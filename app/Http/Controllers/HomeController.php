@@ -13,17 +13,17 @@ class HomeController extends Controller
             [
                 'title' => 'Take authentic feedbacks',
                 'desc' => 'from customers of your app. Build a quick list.',
-                'img' => 'project1.jpg',
+                'img' => 'images/a.jpg',
             ],
             [
                 'title' => 'Make quick fixes',
                 'desc' => 'based on the feedbacks you\'ve received. With a happy smile.',
-                'img' => 'project2.jpg',
+                'img' => 'images/b.jpg',
             ],
             [
                 'title' => 'Enjoy more than 10x revenue',
                 'desc' => 'with real-time conversions. Grow your business.',
-                'img' => 'project3.jpg',
+                'img' => 'images/c.jpg',
             ],
         ];
 
