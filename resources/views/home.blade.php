@@ -12,7 +12,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white" style="height: 80px; padding: 0 80px;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white" style="height: 80px; padding: 50px 80px;">
         <div class="container-fluid " style="display: grid; grid-template-columns: auto 1fr auto; max-width: 1440px; margin: 0 auto; position: relative;">
             <!-- Logo -->
             <a class="navbar-brand" href="#"  >
@@ -40,22 +40,36 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="py-5 bg-white">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 mb-4 mb-md-0">
-                    <h1 class="display-5 fw-bold mb-3">Meet the New<br>Landingfolio Kit</h1>
-                    <p class="mb-4">Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.</p>
-                    <a href="#" class="btn btn-primary">Start using LandingFolio</a>
+    <section class="bg-white" style="padding: 98px 0;">
+        <div class="container-fluid" style="max-width: 1440px; margin: 0 auto; padding: 0 80px;">
+            <div class="d-flex justify-content-between align-items-start">
+                <!-- Left Content -->
+                <div style="width: 650px; margin-top: 169px; margin-left: 4px;">
+                    <h1 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 80px; line-height: 86px; letter-spacing: -4px; color: #0F172A; margin-bottom: 32px;">
+                        Meet the new<br>Landingfolio Kit
+                    </h1>
+                    <p style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: 21px; line-height: 34px; color: #4B5262; margin-bottom: 40px; max-width: 600px;">
+                        Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.
+                    </p>
+                    <div class="d-flex gap-4">
+                        <button style="background: #0F172A; color: white; border: none; border-radius: 8px; padding: 16px 24px; font-weight: 600; font-size: 16px; line-height: 28px; width: 259px; height: 60px;">
+                            Start using Landingfolio
+                        </button>
+                    </div>
                 </div>
-                <div class="col-md-6 text-center">
-                    <div style="background: #e7f0fd; border-radius: 24px; min-height: 400px; width: 100%; height: 100%; position: relative; overflow: hidden;">
+                
+                <!-- Right Image -->
+                <div style="width: 530px; height: 655px; background: #DBEAFE; border-radius: 24px; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #3B82F6;">
+                        <i class="fas fa-image" style="font-size: 48px; margin-bottom: 16px;"></i>
+                        <p>Image</p>
                         <img src="{{ asset('images/d.jpg') }}" alt="Hero Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 24px;">
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- Projects Section -->
     <section class="py-5">
