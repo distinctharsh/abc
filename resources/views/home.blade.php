@@ -12,21 +12,30 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">ClarityUI</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white" style="height: 80px; padding: 0 80px;">
+        <div class="container-fluid " style="display: grid; grid-template-columns: auto 1fr auto; max-width: 1440px; margin: 0 auto; position: relative;">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#"  >
+                <img src="{{ asset('images/logo.jpg') }}" alt="Logo" style="object-fit: cover; width: 134px; height: 37px; margin-right: 0;">
+            </a>
+            
+            <!-- Navigation Links -->
+            <div class="d-flex align-items-center" style="gap: 40px; margin-left: 78px; ">
+                <a class="text-decoration-none" href="#" style="color: #0F172A; font-size: 16px; font-weight: 500; line-height: 24px;">Product</a>
+                <a class="text-decoration-none" href="#" style="color: #0F172A; font-size: 16px; font-weight: 500; line-height: 24px;">Feature</a>
+                <a class="text-decoration-none" href="#" style="color: #0F172A; font-size: 16px; font-weight: 500; line-height: 24px;">Pricing</a>
+                <a class="text-decoration-none" href="#" style="color: #0F172A; font-size: 16px; font-weight: 500; line-height: 24px;">Support</a>
+            </div>
+            
+            <!-- Start Free Trial Button -->
+            <button class="btn" style="width: 156px; height: 50px; border: 2px solid #0F172A; border-radius: 8px; font-weight: 600; font-size: 16px; line-height: 24px; color: #0F172A;">
+                Start Free Trial
+            </button>
+            
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="display: none;">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mb-2 mb-lg-0" style="margin-bottom: 12px;">
-                    <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
-                </ul>
-            </div>
-            <a href="#" class="btn btn-outline-dark">Start free trial</a>
         </div>
     </nav>
 
