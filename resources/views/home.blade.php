@@ -4,18 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClarityUI - Landingfolio Kit</title>
-<<<<<<< HEAD
     <!-- Google Fonts - Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-=======
->>>>>>> 5b22fc2663938a7d0c11e517003632c2519b43d7
     <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-papm6Q+..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-<<<<<<< HEAD
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
@@ -38,28 +34,6 @@
             
             <!-- Start Free Trial Button -->
             <button class="btn start-trial-btn">
-=======
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white" style="height: 80px; padding: 50px 80px;">
-        <div class="container-fluid " style="display: grid; grid-template-columns: auto 1fr auto; max-width: 1440px; margin: 0 auto; position: relative;">
-            <!-- Logo -->
-            <a class="navbar-brand" href="#"  >
-                <img src="{{ asset('images/logo.jpg') }}" alt="Logo" style="object-fit: cover; width: 134px; height: 37px; margin-right: 0;">
-            </a>
-            
-            <!-- Navigation Links -->
-            <div class="d-flex align-items-center" style="gap: 40px; margin-left: 78px; ">
-                <a class="text-decoration-none" href="#" style="color: #0F172A; font-size: 16px; font-weight: 500; line-height: 24px;">Product</a>
-                <a class="text-decoration-none" href="#" style="color: #0F172A; font-size: 16px; font-weight: 500; line-height: 24px;">Feature</a>
-                <a class="text-decoration-none" href="#" style="color: #0F172A; font-size: 16px; font-weight: 500; line-height: 24px;">Pricing</a>
-                <a class="text-decoration-none" href="#" style="color: #0F172A; font-size: 16px; font-weight: 500; line-height: 24px;">Support</a>
-            </div>
-            
-            <!-- Start Free Trial Button -->
-            <button class="btn" style="width: 156px; height: 50px; border: 2px solid #0F172A; border-radius: 8px; font-weight: 600; font-size: 16px; line-height: 24px; color: #0F172A;">
->>>>>>> 5b22fc2663938a7d0c11e517003632c2519b43d7
                 Start Free Trial
             </button>
             
@@ -71,7 +45,6 @@
     </nav>
 
     <!-- Hero Section -->
-<<<<<<< HEAD
     <section class="bg-white hero-section">
         <div class="container-fluid hero-container">
             <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row">
@@ -94,32 +67,6 @@
                 <div class="hero-image-container">
                     <div class="hero-image">
                         <img src="{{ asset('images/d.jpg') }}" alt="Hero Image">
-=======
-    <section class="bg-white" style="padding: 98px 0;">
-        <div class="container-fluid" style="max-width: 1440px; margin: 0 auto; padding: 0 80px;">
-            <div class="d-flex justify-content-between align-items-start">
-                <!-- Left Content -->
-                <div style="width: 650px; margin-top: 169px; margin-left: 4px;">
-                    <h1 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 80px; line-height: 86px; letter-spacing: -4px; color: #0F172A; margin-bottom: 32px;">
-                        Meet the new<br>Landingfolio Kit
-                    </h1>
-                    <p style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: 21px; line-height: 34px; color: #4B5262; margin-bottom: 40px; max-width: 600px;">
-                        Clarity gives you the blocks & components you need to create a truly professional website, landing page or admin panel for your SaaS.
-                    </p>
-                    <div class="d-flex gap-4">
-                        <button style="background: #0F172A; color: white; border: none; border-radius: 8px; padding: 16px 24px; font-weight: 600; font-size: 16px; line-height: 28px; width: 259px; height: 60px;">
-                            Start using Landingfolio
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Right Image -->
-                <div style="width: 530px; height: 655px; background: #DBEAFE; border-radius: 24px; position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #3B82F6;">
-                        <i class="fas fa-image" style="font-size: 48px; margin-bottom: 16px;"></i>
-                        <p>Image</p>
-                        <img src="{{ asset('images/d.jpg') }}" alt="Hero Image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 24px;">
->>>>>>> 5b22fc2663938a7d0c11e517003632c2519b43d7
                     </div>
                 </div>
             </div>
@@ -128,7 +75,6 @@
 
 
     <!-- Projects Section -->
-<<<<<<< HEAD
     <section class="projects-section py-5 bg-light">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -162,28 +108,10 @@
                             <h5 class="card-title fw-bold mb-2">{{ $project['title'] }}</h5>
                             <p class="card-text text-muted">{{ $project['desc'] }}</p>
                         </div>
-=======
-    <section class="py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Our other projects that<br>you can look</h2>
-                <p class="text-muted">The blocks & components you need</p>
-            </div>
-            <div class="row g-4">
-                @foreach($projects as $project)
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $project['title'] }}</h5>
-                            <p class="card-text">{{ $project['desc'] }}</p>
-                        </div>
-                        <img src="{{ asset($project['img']) }}" class="card-img-bottom" alt="Project Image">
->>>>>>> 5b22fc2663938a7d0c11e517003632c2519b43d7
                     </div>
                 </div>
                 @endforeach
             </div>
-<<<<<<< HEAD
             
             <div class="text-center mt-5" data-aos="fade-up">
                 <a href="#" class="btn btn-outline-primary px-4 py-2">
@@ -206,11 +134,6 @@
         });
     </script>
 
-=======
-        </div>
-    </section>
-
->>>>>>> 5b22fc2663938a7d0c11e517003632c2519b43d7
     <!-- Testimonials Section -->
     <section class="py-5 bg-light">
         <div class="container">
@@ -276,7 +199,6 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-<<<<<<< HEAD
                     <div class="contact-section">
                         <!-- Top Left SVG -->
                         <svg width="120" height="120" class="contact-svg-1" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -296,27 +218,6 @@
                             </div>
                             <div class="col-md-3 d-grid">
                                 <button type="submit" class="btn contact-btn">Send your query</button>
-=======
-                    <div style="background: #2563eb; border-radius: 20px; position: relative; overflow: hidden; padding: 3rem 1rem;">
-                        <!-- Top Left SVG -->
-                        <svg width="120" height="120" style="position: absolute; top: -40px; left: -40px; opacity: 0.3;" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="80" cy="80" r="80" stroke="#fff" stroke-width="8"/>
-                        </svg>
-                        <!-- Bottom Right SVG -->
-                        <svg width="120" height="120" style="position: absolute; bottom: -40px; right: -40px; opacity: 0.7;" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="40" cy="80" r="40" stroke="#fff" stroke-width="6"/>
-                        </svg>
-                        <h3 class="mb-4 text-center" style="color: #fff; font-weight: bold; letter-spacing: 1px;">Contact Us</h3>
-                        <form class="row g-3 justify-content-center">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="First name" style="background: transparent; border: 1.5px solid #fff; color: #fff; border-radius: 8px; font-weight: 500;">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="email" class="form-control" placeholder="Email address" style="background: transparent; border: 1.5px solid #fff; color: #fff; border-radius: 8px; font-weight: 500;">
-                            </div>
-                            <div class="col-md-3 d-grid">
-                                <button type="submit" class="btn" style="background: #111; color: #fff; font-weight: 600; border-radius: 8px;">Send your query</button>
->>>>>>> 5b22fc2663938a7d0c11e517003632c2519b43d7
                             </div>
                         </form>
                     </div>
@@ -326,30 +227,17 @@
     </section>
 
     <!-- Footer -->
-<<<<<<< HEAD
     <footer class="footer">
-=======
-    <footer class="pt-5 pb-3" style="background: #f8fafc;">
->>>>>>> 5b22fc2663938a7d0c11e517003632c2519b43d7
         <div class="container">
             <div class="row align-items-start gy-4">
                 <div class="col-md-4">
                     <div class="d-flex align-items-center mb-2">
-<<<<<<< HEAD
                         <div class="footer-logo">
                             <span class="footer-logo-text">C</span>
                         </div>
                         <span class="footer-title">ClarityUI</span>
                     </div>
                     <p class="footer-desc">Clarity gives you the blocks and components you need to create a truly professional website.</p>
-=======
-                        <div style="width: 36px; height: 36px; background: #2563eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-                            <span style="color: #fff; font-size: 1.5rem; font-weight: bold;">C</span>
-                        </div>
-                        <span class="fw-bold fs-5" style="letter-spacing: 1px;">ClarityUI</span>
-                    </div>
-                    <p class="text-muted small mb-3" style="max-width: 260px;">Clarity gives you the blocks and components you need to create a truly professional website.</p>
->>>>>>> 5b22fc2663938a7d0c11e517003632c2519b43d7
                     <div class="d-flex gap-2">
                         <a href="#" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #fff; border-radius: 50%; border: 1.5px solid #e5e7eb; color: #111;"><i class="fa-brands fa-twitter"></i></a>
                         <a href="#" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #2563eb; border-radius: 50%; color: #fff;"><i class="fa-brands fa-facebook-f"></i></a>
