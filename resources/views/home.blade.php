@@ -157,7 +157,12 @@
     <!-- Youtube Highlights Section -->
     <section class="py-5">
         <div class="container">
-            <h4 class="mb-4">Youtube Highlights</h4>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4>Youtube Highlights</h4>
+                <a href="{{ route('youtube-highlights.index') }}" class="btn btn-outline-primary">
+                    View All <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
             <div class="row g-4">
                 @foreach($youtube as $yt)
                 <div class="col-md-4">
@@ -180,17 +185,11 @@
                 </div>
                 @endforeach
             </div>
-            <nav class="mt-5">
-                <ul class="pagination justify-content-center align-items-center" style="border: none;">
-                    <li class="page-item disabled"><a class="page-link bg-transparent border-0 text-muted" href="#" tabindex="-1"><span style="font-size:1.2em">&#8592;</span> Previous</a></li>
-                    <li class="page-item active"><a class="page-link rounded-circle bg-light text-dark border-0 mx-1" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link rounded-circle bg-transparent text-dark border-0 mx-1" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link rounded-circle bg-transparent text-dark border-0 mx-1" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link rounded-circle bg-transparent text-dark border-0 mx-1" href="#">...</a></li>
-                    <li class="page-item"><a class="page-link rounded-circle bg-transparent text-dark border-0 mx-1" href="#">10</a></li>
-                    <li class="page-item"><a class="page-link bg-transparent border-0 text-muted" href="#">Next <span style="font-size:1.2em">&#8594;</span></a></li>
-                </ul>
-            </nav>
+            <div class="text-center mt-4">
+                <a href="{{ route('youtube-highlights.index') }}" class="btn btn-primary">
+                    View All Highlights <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
         </div>
     </section>
 

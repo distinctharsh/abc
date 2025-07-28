@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\YoutubeHighlight;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -37,16 +38,22 @@ class HomeController extends Controller
             ],
         ];
 
-        $youtube = [
-            [
-                'img' => 'yt1.jpg',
-                'title' => 'Bill Walsh leadership lessons',
-                'desc' => 'Like to know the secrets of transforming a 2-14 team...',
-                'author' => 'Alec Whitten',
-                'date' => '17 Jan 2022',
-                'tags' => ['Leadership', 'Management'],
-            ],
-        ];
+        // Fetch YouTube highlights from database
+        $youtube = YoutubeHighlight::featured()
+            ->latest()
+            ->take(3)
+            ->get()
+            ->map(function($highlight) {
+                return [
+                    'img' => $highlight->thumbnail_url,
+                    'title' => $highlight->title,
+                    'desc' => $highlight->description,
+                    'author' => $highlight->author,
+                    'date' => $highlight->formatted_date,
+                    'tags' => $highlight->tags ?? [],
+                ];
+            })
+            ->toArray();
 
         return view('home', compact('projects', 'testimonials', 'youtube'));
     }
