@@ -168,8 +168,8 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="d-flex justify-content-center mt-5">
-                    {{ $highlights->appends(request()->query())->links() }}
+                <div class="pagination-wrapper mt-5">
+                    {{ $highlights->appends(request()->query())->links('pagination::bootstrap-5') }}
                 </div>
             @else
                 <div class="text-center py-5">
