@@ -135,34 +135,19 @@
     </script>
 
     <!-- Testimonials Section -->
-    <section class="py-5" style="background: #f8f9fa;">
+    <section class="py-5 bg-light">
         <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold mb-3">What Our Clients Say</h2>
-                <p class="text-muted">Don't just take our word for it. Here's what our clients say about us.</p>
-            </div>
-
-            <div class="row g-4">
+            <div class="row align-items-center">
                 @foreach($testimonials as $testimonial)
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <img src="{{ asset($testimonial['author_image'] ?? 'https://ui-avatars.com/api/?name='.urlencode($testimonial['author']).'&background=random') }}" 
-                                 class="rounded-circle me-3" 
-                                 alt="{{ $testimonial['author'] }}"
-                                 style="width: 50px; height: 50px; object-fit: cover;">
-                            <div>
-                                <h6 class="mb-0 fw-bold">{{ $testimonial['author'] }}</h6>
-                                <small class="text-muted">{{ $testimonial['role'] }}</small>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            @for($i = 0; $i < 5; $i++)
-                                <i class="fas fa-star text-warning"></i>
-                            @endfor
-                        </div>
-                        <p class="mb-0">"{{ $testimonial['desc'] }}"</p>
-                    </div>
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="{{ asset('images/a.jpg') }}" class="img-fluid rounded-4" alt="Testimonial">
+                </div>
+                <div class="col-md-6">
+                    <small class="text-muted">Real-time Analytics</small>
+                    <h3 class="fw-bold mt-2">{{ $testimonial['title'] }}</h3>
+                    <p>{{ $testimonial['desc'] }}</p>
+                    <div class="mb-2"><strong>{{ $testimonial['author'] }}</strong> <span class="text-muted">- {{ $testimonial['role'] }}</span></div>
+                    <a href="#" class="text-primary">Read Full Case Study →</a>
                 </div>
                 @endforeach
             </div>
