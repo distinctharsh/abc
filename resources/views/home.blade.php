@@ -118,90 +118,44 @@
 
 
     <style>
-        .ambulance-section {
-            padding: 3rem 0;
-            background-color: #f8f9fa;
-        }
         .ambulance-container {
             position: relative;
             width: 100%;
-            height: 200px;
+            /* height: 200px; */
             overflow: hidden;
-            margin: 0 auto;
-            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            margin: 2rem 0;
+            /* background-color: #f0f0f0; */
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .road-bg {
-            position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 1;
         }
         .ambulance-img {
             position: absolute;
-            bottom: 20px;
+            bottom: 70px;
             left: -200px;
             width: 150px;
             height: auto;
-            z-index: 2;
-            animation: moveAmbulance 10s linear infinite;
+            animation: moveAmbulance 8s linear infinite;
         }
         @keyframes moveAmbulance {
             0% {
                 transform: translateX(-200px);
             }
             100% {
-                transform: translateX(calc(100% + 200px));
+                transform: translateX(calc(100vw + 200px));
             }
-        }
-        /* Debug styles - can be removed later */
-        .debug-info {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            z-index: 3;
         }
     </style>
 
-    <section class="ambulance-section">
-        <div class="container">
-            <h2 class="text-center mb-4">Emergency Services</h2>
-            <div class="ambulance-container">
-                <div class="debug-info">
-                    {{-- This is for debugging --}}
-                    @if(file_exists(public_path('images/road.png')))
-                        Road image exists
-                    @else
-                        Road image not found at: {{ public_path('images/road.png') }}
-                    @endif
-                </div>
-                @if(file_exists(public_path('images/road.png')))
-                    <img src="{{ asset('images/road.png') }}" class="road-bg" alt="Road">
-                @else
-                    <div style="position:absolute; width:100%; height:100%; background:linear-gradient(90deg, #333 0%, #666 50%, #333 100%); z-index:1;">
-                        <div style="position:absolute; top:50%; left:0; right:0; height:4px; background:white; transform:translateY(-50%);"></div>
-                        <div style="position:absolute; top:50%; left:0; right:0; height:2px; background:yellow; transform:translateY(-50%);"></div>
-                    </div>
-                @endif
-                @if(file_exists(public_path('images/ambulance.png')))
-                    <img src="{{ asset('images/ambulance.png') }}" class="ambulance-img" alt="Ambulance">
-                @else
-                    <div style="position:absolute; bottom:20px; left:0; width:150px; height:80px; background:red; z-index:2;">
-                        <div style="position:absolute; top:0; left:0; right:0; height:20px; background:white;">AMBULANCE</div>
-                        <div style="position:absolute; top:20px; left:0; width:100%; height:60px; background:red;"></div>
-                    </div>
-                @endif
-            </div>
-            <p class="text-center mt-3 text-muted">24/7 Emergency Medical Services</p>
+    <div>
+        <div class="ambulance-container">
+            <img src="{{ asset('images/road.png') }}" class="road-bg" alt="Road">
+            <img src="{{ asset('images/ambulance.png') }}" class="ambulance-img" alt="Ambulance">
         </div>
-    </section>
+    </div>
 
     <!-- Projects Section -->
     <section class="projects-section py-5 bg-light">
