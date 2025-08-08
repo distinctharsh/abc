@@ -38,9 +38,14 @@ class HomeController extends Controller
             ],
         ];
 
+        // Get all active about sections, ordered by order field
+        $abouts = \App\Models\About::where('is_active', true)
+            ->orderBy('order')
+            ->get();
+
         // Fetch YouTube highlights from database
-        $youtube = YoutubeHighlight::featured()
-            ->latest()
+        // Temporarily removing is_active condition to fix the error
+        $highlights = YoutubeHighlight::orderBy('created_at', 'desc')
             ->take(3)
             ->get()
             ->map(function($highlight) {
@@ -55,6 +60,6 @@ class HomeController extends Controller
             })
             ->toArray();
 
-        return view('home', compact('projects', 'testimonials', 'youtube'));
+        return view('home', compact('projects', 'testimonials', 'highlights', 'abouts'));
     }
 }

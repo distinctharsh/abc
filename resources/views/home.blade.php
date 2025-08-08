@@ -6,6 +6,8 @@
     <title>ClarityUI - Landingfolio Kit</title>
     <!-- Google Fonts - Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,23 +20,23 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-custom">
-        <div class="container-fluid navbar-container">
-            <!-- Logo -->
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('images/logo.jpg') }}" alt="Logo" class="nav-logo">
-            </a>
+        <div class="container navbar-container justify-content-center">
             
             <!-- Navigation Links -->
             <div class="d-flex align-items-center nav-links">
-                <a class="nav-link" href="#">Product</a>
-                <a class="nav-link" href="#">Feature</a>
-                <a class="nav-link" href="#">Pricing</a>
-                <a class="nav-link" href="#">Support</a>
+                <a class="nav-link" href="#about">About Us</a>
+                <a class="nav-link" href="#">Orodental</a>
+                <a class="nav-link mr-5" href="#">Dr. Sarkar Social</a>
+                @auth
+                    <a class="nav-link" href="{{ route('admin.abouts.index') }}" style="margin-left: 20px;">
+                        <i class="fas fa-cog"></i> Admin
+                    </a>
+                @endauth
             </div>
             
             <!-- Start Free Trial Button -->
-            <button class="btn start-trial-btn">
-                Start Free Trial
+            <button class="btn start-trial-btn ml-5">
+                Contact
             </button>
             
             <!-- Mobile Toggle Button -->
@@ -66,13 +68,140 @@
                 <!-- Right Image -->
                 <div class="hero-image-container">
                     <div class="hero-image">
-                        <img src="{{ asset('images/d.jpg') }}" alt="Hero Image">
+                        <img src="{{ asset('images/sir.png') }}" alt="Hero Image" style="background: transparent;">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+
+       <!-- Projects Section -->
+       <section class="projects-section py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-5 fw-bold text-primary mb-3">About Us</h2>
+                <!-- <div class="mx-auto" style="max-width: 600px;">
+                    <p class="text-muted lead">Explore our portfolio of successful projects and see how we bring ideas to life with innovative solutions.</p>
+                </div> -->
+            </div>
+            
+            <div class="row g-4">
+                @foreach($abouts as $index => $about)
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
+                    <div class="project-card card h-100 border-0 shadow-sm overflow-hidden">
+                        <div class="position-relative overflow-hidden">
+                            <img src="{{ asset($about->image) }}" class="card-img-top project-image" alt="{{ $about->title }}" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div class="project-overlay d-flex align-items-center justify-content-center">
+                                <a href="#" class="btn btn-primary rounded-circle p-3">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-primary bg-opacity-10 text-primary">{{ $about->title ?? 'Web Design' }}</span>
+                                <div class="project-links">
+                                    <a href="#" class="text-muted me-2"><i class="far fa-heart"></i></a>
+                                    <a href="#" class="text-muted"><i class="fas fa-share-alt"></i></a>
+                                </div>
+                            </div>
+                            <h5 class="card-title fw-bold mb-2">{{ $about->title }}</h5>
+                            <p class="card-text text-muted">{{ $about->description }}</p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+
+    <style>
+        .ambulance-section {
+            padding: 3rem 0;
+            background-color: #f8f9fa;
+        }
+        .ambulance-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            margin: 0 auto;
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .road-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .ambulance-img {
+            position: absolute;
+            bottom: 20px;
+            left: -200px;
+            width: 150px;
+            height: auto;
+            z-index: 2;
+            animation: moveAmbulance 10s linear infinite;
+        }
+        @keyframes moveAmbulance {
+            0% {
+                transform: translateX(-200px);
+            }
+            100% {
+                transform: translateX(calc(100% + 200px));
+            }
+        }
+        /* Debug styles - can be removed later */
+        .debug-info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 3;
+        }
+    </style>
+
+    <section class="ambulance-section">
+        <div class="container">
+            <h2 class="text-center mb-4">Emergency Services</h2>
+            <div class="ambulance-container">
+                <div class="debug-info">
+                    {{-- This is for debugging --}}
+                    @if(file_exists(public_path('images/road.png')))
+                        Road image exists
+                    @else
+                        Road image not found at: {{ public_path('images/road.png') }}
+                    @endif
+                </div>
+                @if(file_exists(public_path('images/road.png')))
+                    <img src="{{ asset('images/road.png') }}" class="road-bg" alt="Road">
+                @else
+                    <div style="position:absolute; width:100%; height:100%; background:linear-gradient(90deg, #333 0%, #666 50%, #333 100%); z-index:1;">
+                        <div style="position:absolute; top:50%; left:0; right:0; height:4px; background:white; transform:translateY(-50%);"></div>
+                        <div style="position:absolute; top:50%; left:0; right:0; height:2px; background:yellow; transform:translateY(-50%);"></div>
+                    </div>
+                @endif
+                @if(file_exists(public_path('images/ambulance.png')))
+                    <img src="{{ asset('images/ambulance.png') }}" class="ambulance-img" alt="Ambulance">
+                @else
+                    <div style="position:absolute; bottom:20px; left:0; width:150px; height:80px; background:red; z-index:2;">
+                        <div style="position:absolute; top:0; left:0; right:0; height:20px; background:white;">AMBULANCE</div>
+                        <div style="position:absolute; top:20px; left:0; width:100%; height:60px; background:red;"></div>
+                    </div>
+                @endif
+            </div>
+            <p class="text-center mt-3 text-muted">24/7 Emergency Medical Services</p>
+        </div>
+    </section>
 
     <!-- Projects Section -->
     <section class="projects-section py-5 bg-light">
@@ -164,7 +293,7 @@
                 </a>
             </div>
             <div class="row g-4">
-                @foreach($youtube as $yt)
+                @foreach($highlights as $yt)
                 <div class="col-md-4">
                     <div class="card border-0 bg-transparent">
                         <img src="{{ asset('images/b.jpg') }}" class="card-img-top rounded-3 mb-3" alt="Youtube" style="height: 200px; object-fit: cover;">
