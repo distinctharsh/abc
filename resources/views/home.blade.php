@@ -24,7 +24,16 @@
             
             <!-- Navigation Links -->
             <div class="d-flex align-items-center nav-links">
-                <a class="nav-link" href="#about">About Us</a>
+                <a class="nav-link" href="#">Home</a>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#about" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        About Us
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                        <li><a class="dropdown-item" href="#gallery">Gallery</a></li>
+                        <li><a class="dropdown-item" href="#press">Press</a></li>
+                    </ul>
+                </div>
                 <a class="nav-link" href="#">Orodental</a>
                 <a class="nav-link mr-5" href="#">Dr. Sarkar Social</a>
                 @auth
@@ -161,21 +170,20 @@
     <section class="services-section " style=" background: url({{ asset('images/abbg.png') }}) no-repeat center center/cover">
         <div class="container text-center">
             <div class="d-flex text-center justify-content-center align-items-center">
-            <div class="doctor-card" style="    left: 36px;
-    position: absolute;">
-                <div class="doctor-img mb-3 mx-auto" style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <img class="img-fluid w-100 h-100" style="object-fit: cover;">
+                <div class="doctor-card" style="left: 36px; position: absolute;">
+                    <div class="doctor-img mb-3 mx-auto" style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                        <img class="img-fluid w-100 h-100" style="object-fit: cover;">
+                    </div>
                 </div>
-            </div>
 
 
-                        <h1 class="text-center text-white mt-3 mb-5"> ORODENTAL HOSPITAL PVT. LTD. </h1>
+                <span class="text-center text-white mt-3 mb-5" style="font-size: 4rem;"> ORODENTAL HOSPITAL PVT. LTD. </span>
             </div>
             <!-- Service Cards -->
             <div class="row g-4 d-flex justify-content-center align-items-center">
              
-                <div class=" col-md-4" data-aos="fade-up" >
-                    <div class="project-card card h-100 border-0 shadow-sm overflow-hidden">
+                <div class=" col-md-5 col-lg-5"  >
+                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden">
                         <div class="position-relative overflow-hidden">
                             <img src="{{ asset('images/f.png') }}" class="card-img-top project-image" alt="Eye Care">
                         </div>
@@ -185,8 +193,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-4" data-aos="fade-up" >
-                    <div class="project-card card h-100 border-0 shadow-sm overflow-hidden">
+                <div class="col-md-5 col-lg-5">
+                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden">
                         <div class="position-relative overflow-hidden">
                             <img src="{{ asset('images/e.png') }}" class="card-img-top project-image" alt="Eye Care">
                            
@@ -246,123 +254,6 @@
             </div>
         </div>
     </section>
-    
-    <style>
-        .service-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px 20px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            height: 100%;
-        }
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 15px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-        .service-card h3 {
-            font-size: 1.25rem;
-            color: #333;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        .service-card p {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-        .read-more {
-            color: #0d6efd;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        .read-more i {
-            margin-left: 5px;
-            font-size: 0.8rem;
-        }
-        .doctor-card {
-            text-align: center;
-            padding: 15px 10px;
-        }
-        .doctor-img {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 15px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid #fff;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        .doctor-card h4 {
-            font-size: 1rem;
-            color: #333;
-            margin: 10px 0 5px;
-            font-weight: 600;
-        }
-        .doctor-card .specialty {
-            color: #666;
-            font-size: 0.85rem;
-            margin: 0;
-        }
-        @media (max-width: 768px) {
-            .doctor-img {
-                width: 100px;
-                height: 100px;
-            }
-        }
-    </style>
-
-    <!-- Projects Section -->
-    <!-- <section class="projects-section py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <span class="text-primary fw-semibold">OUR WORK</span>
-                <h2 class="display-5 fw-bold mb-3">Our Featured Projects</h2>
-                <div class="mx-auto" style="max-width: 600px;">
-                    <p class="text-muted lead">Explore our portfolio of successful projects and see how we bring ideas to life with innovative solutions.</p>
-                </div>
-            </div>
-            
-            <div class="row g-4">
-                @foreach($projects as $index => $project)
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
-                    <div class="project-card card h-100 border-0 shadow-sm overflow-hidden">
-                        <div class="position-relative overflow-hidden">
-                            <img src="{{ asset($project['img']) }}" class="card-img-top project-image" alt="{{ $project['title'] }}">
-                            <div class="project-overlay d-flex align-items-center justify-content-center">
-                                <a href="#" class="btn btn-primary rounded-circle p-3">
-                                    <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-primary bg-opacity-10 text-primary">{{ $project['category'] ?? 'Web Design' }}</span>
-                                <div class="project-links">
-                                    <a href="#" class="text-muted me-2"><i class="far fa-heart"></i></a>
-                                    <a href="#" class="text-muted"><i class="fas fa-share-alt"></i></a>
-                                </div>
-                            </div>
-                            <h5 class="card-title fw-bold mb-2">{{ $project['title'] }}</h5>
-                            <p class="card-text text-muted">{{ $project['desc'] }}</p>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            
-            <div class="text-center mt-5" data-aos="fade-up">
-                <a href="#" class="btn btn-outline-primary px-4 py-2">
-                    View All Projects <i class="fas fa-arrow-right ms-2"></i>
-                </a>
-            </div>
-        </div>
-    </section> -->
 
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -376,66 +267,6 @@
             });
         });
     </script>
-
-    <!-- Testimonials Section -->
-    <!-- <section class="py-5 bg-light">
-        <div class="container">
-            <div class="row align-items-center">
-                @foreach($testimonials as $testimonial)
-                <div class="col-md-6 mb-4 mb-md-0">
-                    <img src="{{ asset('images/a.jpg') }}" class="img-fluid rounded-4" alt="Testimonial">
-                </div>
-                <div class="col-md-6">
-                    <small class="text-muted">Real-time Analytics</small>
-                    <h3 class="fw-bold mt-2">{{ $testimonial['title'] }}</h3>
-                    <p>{{ $testimonial['desc'] }}</p>
-                    <div class="mb-2"><strong>{{ $testimonial['author'] }}</strong> <span class="text-muted">- {{ $testimonial['role'] }}</span></div>
-                    <a href="#" class="text-primary">Read Full Case Study →</a>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </section> -->
-
-    <!-- Youtube Highlights Section -->
-    <!-- <section class="py-5">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h4>Youtube Highlights</h4>
-                <a href="{{ route('youtube-highlights.index') }}" class="btn btn-outline-primary">
-                    View All <i class="fas fa-arrow-right ms-2"></i>
-                </a>
-            </div>
-            <div class="row g-4">
-                @foreach($highlights as $yt)
-                <div class="col-md-4">
-                    <div class="card border-0 bg-transparent">
-                        <img src="{{ asset('images/b.jpg') }}" class="card-img-top rounded-3 mb-3" alt="Youtube" style="height: 200px; object-fit: cover;">
-                        <div class="card-body p-0">
-                            <small class="d-block mb-1" style="color: #6c3ef5; font-weight: 500;">{{ $yt['author'] }} • {{ $yt['date'] }}</small>
-                            <div class="d-flex align-items-center mb-1">
-                                <h5 class="card-title fw-bold mb-0 flex-grow-1">{{ $yt['title'] }}</h5>
-                                <span class="ms-2" style="font-size: 1.1em; color: #888;">&#8599;</span>
-                            </div>
-                            <p class="card-text text-muted mb-2" style="font-size: 0.97em;">{{ $yt['desc'] }}</p>
-                            <div class="mb-2">
-                                @foreach($yt['tags'] as $tag)
-                                    <span class="badge rounded-pill px-3 py-2 me-1 mb-1" style="background: #f4f4f6; color: #6c3ef5; font-weight: 500; font-size: 0.95em;">{{ $tag }}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            <div class="text-center mt-4">
-                <a href="{{ route('youtube-highlights.index') }}" class="btn btn-primary">
-                    View All Highlights <i class="fas fa-arrow-right ms-2"></i>
-                </a>
-            </div>
-        </div>
-    </section> -->
-
 
     <section class="py-5 text-center" style="background: #f8fafc;">
         <div class=" gap-4 flex-direction-column">

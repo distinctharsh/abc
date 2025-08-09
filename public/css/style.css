@@ -279,6 +279,13 @@ font-family: 'Inter', sans-serif;
     background: #fff;
 }
 
+
+.service-card {
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    background: #fff;
+}
+
 .project-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
@@ -382,4 +389,64 @@ font-family: 'Inter', sans-serif;
 .project-links a:hover {
     color: var(--bs-primary) !important;
     transform: translateY(-2px);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.service-card h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.service-card p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+.read-more {
+    color: #0d6efd;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.read-more i {
+    margin-left: 5px;
+    font-size: 0.8rem;
+}
+.doctor-card {
+    text-align: center;
+    padding: 15px 10px;
+}
+.doctor-img {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+.doctor-card h4 {
+    font-size: 1rem;
+    color: #333;
+    margin: 10px 0 5px;
+    font-weight: 600;
+}
+.doctor-card .specialty {
+    color: #666;
+    font-size: 0.85rem;
+    margin: 0;
+}
+@media (max-width: 768px) {
+    .doctor-img {
+        width: 100px;
+        height: 100px;
+    }
 }
