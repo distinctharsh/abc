@@ -44,6 +44,20 @@
     background: linear-gradient(to right, #7F00FF, #00FF00);
 }
 
+
+.popup-btn {
+    /* width: 130px; */
+    height: 53px;
+    border: 2px solid #fff;
+    border-radius: 28px;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 22px;
+    color: #fff;
+    background: linear-gradient(to right, #7F00FF, #00FF00);
+}
+
+
 /* Hero Section */
 .hero-section {
     /* padding: 98px 0 125px 0; */

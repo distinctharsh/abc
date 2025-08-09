@@ -318,7 +318,7 @@
     </style>
 
     <!-- Projects Section -->
-    <section class="projects-section py-5 bg-light">
+    <!-- <section class="projects-section py-5 bg-light">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
                 <span class="text-primary fw-semibold">OUR WORK</span>
@@ -362,7 +362,7 @@
                 </a>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -378,7 +378,7 @@
     </script>
 
     <!-- Testimonials Section -->
-    <section class="py-5 bg-light">
+    <!-- <section class="py-5 bg-light">
         <div class="container">
             <div class="row align-items-center">
                 @foreach($testimonials as $testimonial)
@@ -395,10 +395,10 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Youtube Highlights Section -->
-    <section class="py-5">
+    <!-- <section class="py-5">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h4>Youtube Highlights</h4>
@@ -434,6 +434,113 @@
                 </a>
             </div>
         </div>
+    </section> -->
+
+
+    <section class="py-5 text-center" style="background: #f8fafc;">
+        <div class=" gap-4 flex-direction-column">
+            <!-- Dr. Sarkar Official Button -->
+            <button type="button" class="btn popup-btn" data-bs-toggle="modal" data-bs-target="#drSarkarModal">
+                Dr. Sarkar Official
+            </button>
+            
+            <!-- Capigen Highlights Button -->
+            <button type="button" class="btn popup-btn" data-bs-toggle="modal" data-bs-target="#capigenModal">
+                Capigen highlights
+            </button>
+        </div>
+        
+        <!-- Dr. Sarkar Modal -->
+        <div class="modal fade" id="drSarkarModal" tabindex="-1" aria-labelledby="drSarkarModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style=" background: linear-gradient(to right, #7F00FF, #00FF00); color: #fff;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="drSarkarModalLabel">Dr. Sarkar Official</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="card border-0 bg-transparent">
+                                    <div class="d-flex align-items-center mb-1">
+                                        <h5 class="card-title fw-bold mb-0 flex-grow-1 text-white">Test</h5>
+                                            
+                                    </div>
+                                    <img src="{{ asset('images/b.jpg') }}" class="card-img-top rounded-3 mb-3" alt="Youtube" style="height: 200px; object-fit: cover;">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card border-0 bg-transparent">
+                                    <div class="d-flex align-items-center mb-1">
+                                        <h5 class="card-title fw-bold mb-0 flex-grow-1 text-white">Test</h5>
+                                            
+                                    </div>
+                                    <img src="{{ asset('images/b.jpg') }}" class="card-img-top rounded-3 mb-3" alt="Youtube" style="height: 200px; object-fit: cover;">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card border-0 bg-transparent">
+                                    <div class="d-flex align-items-center mb-1">
+                                        <h5 class="card-title fw-bold mb-0 flex-grow-1 text-white">Test</h5>
+                                            
+                                    </div>
+                                    <img src="{{ asset('images/b.jpg') }}" class="card-img-top rounded-3 mb-3" alt="Youtube" style="height: 200px; object-fit: cover;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Capigen Modal -->
+        <div class="modal fade" id="capigenModal" tabindex="-1" aria-labelledby="capigenModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style=" background: linear-gradient(to right, #7F00FF, #00FF00); color: #fff;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="capigenModalLabel">Capigen Highlights</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div class="row g-4">
+                          
+                            <div class="col-md-4">
+                                <div class="card border-0 bg-transparent">
+                                    <div class="d-flex align-items-center mb-1">
+                                        <h5 class="card-title fw-bold mb-0 flex-grow-1 text-white">Test</h5>
+                                            
+                                    </div>
+                                    <img src="{{ asset('images/b.jpg') }}" class="card-img-top rounded-3 mb-3" alt="Youtube" style="height: 200px; object-fit: cover;">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card border-0 bg-transparent">
+                                    <div class="d-flex align-items-center mb-1">
+                                        <h5 class="card-title fw-bold mb-0 flex-grow-1 text-white">Test</h5>
+                                            
+                                    </div>
+                                    <img src="{{ asset('images/b.jpg') }}" class="card-img-top rounded-3 mb-3" alt="Youtube" style="height: 200px; object-fit: cover;">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card border-0 bg-transparent">
+                                    <div class="d-flex align-items-center mb-1">
+                                        <h5 class="card-title fw-bold mb-0 flex-grow-1 text-white">Test</h5>
+                                            
+                                    </div>
+                                    <img src="{{ asset('images/b.jpg') }}" class="card-img-top rounded-3 mb-3" alt="Youtube" style="height: 200px; object-fit: cover;">
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Contact Section -->
@@ -442,11 +549,9 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="contact-section">
-                        <!-- Top Left SVG -->
                         <svg width="120" height="120" class="contact-svg-1" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="80" cy="80" r="80" stroke="#fff" stroke-width="8"/>
                         </svg>
-                        <!-- Bottom Right SVG -->
                         <svg width="120" height="120" class="contact-svg-2" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="40" cy="80" r="40" stroke="#fff" stroke-width="6"/>
                         </svg>
