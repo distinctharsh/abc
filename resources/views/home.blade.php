@@ -157,6 +157,166 @@
         </div>
     </div>
 
+    <!-- Services Section -->
+    <section class="services-section " style=" background: url({{ asset('images/abbg.png') }}) no-repeat center center/cover">
+        <div class="container text-center">
+            <div class="d-flex text-center justify-content-center align-items-center">
+            <div class="doctor-card" style="    left: 36px;
+    position: absolute;">
+                <div class="doctor-img mb-3 mx-auto" style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <img class="img-fluid w-100 h-100" style="object-fit: cover;">
+                </div>
+            </div>
+
+
+                        <h1 class="text-center text-white mt-3 mb-5"> ORODENTAL HOSPITAL PVT. LTD. </h1>
+            </div>
+            <!-- Service Cards -->
+            <div class="row g-4 d-flex justify-content-center align-items-center">
+             
+                <div class=" col-md-4" data-aos="fade-up" >
+                    <div class="project-card card h-100 border-0 shadow-sm overflow-hidden">
+                        <div class="position-relative overflow-hidden">
+                            <img src="{{ asset('images/f.png') }}" class="card-img-top project-image" alt="Eye Care">
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-2">Dental Care</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" >
+                    <div class="project-card card h-100 border-0 shadow-sm overflow-hidden">
+                        <div class="position-relative overflow-hidden">
+                            <img src="{{ asset('images/e.png') }}" class="card-img-top project-image" alt="Eye Care">
+                           
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-2">Eye Care</h5>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Meet Our Doctors Section -->
+            <div class="text-center  pt-5">
+       
+                <div class="row justify-content-center">
+                    <!-- Doctor 1 -->
+                    <div class="col-6 col-md-3 mb-4">
+                        <div class="doctor-card">
+                            <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                <img src="{{ asset('images/a.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <h4 style="font-size: 1.1rem; color: #333; margin-bottom: 5px; font-weight: 600;">Dr. John Doe</h4>
+                        </div>
+                    </div>
+                    
+                    <!-- Doctor 2 -->
+                    <div class="col-6 col-md-3 mb-4">
+                        <div class="doctor-card">
+                            <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                <img src="{{ asset('images/c.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <h4 style="font-size: 1.1rem; color: #333; margin-bottom: 5px; font-weight: 600;">Dr. Jane Smith</h4>
+                        </div>
+                    </div>
+                    
+                    <!-- Doctor 3 -->
+                    <div class="col-6 col-md-3 mb-4">
+                        <div class="doctor-card">
+                            <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                <img src="{{ asset('images/b.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <h4 style="font-size: 1.1rem; color: #333; margin-bottom: 5px; font-weight: 600;">Dr. Robert Johnson</h4>
+                        </div>
+                    </div>
+                    
+                    <!-- Doctor 4 -->
+                    <div class="col-6 col-md-3 mb-4">
+                        <div class="doctor-card">
+                            <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                <img src="{{ asset('images/d.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <h4 style="font-size: 1.1rem; color: #333; margin-bottom: 5px; font-weight: 600;">Dr. Sarah Williams</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <style>
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .service-card h3 {
+            font-size: 1.25rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .service-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .read-more {
+            color: #0d6efd;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .read-more i {
+            margin-left: 5px;
+            font-size: 0.8rem;
+        }
+        .doctor-card {
+            text-align: center;
+            padding: 15px 10px;
+        }
+        .doctor-img {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #fff;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .doctor-card h4 {
+            font-size: 1rem;
+            color: #333;
+            margin: 10px 0 5px;
+            font-weight: 600;
+        }
+        .doctor-card .specialty {
+            color: #666;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .doctor-img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+
     <!-- Projects Section -->
     <section class="projects-section py-5 bg-light">
         <div class="container">
