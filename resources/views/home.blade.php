@@ -134,7 +134,7 @@
         }
         .ambulance-img {
             position: absolute;
-            bottom: 70px;
+            bottom: 0px;
             left: -200px;
             width: 150px;
             height: auto;
@@ -453,7 +453,7 @@
         <!-- Dr. Sarkar Modal -->
         <div class="modal fade" id="drSarkarModal" tabindex="-1" aria-labelledby="drSarkarModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content" style=" background: linear-gradient(to right, #7F00FF, #00FF00); color: #fff;">
+                <div class="modal-content" style=" background: linear-gradient(to right, #a96ee4, #46ff46); color: #fff;">
                     <div class="modal-header">
                         <h5 class="modal-title" id="drSarkarModalLabel">Dr. Sarkar Official</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -498,7 +498,7 @@
         <!-- Capigen Modal -->
         <div class="modal fade" id="capigenModal" tabindex="-1" aria-labelledby="capigenModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content" style=" background: linear-gradient(to right, #7F00FF, #00FF00); color: #fff;">
+                <div class="modal-content" style=" background: linear-gradient(to right, #a96ee4, #46ff46); color: #fff;">
                     <div class="modal-header">
                         <h5 class="modal-title" id="capigenModalLabel">Capigen Highlights</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
