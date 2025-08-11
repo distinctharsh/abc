@@ -157,6 +157,57 @@
                 transform: translateX(calc(100vw + 200px));
             }
         }
+        /* Flip animation for doctor cards */
+        .doctor-flip {
+            perspective: 1000px;
+            height: 200px;
+        }
+        .doctor-flip .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.7s ease;
+            transform-origin: center center;
+        }
+        .doctor-flip:hover .flip-inner {
+            transform: rotateY(-180deg);
+            -webkit-transform: rotateY(-180deg);
+        }
+        .doctor-flip .flip-front,
+        .doctor-flip .flip-back {
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            width: 100%; height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+        .doctor-flip .flip-back { 
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+            background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 50%, #7c3aed 100%);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        }
+        .doctor-flip .flip-back h5 { 
+            font-size: 1rem; 
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.3px;
+        }
+        .doctor-flip .flip-back p { 
+            font-size: 0.8rem; 
+            opacity: 0.95; 
+            line-height: 1.4;
+            margin: 0;
+        }
         /* Flip entire column (right-to-left) */
         .flip-col {
             perspective: 1000px;
@@ -235,48 +286,25 @@
             <!-- Service Cards -->
             <div class="row g-4 d-flex justify-content-center align-items-center">
              
-                <div class="col-md-5 col-lg-5 flip-col">
-                    <div class="flip-inner">
-                        <div class="flip-front">
-                            <div class="service-card card h-100 border-0 shadow-sm overflow-hidden">
-                                <div class="position-relative overflow-hidden" style="height: 100%">
-                                    <img src="{{ asset('images/f.png') }}" alt="Dental Care" style="width:100%; height:100%; object-fit:cover; display:block;">
-                                    <div class="title-overlay"><h5 class="mb-0">Dental Care</h5></div>
-                                </div>
-                            </div>
+                <div class=" col-md-5 col-lg-5"  >
+                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden" data-title="Dental Care" data-description="Comprehensive dental treatments including root canals, implants, cosmetic dentistry, and preventive care by experienced dentists." data-image="{{ asset('images/f.png') }}">
+                        <div class="position-relative overflow-hidden">
+                            <img src="{{ asset('images/f.png') }}" class="card-img-top project-image" alt="Dental Care">
                         </div>
-                        <div class="flip-back">
-                            <div class="service-card card h-100 border-0 shadow-sm overflow-hidden info-back-card" style="color:#fff;">
-                                <div class="card-body d-flex align-items-center justify-content-center text-center p-4">
-                                    <div>
-                                        <h5 class="fw-bold mb-2">Dental Care</h5>
-                                        <p class="mb-0 text-white small">Comprehensive dental treatments including root canals, implants, cosmetic dentistry, and preventive care by experienced dentists.</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-2">Dental Care</h5>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-5 col-lg-5 flip-col">
-                    <div class="flip-inner">
-                        <div class="flip-front">
-                            <div class="service-card card h-100 border-0 shadow-sm overflow-hidden">
-                                <div class="position-relative overflow-hidden" style="height: 100%">
-                                    <img src="{{ asset('images/e.png') }}" alt="Eye Care" style="width:100%; height:100%; object-fit:cover; display:block;">
-                                    <div class="title-overlay"><h5 class="mb-0">Eye Care</h5></div>
-                                </div>
-                            </div>
+                <div class="col-md-5 col-lg-5">
+                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden" data-title="Eye Care" data-description="Advanced eye examinations, cataract surgery, LASIK, glaucoma management, and pediatric ophthalmology." data-image="{{ asset('images/e.png') }}">
+                        <div class="position-relative overflow-hidden">
+                            <img src="{{ asset('images/e.png') }}" class="card-img-top project-image" alt="Eye Care">
+                           
                         </div>
-                        <div class="flip-back">
-                            <div class="service-card card h-100 border-0 shadow-sm overflow-hidden info-back-card" style="color:#fff;">
-                                <div class="card-body d-flex align-items-center justify-content-center text-center p-4">
-                                    <div>
-                                        <h5 class="fw-bold mb-2">Eye Care</h5>
-                                        <p class="mb-0 text-white small">Advanced eye examinations, cataract surgery, LASIK, glaucoma management, and pediatric ophthalmology.</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-2">Eye Care</h5>
                         </div>
                     </div>
                 </div>
@@ -289,41 +317,73 @@
                 <div class="row justify-content-center">
                     <!-- Doctor 1 -->
                     <div class="col-6 col-md-3 mb-4">
-                        <div class="doctor-card" data-title="Dr. John Doe" data-description="Specialist in Orthodontics and cosmetic dentistry with 12+ years of experience." data-image="{{ asset('images/a.png') }}">
-                            <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                                <img src="{{ asset('images/a.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                        <div class="doctor-card doctor-flip" data-title="Dr. John Doe" data-description="Specialist in Orthodontics and cosmetic dentistry with 12+ years of experience." data-image="{{ asset('images/a.png') }}">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                        <img src="{{ asset('images/a.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <h4 style="font-size: 1.1rem; color: #333; margin-bottom: 5px; font-weight: 600;">Dr. John Doe</h4>
+                                </div>
+                                <div class="flip-back">
+                                    <h5>Dr. John Doe</h5>
+                                    <p>Specialist in Orthodontics and cosmetic dentistry with 12+ years of experience.</p>
+                                </div>
                             </div>
-                            <h4 style="font-size: 1.1rem; color: #333; margin-bottom: 5px; font-weight: 600;">Dr. John Doe</h4>
                         </div>
                     </div>
                     
                     <!-- Doctor 2 -->
                     <div class="col-6 col-md-3 mb-4">
-                        <div class="doctor-card" data-title="Dr. Jane Smith" data-description="Consultant Ophthalmologist focused on cataract and refractive surgeries." data-image="{{ asset('images/c.png') }}">
-                            <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                                <img src="{{ asset('images/c.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                        <div class="doctor-card doctor-flip" data-title="Dr. Jane Smith" data-description="Consultant Ophthalmologist focused on cataract and refractive surgeries." data-image="{{ asset('images/c.png') }}">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                        <img src="{{ asset('images/c.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <h4 style="font-size: 1.1rem; color: #333; margin-bottom: 5px; font-weight: 600;">Dr. Jane Smith</h4>
+                                </div>
+                                <div class="flip-back">
+                                    <h5>Dr. Jane Smith</h5>
+                                    <p>Consultant Ophthalmologist focused on cataract and refractive surgeries.</p>
+                                </div>
                             </div>
-                            <h4 style="font-size: 1.1rem; color: #333; margin-bottom: 5px; font-weight: 600;">Dr. Jane Smith</h4>
                         </div>
                     </div>
                     
                     <!-- Doctor 3 -->
                     <div class="col-6 col-md-3 mb-4">
-                        <div class="doctor-card" data-title="Dr. Robert Johnson" data-description="Maxillofacial surgeon specializing in complex jaw surgeries and implants." data-image="{{ asset('images/b.png') }}">
-                            <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                                <img src="{{ asset('images/b.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                        <div class="doctor-card doctor-flip" data-title="Dr. Robert Johnson" data-description="Maxillofacial surgeon specializing in complex jaw surgeries and implants." data-image="{{ asset('images/b.png') }}">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                        <img src="{{ asset('images/b.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <h4 style="font-size: 1.1rem; color: #333; margin-bottom: 5px; font-weight: 600;">Dr. Robert Johnson</h4>
+                                </div>
+                                <div class="flip-back">
+                                    <h5>Dr. Robert Johnson</h5>
+                                    <p>Maxillofacial surgeon specializing in complex jaw surgeries and implants.</p>
+                                </div>
                             </div>
-                            <h4 style="font-size: 1.1rem; color: #333; margin-bottom: 5px; font-weight: 600;">Dr. Robert Johnson</h4>
                         </div>
                     </div>
                     
                     <!-- Doctor 4 -->
                     <div class="col-6 col-md-3 mb-4">
-                        <div class="doctor-card" data-title="Dr. Sarah Williams" data-description="Pediatric Dentist providing gentle care for children and teens." data-image="{{ asset('images/d.png') }}">
-                            <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                                <img src="{{ asset('images/d.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                        <div class="doctor-card doctor-flip" data-title="Dr. Sarah Williams" data-description="Pediatric Dentist providing gentle care for children and teens." data-image="{{ asset('images/d.png') }}">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                        <img src="{{ asset('images/d.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                                    </div>
+                                    <h4 style="font-size: 1.1rem; color: #333; margin-bottom: 5px; font-weight: 600;">Dr. Sarah Williams</h4>
+                                </div>
+                                <div class="flip-back">
+                                    <h5>Dr. Sarah Williams</h5>
+                                    <p>Pediatric Dentist providing gentle care for children and teens.</p>
+                                </div>
                             </div>
-                            <h4 style="font-size: 1.1rem; color: #333; margin-bottom: 5px; font-weight: 600;">Dr. Sarah Williams</h4>
                         </div>
                     </div>
                 </div>
