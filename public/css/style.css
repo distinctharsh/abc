@@ -61,7 +61,7 @@
 /* Hero Section */
 .hero-section {
     /* padding: 98px 0 125px 0; */
-    background: url('../images/background.jpg') no-repeat center center    /cover;
+    background: url('../images/background.jpg') no-repeat center center /cover;
 }
 
 .hero-container {
@@ -79,7 +79,7 @@
 }
 
 .hero-title {
-font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 67px;
     line-height: 86px;
@@ -89,7 +89,7 @@ font-family: 'Inter', sans-serif;
 }
 
 .hero-description {
-font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 20px;
     line-height: 34px;
@@ -117,7 +117,8 @@ font-family: 'Inter', sans-serif;
     border-radius: 24px;
     position: relative;
     overflow: hidden;
-    margin-top: 20px; /* Add some space from the top */
+    margin-top: 20px;
+    /* Add some space from the top */
 }
 
 .hero-image {
@@ -125,7 +126,8 @@ font-family: 'Inter', sans-serif;
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: flex-end; /* Align image to bottom */
+    align-items: flex-end;
+    /* Align image to bottom */
 }
 
 .hero-image img {
@@ -254,12 +256,12 @@ font-family: 'Inter', sans-serif;
     .navbar-custom {
         padding: 20px;
     }
-    
+
     .hero-content {
         width: 100%;
         margin-top: 2rem;
     }
-    
+
     .hero-image-container {
         width: 100%;
         height: 400px;
@@ -338,7 +340,7 @@ font-family: 'Inter', sans-serif;
     margin-top: 2rem;
 }
 
-.pagination > .page-item > .page-link {
+.pagination>.page-item>.page-link {
     color: #6c3ef5;
     border: 1px solid #e2e8f0;
     padding: 0.5rem 1rem;
@@ -348,30 +350,30 @@ font-family: 'Inter', sans-serif;
     transition: all 0.2s ease;
 }
 
-.pagination > .page-item.active > .page-link {
+.pagination>.page-item.active>.page-link {
     background-color: #6c3ef5;
     border-color: #6c3ef5;
     color: white;
 }
 
-.pagination > .page-item:not(.active):hover > .page-link {
+.pagination>.page-item:not(.active):hover>.page-link {
     background-color: #f8f9fa;
     border-color: #e2e8f0;
 }
 
-.pagination > .page-item.disabled > .page-link {
+.pagination>.page-item.disabled>.page-link {
     color: #a0aec0;
     pointer-events: none;
 }
 
-.pagination > .page-item:first-child > .page-link,
-.pagination > .page-item:last-child > .page-link {
+.pagination>.page-item:first-child>.page-link,
+.pagination>.page-item:last-child>.page-link {
     border-radius: 6px;
 }
 
 /* Responsive pagination */
 @media (max-width: 576px) {
-    .pagination > .page-item > .page-link {
+    .pagination>.page-item>.page-link {
         padding: 0.375rem 0.75rem;
         font-size: 0.875rem;
     }
@@ -398,32 +400,38 @@ font-family: 'Inter', sans-serif;
     border-radius: 50%;
     overflow: hidden;
 }
+
 .service-card h3 {
     font-size: 1.25rem;
     color: #333;
     margin-bottom: 10px;
     font-weight: 600;
 }
+
 .service-card p {
     color: #666;
     font-size: 0.9rem;
     margin-bottom: 15px;
     line-height: 1.5;
 }
+
 .read-more {
     color: #0d6efd;
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
 }
+
 .read-more i {
     margin-left: 5px;
     font-size: 0.8rem;
 }
+
 .doctor-card {
     text-align: center;
     padding: 15px 10px;
 }
+
 .doctor-img {
     width: 120px;
     height: 120px;
@@ -431,22 +439,106 @@ font-family: 'Inter', sans-serif;
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid #fff;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
+
 .doctor-card h4 {
     font-size: 1rem;
     color: #333;
     margin: 10px 0 5px;
     font-weight: 600;
 }
+
 .doctor-card .specialty {
     color: #666;
     font-size: 0.85rem;
     margin: 0;
 }
+
 @media (max-width: 768px) {
     .doctor-img {
         width: 100px;
         height: 100px;
     }
+}
+
+/* Hero image delayed slide-in for sir.png */
+.hero-sir {
+    opacity: 0;
+    transform: translateX(60px);
+    animation: sirSlideIn 0.9s ease-out 2s forwards;
+}
+
+@keyframes sirSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Interactive info drawer for services and doctors */
+.service-card,
+.doctor-card {
+    cursor: pointer;
+}
+
+.info-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 1040;
+}
+
+.info-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.info-panel {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 70vh;
+    background: linear-gradient(to right, #a96ee4, #46ff46);
+    color: #fff;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(.22, .61, .36, 1);
+    z-index: 1050;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.info-panel.open {
+    transform: translateY(0);
+}
+
+.info-panel .info-content {
+    padding: 20px 24px 28px;
+    overflow-y: auto;
+    max-height: calc(70vh - 56px);
+}
+
+.info-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
 }

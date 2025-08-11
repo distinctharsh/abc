@@ -77,7 +77,7 @@
                 <!-- Right Image -->
                 <div class="hero-image-container">
                     <div class="hero-image">
-                        <img src="{{ asset('images/sir.png') }}" alt="Hero Image" style="background: transparent;">
+                        <img src="{{ asset('images/sir.png') }}" alt="Hero Image" class="hero-sir" style="background: transparent;">
                     </div>
                 </div>
             </div>
@@ -183,7 +183,7 @@
             <div class="row g-4 d-flex justify-content-center align-items-center">
              
                 <div class=" col-md-5 col-lg-5"  >
-                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden">
+                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden" data-title="Dental Care" data-description="Comprehensive dental treatments including root canals, implants, cosmetic dentistry, and preventive care by experienced dentists." data-image="{{ asset('images/f.png') }}">
                         <div class="position-relative overflow-hidden">
                             <img src="{{ asset('images/f.png') }}" class="card-img-top project-image" alt="Eye Care">
                         </div>
@@ -194,7 +194,7 @@
                 </div>
 
                 <div class="col-md-5 col-lg-5">
-                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden">
+                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden" data-title="Eye Care" data-description="Advanced eye examinations, cataract surgery, LASIK, glaucoma management, and pediatric ophthalmology." data-image="{{ asset('images/e.png') }}">
                         <div class="position-relative overflow-hidden">
                             <img src="{{ asset('images/e.png') }}" class="card-img-top project-image" alt="Eye Care">
                            
@@ -213,7 +213,7 @@
                 <div class="row justify-content-center">
                     <!-- Doctor 1 -->
                     <div class="col-6 col-md-3 mb-4">
-                        <div class="doctor-card">
+                        <div class="doctor-card" data-title="Dr. John Doe" data-description="Specialist in Orthodontics and cosmetic dentistry with 12+ years of experience." data-image="{{ asset('images/a.png') }}">
                             <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                                 <img src="{{ asset('images/a.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
                             </div>
@@ -223,7 +223,7 @@
                     
                     <!-- Doctor 2 -->
                     <div class="col-6 col-md-3 mb-4">
-                        <div class="doctor-card">
+                        <div class="doctor-card" data-title="Dr. Jane Smith" data-description="Consultant Ophthalmologist focused on cataract and refractive surgeries." data-image="{{ asset('images/c.png') }}">
                             <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                                 <img src="{{ asset('images/c.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
                             </div>
@@ -233,7 +233,7 @@
                     
                     <!-- Doctor 3 -->
                     <div class="col-6 col-md-3 mb-4">
-                        <div class="doctor-card">
+                        <div class="doctor-card" data-title="Dr. Robert Johnson" data-description="Maxillofacial surgeon specializing in complex jaw surgeries and implants." data-image="{{ asset('images/b.png') }}">
                             <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                                 <img src="{{ asset('images/b.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
                             </div>
@@ -243,7 +243,7 @@
                     
                     <!-- Doctor 4 -->
                     <div class="col-6 col-md-3 mb-4">
-                        <div class="doctor-card">
+                        <div class="doctor-card" data-title="Dr. Sarah Williams" data-description="Pediatric Dentist providing gentle care for children and teens." data-image="{{ asset('images/d.png') }}">
                             <div class="doctor-img mb-3 mx-auto" style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                                 <img src="{{ asset('images/d.png') }}" alt="Doctor" class="img-fluid w-100 h-100" style="object-fit: cover;">
                             </div>
@@ -255,6 +255,19 @@
         </div>
     </section>
 
+    <!-- Info Drawer (shared) -->
+    <div id="infoOverlay" class="info-overlay" aria-hidden="true"></div>
+    <aside id="infoPanel" class="info-panel" role="dialog" aria-modal="true" aria-labelledby="infoTitle" aria-hidden="true">
+        <button type="button" class="info-close" id="infoClose" aria-label="Close">×</button>
+        <div class="info-content">
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <img id="infoImage" src="" alt="" style="width:64px; height:64px; border-radius:12px; object-fit:cover; background:#ffffff33;">
+                <h3 id="infoTitle" class="mb-0"></h3>
+            </div>
+            <p id="infoDesc" class="mb-0"></p>
+        </div>
+    </aside>
+
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -265,6 +278,64 @@
                 easing: 'ease-in-out',
                 once: true
             });
+
+            // Interactive info drawer
+            const overlay = document.getElementById('infoOverlay');
+            const panel = document.getElementById('infoPanel');
+            const closeBtn = document.getElementById('infoClose');
+            const titleEl = document.getElementById('infoTitle');
+            const descEl = document.getElementById('infoDesc');
+            const imgEl = document.getElementById('infoImage');
+
+            function openPanel({ title, description, image }) {
+                titleEl.textContent = title || '';
+                descEl.textContent = description || '';
+                if (image) {
+                    imgEl.src = image;
+                    imgEl.alt = title || 'Image';
+                    imgEl.style.display = 'block';
+                } else {
+                    imgEl.style.display = 'none';
+                }
+                overlay.classList.add('show');
+                panel.classList.add('open');
+                overlay.setAttribute('aria-hidden', 'false');
+                panel.setAttribute('aria-hidden', 'false');
+                closeBtn.focus();
+            }
+
+            function closePanel() {
+                panel.classList.remove('open');
+                overlay.classList.remove('show');
+                overlay.setAttribute('aria-hidden', 'true');
+                panel.setAttribute('aria-hidden', 'true');
+            }
+
+            overlay.addEventListener('click', closePanel);
+            closeBtn.addEventListener('click', closePanel);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closePanel();
+            });
+
+            function attach(card) {
+                card.setAttribute('tabindex', '0');
+                card.addEventListener('click', () => {
+                    openPanel({
+                        title: card.dataset.title,
+                        description: card.dataset.description,
+                        image: card.dataset.image
+                    });
+                });
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        card.click();
+                    }
+                });
+            }
+
+            document.querySelectorAll('.service-card[data-title]').forEach(attach);
+            document.querySelectorAll('.doctor-card[data-title]').forEach(attach);
         });
     </script>
 
