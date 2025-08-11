@@ -157,6 +157,39 @@
                 transform: translateX(calc(100vw + 200px));
             }
         }
+        /* Flip entire column (right-to-left) */
+        .flip-col {
+            perspective: 1000px;
+        }
+        .flip-col .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 360px;
+            transform-style: preserve-3d;
+            transition: transform 0.7s ease;
+            transform-origin: center center;
+        }
+        .flip-col:hover .flip-inner {
+            transform: rotateY(-180deg);
+            -webkit-transform: rotateY(-180deg);
+        }
+        .flip-col .flip-front,
+        .flip-col .flip-back {
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            width: 100%; height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .flip-col .flip-back { 
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+            display: flex; align-items: stretch; justify-content: stretch;
+        }
+        .flip-col .flip-front .title-overlay {
+            position: absolute; left: 0; right: 0; bottom: 0;
+            padding: 1rem 1.25rem; background: rgba(0,0,0,0.45); color: #fff;
+        }
     </style>
 
     <div>
@@ -182,25 +215,48 @@
             <!-- Service Cards -->
             <div class="row g-4 d-flex justify-content-center align-items-center">
              
-                <div class=" col-md-5 col-lg-5"  >
-                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden" data-title="Dental Care" data-description="Comprehensive dental treatments including root canals, implants, cosmetic dentistry, and preventive care by experienced dentists." data-image="{{ asset('images/f.png') }}">
-                        <div class="position-relative overflow-hidden">
-                            <img src="{{ asset('images/f.png') }}" class="card-img-top project-image" alt="Eye Care">
+                <div class="col-md-5 col-lg-5 flip-col">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <div class="service-card card h-100 border-0 shadow-sm overflow-hidden">
+                                <div class="position-relative overflow-hidden" style="height: 100%">
+                                    <img src="{{ asset('images/f.png') }}" alt="Dental Care" style="width:100%; height:100%; object-fit:cover; display:block;">
+                                    <div class="title-overlay"><h5 class="mb-0">Dental Care</h5></div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2">Dental Care</h5>
+                        <div class="flip-back">
+                            <div class="service-card card h-100 border-0 shadow-sm overflow-hidden" style="background: linear-gradient(135deg, #0ea5e9, #2563eb); color:#fff;">
+                                <div class="card-body d-flex align-items-center justify-content-center text-center p-4">
+                                    <div>
+                                        <h5 class="fw-bold mb-2">Dental Care</h5>
+                                        <p class="mb-0 small">Comprehensive dental treatments including root canals, implants, cosmetic dentistry, and preventive care by experienced dentists.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-5 col-lg-5">
-                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden" data-title="Eye Care" data-description="Advanced eye examinations, cataract surgery, LASIK, glaucoma management, and pediatric ophthalmology." data-image="{{ asset('images/e.png') }}">
-                        <div class="position-relative overflow-hidden">
-                            <img src="{{ asset('images/e.png') }}" class="card-img-top project-image" alt="Eye Care">
-                           
+                <div class="col-md-5 col-lg-5 flip-col">
+                    <div class="flip-inner">
+                        <div class="flip-front">
+                            <div class="service-card card h-100 border-0 shadow-sm overflow-hidden">
+                                <div class="position-relative overflow-hidden" style="height: 100%">
+                                    <img src="{{ asset('images/e.png') }}" alt="Eye Care" style="width:100%; height:100%; object-fit:cover; display:block;">
+                                    <div class="title-overlay"><h5 class="mb-0">Eye Care</h5></div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body p-4">
-                            <h5 class="card-title fw-bold mb-2">Eye Care</h5>
+                        <div class="flip-back">
+                            <div class="service-card card h-100 border-0 shadow-sm overflow-hidden" style="background: linear-gradient(135deg, #0ea5e9, #2563eb); color:#fff;">
+                                <div class="card-body d-flex align-items-center justify-content-center text-center p-4">
+                                    <div>
+                                        <h5 class="fw-bold mb-2">Eye Care</h5>
+                                        <p class="mb-0 small">Advanced eye examinations, cataract surgery, LASIK, glaucoma management, and pediatric ophthalmology.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
