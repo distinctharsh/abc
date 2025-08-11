@@ -190,6 +190,26 @@
             position: absolute; left: 0; right: 0; bottom: 0;
             padding: 1rem 1.25rem; background: rgba(0,0,0,0.45); color: #fff;
         }
+        /* Stylish back content */
+        .info-back-card {
+            position: relative;
+            background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 50%, #7c3aed 100%);
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.12);
+            overflow: hidden;
+        }
+        .info-back-card::before {
+            content: "";
+            position: absolute;
+            top: -20%; left: -20%;
+            width: 60%; height: 140%;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.28), rgba(255,255,255,0.0) 60%);
+            transform: rotate(25deg);
+            pointer-events: none;
+        }
+        .info-back-card h5 { letter-spacing: 0.3px; }
+        .info-back-card p { opacity: 0.95; line-height: 1.6; }
     </style>
 
     <div>
@@ -226,11 +246,11 @@
                             </div>
                         </div>
                         <div class="flip-back">
-                            <div class="service-card card h-100 border-0 shadow-sm overflow-hidden" style="background: linear-gradient(135deg, #0ea5e9, #2563eb); color:#fff;">
+                            <div class="service-card card h-100 border-0 shadow-sm overflow-hidden info-back-card" style="color:#fff;">
                                 <div class="card-body d-flex align-items-center justify-content-center text-center p-4">
                                     <div>
                                         <h5 class="fw-bold mb-2">Dental Care</h5>
-                                        <p class="mb-0 small">Comprehensive dental treatments including root canals, implants, cosmetic dentistry, and preventive care by experienced dentists.</p>
+                                        <p class="mb-0 text-white small">Comprehensive dental treatments including root canals, implants, cosmetic dentistry, and preventive care by experienced dentists.</p>
                                     </div>
                                 </div>
                             </div>
@@ -249,11 +269,11 @@
                             </div>
                         </div>
                         <div class="flip-back">
-                            <div class="service-card card h-100 border-0 shadow-sm overflow-hidden" style="background: linear-gradient(135deg, #0ea5e9, #2563eb); color:#fff;">
+                            <div class="service-card card h-100 border-0 shadow-sm overflow-hidden info-back-card" style="color:#fff;">
                                 <div class="card-body d-flex align-items-center justify-content-center text-center p-4">
                                     <div>
                                         <h5 class="fw-bold mb-2">Eye Care</h5>
-                                        <p class="mb-0 small">Advanced eye examinations, cataract surgery, LASIK, glaucoma management, and pediatric ophthalmology.</p>
+                                        <p class="mb-0 text-white small">Advanced eye examinations, cataract surgery, LASIK, glaucoma management, and pediatric ophthalmology.</p>
                                     </div>
                                 </div>
                             </div>
