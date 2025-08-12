@@ -76,10 +76,11 @@
                 <!-- Left Content -->
                 <div class="hero-content fade-in-up" style="animation-delay: 0.2s;">
                     <h1 class="hero-title">
-                        Welcome to <br><span class="gradient-text">Orodental Hospital</span>
+                        Dr. Sarkar Family <br><span class="gradient-text">Transforming Smiles, Transforming Lives
+                        </span>
                     </h1>
                     <p class="hero-description">
-                        Excellence in Dental Care with a Human Touch
+                        A trusted dental surgeon and dedicated social contributor, bringing advanced healthcare and meaningful community development to the people of Asansol.
                     </p>
                 
                         <button class="hero-btn">
