@@ -746,6 +746,54 @@
         </div>
     </section>
 
+
+     <!-- Social Media Section -->
+     <section class="social-media-section py-5 mb-5"
+        style="background: linear-gradient(135deg, #1fd51f 0%, #16a016 100%);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <h4 class="text-white mb-4 fw-bold" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">Follow Us on
+                        Social Media</h4>
+                    <p class="text-white mb-4 opacity-90">Stay connected with us for latest updates and health tips</p>
+
+                    <div
+                        class="social-icons-container d-flex justify-content-center align-items-center gap-4 flex-wrap">
+                        <!-- Facebook -->
+                        <a href="#" class="social-icon-link facebook" title="Follow us on Facebook">
+                            <div class="social-icon facebook-icon">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </div>
+                        </a>
+
+                        <!-- Twitter -->
+                        <a href="#" class="social-icon-link twitter" title="Follow us on Twitter">
+                            <div class="social-icon twitter-icon">
+                                <i class="fa-brands fa-twitter"></i>
+                            </div>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a href="https://www.instagram.com/sarkardr.debasish?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                            class="social-icon-link instagram" title="Follow us on Instagram">
+                            <div class="social-icon instagram-icon">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                        </a>
+
+                        <!-- YouTube -->
+                        <a href="https://www.youtube.com/@drdebashissarkartmc/" class="social-icon-link youtube"
+                            title="Subscribe to our YouTube">
+                            <div class="social-icon youtube-icon">
+                                <i class="fa-brands fa-youtube"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
