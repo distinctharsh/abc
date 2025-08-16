@@ -75,17 +75,37 @@
             <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row">
                 <!-- Left Content -->
                 <div class="hero-content fade-in-up" style="animation-delay: 0.2s;">
-                    <h1 class="hero-title">
-                        Dr. Sarkar Family <br><span class="gradient-text">Transforming Smiles, Transforming Lives
-                        </span>
-                    </h1>
+
+               <div class="health-box">
+                    <!-- Corner lines -->
+                    <div class="corner-line line-hygiene-start"></div>
+                    <div class="corner-line line-hygiene-end"></div>
+
+                    <div class="corner-line line-mask-start"></div>
+                    <div class="corner-line line-mask-end"></div>
+
+                    <div class="corner-line line-home-start"></div>
+                    <div class="corner-line line-home-end"></div>
+
+                    <div class="corner-line line-distance-start"></div>
+                    <div class="corner-line line-distance-end"></div>
+
+                    <!-- Labels -->
+                    <div class="label-text label-hygiene">Dr. Sarkar Family</div>
+                
+                </div>
+
+                    <div class="tagline">
+                        Transforming Smiles <span class="star">★</span> Transforming Lives
+                    </div>
+                  
                     <p class="hero-description">
                         A trusted dental surgeon and dedicated social contributor, bringing advanced healthcare and meaningful community development to the people of Asansol.
                     </p>
                 
-                        <button class="hero-btn">
-                            <i class="fas fa-rocket me-2"></i>Book an Appointment
-                        </button>
+                    <button class="hero-btn">
+                        <i class="fas fa-rocket me-2"></i>Book an Appointment
+                    </button>
               
                 </div>
                 
@@ -146,144 +166,6 @@
             </div>
         </div>
     </section>
-
-
-    <style>
-        .ambulance-container {
-            position: relative;
-            width: 100%;
-            /* height: 200px; */
-            overflow: hidden;
-            margin: 2rem 0;
-            /* background-color: #f0f0f0; */
-            border-radius: 8px;
-        }
-        .road-bg {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .ambulance-img {
-            position: absolute;
-            bottom: -5px;
-            left: -200px;
-            width: 150px;
-            height: auto;
-            animation: moveAmbulance 8s linear infinite;
-        }
-        @keyframes moveAmbulance {
-            0% {
-                transform: translateX(-200px);
-            }
-            100% {
-                transform: translateX(calc(100vw + 200px));
-            }
-        }
-        /* Flip animation for doctor cards */
-        .doctor-flip {
-            perspective: 1000px;
-            height: 200px;
-        }
-        .doctor-flip .flip-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.7s ease;
-            transform-origin: center center;
-        }
-        .doctor-flip:hover .flip-inner {
-            transform: rotateY(-180deg);
-            -webkit-transform: rotateY(-180deg);
-        }
-        .doctor-flip .flip-front,
-        .doctor-flip .flip-back {
-            position: absolute;
-            top: 0; right: 0; bottom: 0; left: 0;
-            width: 100%; height: 100%;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            border-radius: 0.75rem;
-            overflow: hidden;
-        }
-        .doctor-flip .flip-back { 
-            transform: rotateY(180deg);
-            -webkit-transform: rotateY(180deg);
-            background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 50%, #7c3aed 100%);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 1rem;
-            border: 1px solid rgba(255,255,255,0.18);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-        }
-        .doctor-flip .flip-back h5 { 
-            font-size: 1rem; 
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.3px;
-        }
-        .doctor-flip .flip-back p { 
-            font-size: 0.8rem; 
-            opacity: 0.95; 
-            line-height: 1.4;
-            margin: 0;
-        }
-        /* Flip entire column (right-to-left) */
-        .flip-col {
-            perspective: 1000px;
-        }
-        .flip-col .flip-inner {
-            position: relative;
-            width: 100%;
-            height: 360px;
-            transform-style: preserve-3d;
-            transition: transform 0.7s ease;
-            transform-origin: center center;
-        }
-        .flip-col:hover .flip-inner {
-            transform: rotateY(-180deg);
-            -webkit-transform: rotateY(-180deg);
-        }
-        .flip-col .flip-front,
-        .flip-col .flip-back {
-            position: absolute;
-            top: 0; right: 0; bottom: 0; left: 0;
-            width: 100%; height: 100%;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-        }
-        .flip-col .flip-back { 
-            transform: rotateY(180deg);
-            -webkit-transform: rotateY(180deg);
-            display: flex; align-items: stretch; justify-content: stretch;
-        }
-        .flip-col .flip-front .title-overlay {
-            position: absolute; left: 0; right: 0; bottom: 0;
-            padding: 1rem 1.25rem; background: rgba(0,0,0,0.45); color: #fff;
-        }
-        /* Stylish back content */
-        .info-back-card {
-            position: relative;
-            background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 50%, #7c3aed 100%);
-            border-radius: 0.75rem;
-            border: 1px solid rgba(255,255,255,0.18);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.12);
-            overflow: hidden;
-        }
-        .info-back-card::before {
-            content: "";
-            position: absolute;
-            top: -20%; left: -20%;
-            width: 60%; height: 140%;
-            background: radial-gradient(ellipse at center, rgba(255,255,255,0.28), rgba(255,255,255,0.0) 60%);
-            transform: rotate(25deg);
-            pointer-events: none;
-        }
-        .info-back-card h5 { letter-spacing: 0.3px; }
-        .info-back-card p { opacity: 0.95; line-height: 1.6; }
-    </style>
 
     <div>
         <div class="ambulance-container">
@@ -747,52 +629,57 @@
     </section>
 
 
-     <!-- Social Media Section -->
-     <section class="social-media-section py-5 mb-5"
-        style="background: linear-gradient(135deg, #1fd51f 0%, #16a016 100%);">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 text-center">
-                    <h4 class="text-white mb-4 fw-bold" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">Follow Us on
-                        Social Media</h4>
-                    <p class="text-white mb-4 opacity-90">Stay connected with us for latest updates and health tips</p>
+<!-- Social Media Section -->
+<section class="social-media-section py-5 mb-5 relative overflow-hidden"
+    style="background: linear-gradient(135deg, #1fd51f 0%, #16a016 100%); position: relative;">
+    
+    <div class="container relative z-10">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <h2 class="text-white mb-3 fw-bold" 
+                    style="text-shadow: 3px 3px 8px rgba(0,0,0,0.4); font-size: 2.5rem;">
+                    🌐 Stay Connected
+                </h2>
+                <p class="text-white mb-5 fs-5 opacity-90">Follow us on social media for updates, news & tips</p>
 
-                    <div
-                        class="social-icons-container d-flex justify-content-center align-items-center gap-4 flex-wrap">
-                        <!-- Facebook -->
-                        <a href="#" class="social-icon-link facebook" title="Follow us on Facebook">
-                            <div class="social-icon facebook-icon">
-                                <i class="fa-brands fa-facebook-f"></i>
-                            </div>
-                        </a>
+                <div class="social-icons-container d-flex justify-content-center align-items-center gap-4 flex-wrap">
+                    
+                    <!-- Facebook -->
+                    <a href="#" class="social-icon-link">
+                        <div class="social-icon facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </div>
+                    </a>
 
-                        <!-- Twitter -->
-                        <a href="#" class="social-icon-link twitter" title="Follow us on Twitter">
-                            <div class="social-icon twitter-icon">
-                                <i class="fa-brands fa-twitter"></i>
-                            </div>
-                        </a>
+                    <!-- Twitter -->
+                    <a href="#" class="social-icon-link">
+                        <div class="social-icon twitter">
+                            <i class="fa-brands fa-twitter"></i>
+                        </div>
+                    </a>
 
-                        <!-- Instagram -->
-                        <a href="https://www.instagram.com/sarkardr.debasish?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-                            class="social-icon-link instagram" title="Follow us on Instagram">
-                            <div class="social-icon instagram-icon">
-                                <i class="fa-brands fa-instagram"></i>
-                            </div>
-                        </a>
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/sarkardr.debasish" class="social-icon-link">
+                        <div class="social-icon instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                    </a>
 
-                        <!-- YouTube -->
-                        <a href="https://www.youtube.com/@drdebashissarkartmc/" class="social-icon-link youtube"
-                            title="Subscribe to our YouTube">
-                            <div class="social-icon youtube-icon">
-                                <i class="fa-brands fa-youtube"></i>
-                            </div>
-                        </a>
-                    </div>
+                    <!-- YouTube -->
+                    <a href="https://www.youtube.com/@drdebashissarkartmc/" class="social-icon-link">
+                        <div class="social-icon youtube">
+                            <i class="fa-brands fa-youtube"></i>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Decorative background circles -->
+    <div class="circle-shape"></div>
+    <div class="circle-shape two"></div>
+</section>
 
     <!-- Footer -->
     <footer class="footer">
