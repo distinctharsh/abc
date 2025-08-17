@@ -443,7 +443,13 @@
 			new Swiper(slider, {
 				slidesPerView: "auto",
 				spaceBetween: 20,
-				speed: 600,
+				speed: 800,
+				loop: true,
+				centeredSlides: true,
+				autoplay: {
+					delay: 3000,
+					disableOnInteraction: false,
+				},
 				observer: true,
 				watchOverflow: true,
 				watchSlidesProgress: true,
