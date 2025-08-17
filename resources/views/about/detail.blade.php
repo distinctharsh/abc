@@ -28,46 +28,211 @@
 
     <!-- Social Media Posts Section -->
     <section class="mb-5">
-        <h2 class="h3 mb-4">Social Media Updates</h2>
-        <div class="row g-4">
-            @foreach($socialMediaPosts as $post)
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-header bg-white d-flex align-items-center">
-                        <i class="fab fa-{{ $post['platform'] }} fa-2x me-2 text-{{ 
-                            $post['platform'] === 'facebook' ? 'primary' : 
-                            ($post['platform'] === 'twitter' ? 'info' : 'danger') 
-                        }}"></i>
-                        <div>
-                            <h6 class="mb-0">{{ ucfirst($post['platform']) }}</h6>
-                            <small class="text-muted">{{ $post['date'] }}</small>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h3 mb-0">Social Media Updates</h2>
+            <div>
+                <button class="btn btn-sm btn-outline-secondary me-2" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="position-relative">
+            <div class="social-slider-container">
+                <div class="social-slider" id="socialMediaContainer">
+                    @foreach($socialMediaPosts as $post)
+                    <div class="social-slide">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-header bg-white d-flex align-items-center">
+                                <i class="fab fa-{{ $post['platform'] }} fa-lg me-2 text-{{ 
+                                    $post['platform'] === 'facebook' ? 'primary' : 
+                                    ($post['platform'] === 'twitter' ? 'info' : 'danger') 
+                                }}"></i>
+                                <h6 class="mb-0 small">{{ ucfirst($post['platform']) }}</h6>
+                            </div>
+                            <div class="card-body p-0">
+                                <div style="height: 200px; overflow: hidden;">
+                                    <iframe 
+                                        src="https://www.facebook.com/plugins/post.php?href={{ urlencode($post['url']) }}&show_text=true&width=300" 
+                                        style="border:none;overflow:hidden; width: 100%; height: 100%;" 
+                                        scrolling="no" 
+                                        frameborder="0" 
+                                        allowfullscreen="true" 
+                                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                    </iframe>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-white text-center">
+                                <a href="{{ $post['url'] }}" target="_blank" class="btn btn-sm btn-outline-primary w-100">
+                                    View Post <i class="fas fa-external-link-alt ms-1"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">{{ $post['content'] }}</p>
-                    </div>
-                    <div class="card-footer bg-white border-top-0 d-flex justify-content-between">
-                        <span class="text-muted">
-                            <i class="far fa-heart me-1"></i> {{ $post['likes'] ?? 0 }}
-                        </span>
-                        <span class="text-muted">
-                            <i class="far fa-comment me-1"></i> {{ $post['comments'] ?? 0 }}
-                        </span>
-                        @if(isset($post['shares']))
-                        <span class="text-muted">
-                            <i class="fas fa-share me-1"></i> {{ $post['shares'] }}
-                        </span>
-                        @elseif(isset($post['retweets']))
-                        <span class="text-muted">
-                            <i class="fas fa-retweet me-1"></i> {{ $post['retweets'] }}
-                        </span>
-                        @endif
-                    </div>
+                    @endforeach
                 </div>
             </div>
-            @endforeach
         </div>
+
+        <!-- Add New Post Form -->
+        <!-- <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Add New Social Media Post</h5>
+            </div>
+            <div class="card-body">
+                <form id="addPostForm">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Select Platform</label>
+                        <select class="form-select" id="platformSelect">
+                            <option value="facebook">Facebook</option>
+                            <option value="twitter">Twitter</option>
+                            <option value="instagram">Instagram</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Post URL</label>
+                        <input type="url" class="form-control" id="postUrl" placeholder="https://" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Preview Post</button>
+                </form>
+            </div>
+        </div> -->
     </section>
+
+    @push('styles')
+    <style>
+        .social-slider-container {
+            overflow: hidden;
+            position: relative;
+            padding: 10px 0;
+        }
+        .social-slider {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.3s ease;
+            padding: 10px 5px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+        .social-slider::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+        .social-slide {
+            flex: 0 0 300px;
+            height: 350px;
+        }
+        .social-slide .card {
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .social-slide .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+    </style>
+    @endpush
+
+    @push('scripts')
+    <script>
+        // Social Media Slider Navigation
+        const slider = document.getElementById('socialMediaContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideWidth = 320; // 300px card + 20px gap
+        
+        let scrollPosition = 0;
+        
+        // Next button click
+        nextBtn.addEventListener('click', () => {
+            scrollPosition += slideWidth;
+            if (scrollPosition > slider.scrollWidth - slider.clientWidth) {
+                scrollPosition = slider.scrollWidth - slider.clientWidth;
+            }
+            slider.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Previous button click
+        prevBtn.addEventListener('click', () => {
+            scrollPosition -= slideWidth;
+            if (scrollPosition < 0) {
+                scrollPosition = 0;
+            }
+            slider.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Add new post functionality
+        document.getElementById('addPostForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const platform = document.getElementById('platformSelect').value;
+            const url = document.getElementById('postUrl').value;
+            
+            if (!url) return;
+            
+            const slide = document.createElement('div');
+            slide.className = 'social-slide';
+            
+            // Create a unique ID for the iframe to avoid conflicts
+            const iframeId = 'post-' + Math.random().toString(36).substr(2, 9);
+            
+            slide.innerHTML = `
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-header bg-white d-flex align-items-center">
+                        <i class="fab fa-${platform} fa-lg me-2 text-${
+                            platform === 'facebook' ? 'primary' : 
+                            (platform === 'twitter' ? 'info' : 'danger')
+                        }"></i>
+                        <h6 class="mb-0 small">${platform.charAt(0).toUpperCase() + platform.slice(1)}</h6>
+                    </div>
+                    <div class="card-body p-0">
+                        <div style="height: 200px; overflow: hidden;">
+                            <iframe 
+                                id="${iframeId}"
+                                src="https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=300" 
+                                style="border:none;overflow:hidden; width: 100%; height: 100%;" 
+                                scrolling="no" 
+                                frameborder="0" 
+                                allowfullscreen="true" 
+                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white text-center">
+                        <a href="${url}" target="_blank" class="btn btn-sm btn-outline-primary w-100">
+                            View Post <i class="fas fa-external-link-alt ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            // Add the new slide at the beginning of the slider
+            slider.insertBefore(slide, slider.firstChild);
+            
+            // Reset the form
+            document.getElementById('postUrl').value = '';
+            
+            // Scroll to show the newly added slide
+            scrollPosition = 0;
+            slider.scrollTo({
+                left: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+    @endpush
 
     <!-- Video Section -->
     <section class="mb-5">

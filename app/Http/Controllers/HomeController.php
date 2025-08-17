@@ -68,30 +68,19 @@ class HomeController extends Controller
     {
         // For Dr. Sarkar Social, show a detailed page with social media posts and videos
         if (str_contains(strtolower($about->title), 'dr. sarkar social')) {
-            // Dummy data for social media posts
+            // Array of social media post URLs to show as previews
             $socialMediaPosts = [
                 [
-                    'platform' => 'facebook',
-                    'content' => 'Excited to announce our new community health initiative! Join us this weekend for a free dental checkup camp.',
-                    'date' => '2 days ago',
-                    'likes' => 124,
-                    'comments' => 23,
-                    'shares' => 45
+                    'url' => 'https://www.facebook.com/CrackAddictzYT/videos/799548115735810',
+                    'platform' => 'facebook'
                 ],
                 [
-                    'platform' => 'twitter',
-                    'content' => 'Proud to be part of the medical team at the national healthcare conference. Sharing insights on modern dental care practices. #DentalCare #Healthcare',
-                    'date' => '1 week ago',
-                    'likes' => 89,
-                    'comments' => 12,
-                    'retweets' => 34
+                    'url' => 'https://x.com/mansukhmandviya/status/1703426121227026550',
+                    'platform' => 'twitter'
                 ],
                 [
-                    'platform' => 'instagram',
-                    'content' => 'Behind the scenes at our dental clinic - ensuring healthy smiles every day! 😊 #DentalCare #HealthySmiles',
-                    'date' => '3 days ago',
-                    'likes' => 245,
-                    'comments' => 18
+                    'url' => 'https://www.instagram.com/reels/DHQvEpYS6ja/',
+                    'platform' => 'instagram'
                 ]
             ];
 
