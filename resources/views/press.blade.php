@@ -67,10 +67,22 @@
 	align-items: center;
 	justify-content: center;
 	aspect-ratio: 1;
-	width: 48px;
+	width: 56px;
+	background: rgba(0, 0, 0, 0.6);
+	border-radius: 50%;
 	pointer-events: auto;
 	cursor: pointer;
 	transition: all 0.3s ease-out;
+}
+
+.slider-nav__item:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.slider-nav__item svg path {
+    stroke: white;
+    stroke-width: 3;
 }
 
 .slider-nav__item.disabled {
@@ -357,7 +369,7 @@
 					<div class="emotions-slider__wrapper swiper-wrapper">
 
 						<!-- Slider: Press Images -->
-						@for($i = 1; $i <= 41; $i++)
+						@for($i = 1; $i <= 4; $i++)
 						<div class="emotions-slider__slide swiper-slide">
 							<div class="emotions-slider__item emotions-slider-item">
 								<div class="emotions-slider-item__image">
@@ -367,37 +379,7 @@
 						</div>
 						@endfor
 
-								<div class="emotions-slider-item__content">
-									<div class="emotions-slider-item__header">
-										<div class="emotions-slider-item__header-inner">
-											<div class="emotions-slider-item__price">Test</div>
-											<div class="emotions-slider-item__author">
-												<div class="emotions-slider-item__author-image">
-													<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/author-1.jpg" alt="Andrew Kelman" />
-												</div>
-												<div class="emotions-slider-item__author-name">
-													Andrew Kelman
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__info">
-										<h2 class="emotions-slider-item__title">
-											Winds of Change
-										</h2>
-										<div class="emotions-slider-item__text">
-											Gentle pink and blue hues remind us of moments when everything changes for the better.
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__footer">
-										<a class="emotions-slider-item__btn" href="/" onclick="event.preventDefault();">
-											<span class="emotions-slider-item__btn-text">View more</span>
-											<span class="emotions-slider-item__btn-icon"></span>
-										</a>
-									</div>
-								</div>
+								
 							</div>
 						</div>
 
@@ -441,25 +423,41 @@
 
 		list.push(
 			new Swiper(slider, {
-				slidesPerView: "auto",
+				slidesPerView: 3,
 				spaceBetween: 20,
-				speed: 800,
+				speed: 1000,
 				loop: true,
+				loopAdditionalSlides: 1,
 				centeredSlides: true,
+				grabCursor: true,
 				autoplay: {
 					delay: 3000,
 					disableOnInteraction: false,
+					waitForTransition: true
+				},
+				breakpoints: {
+					320: {
+						slidesPerView: 1,
+						spaceBetween: 10
+					},
+					768: {
+						slidesPerView: 2,
+						spaceBetween: 15
+					},
+					1024: {
+						slidesPerView: 3,
+						spaceBetween: 20
+					}
 				},
 				observer: true,
+				observeParents: true,
 				watchOverflow: true,
 				watchSlidesProgress: true,
-				centeredSlides: true,
-				initialSlide: 1,
-                autoplay: {
-					delay: 2000,
-					disableOnInteraction: false,
+				navigation: { 
+					nextEl, 
+					prevEl, 
+					disabledClass: "disabled" 
 				},
-				navigation: { nextEl, prevEl, disabledClass: "disabled" },
 				pagination: {
 					el: pagination,
 					type: "bullets",
