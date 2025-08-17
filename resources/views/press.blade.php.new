@@ -1,0 +1,352 @@
+@extends('layouts.app')
+
+@section('content')
+<!-- Press & Media Section -->
+<section class="press-section py-5" style="min-height: 100vh; background: #f8f9fa;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-gradient">Press & Media</h1>
+            <p class="lead text-muted">Featured coverage and media appearances</p>
+        </div>
+
+        <!-- Press Gallery Slider -->
+        <div class="press-gallery">
+            <div class="swiper press-slider">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="press-card">
+                            <div class="press-image">
+                                <img src="{{ asset('images/press/press1.jpg') }}" alt="Press Coverage 1" class="img-fluid">
+                                <div class="press-overlay">
+                                    <div class="press-content">
+                                        <h5>Dental Excellence Award 2023</h5>
+                                        <p>Recognized for outstanding contribution to dental healthcare</p>
+                                        <a href="#" class="btn btn-sm btn-light mt-2">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="press-card">
+                            <div class="press-image">
+                                <img src="{{ asset('images/press/press2.jpg') }}" alt="Community Health Initiative" class="img-fluid">
+                                <div class="press-overlay">
+                                    <div class="press-content">
+                                        <h5>Community Health Initiative</h5>
+                                        <p>Free dental camp for underprivileged communities</p>
+                                        <a href="#" class="btn btn-sm btn-light mt-2">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Buttons -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        
+        <!-- Press Releases Section -->
+        <div class="press-releases mt-5 pt-5">
+            <h3 class="text-center mb-4">Latest Press Releases</h3>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="release-card">
+                        <div class="release-date">Aug 15, 2023</div>
+                        <h5>New Dental Implant Technology</h5>
+                        <p>Introducing the latest in painless dental implant procedures...</p>
+                        <a href="#" class="read-more">Read Full Story <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="release-card">
+                        <div class="release-date">Jul 28, 2023</div>
+                        <h5>Oral Health Awareness Campaign</h5>
+                        <p>Join us in spreading awareness about oral hygiene in local schools...</p>
+                        <a href="#" class="read-more">Read Full Story <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="release-card">
+                        <div class="release-date">Jun 10, 2023</div>
+                        <h5>Clinic Expansion Announcement</h5>
+                        <p>We're excited to announce the opening of our new state-of-the-art facility...</p>
+                        <a href="#" class="read-more">Read Full Story <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Styles -->
+<style>
+    /* Press Section Styles */
+    .press-section {
+        padding: 100px 0;
+    }
+    
+    .text-gradient {
+        background: linear-gradient(45deg, #a96ee4, #46ff46);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    /* Gallery Slider */
+    .press-gallery {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 50px;
+    }
+    
+    .press-slider {
+        padding: 20px 0;
+    }
+    
+    .press-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+    }
+    
+    .press-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .press-image {
+        position: relative;
+        padding-top: 60%;
+        overflow: hidden;
+    }
+    
+    .press-image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .press-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: flex-end;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        padding: 20px;
+    }
+    
+    .press-card:hover .press-overlay {
+        opacity: 1;
+    }
+    
+    .press-content {
+        color: white;
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+    }
+    
+    .press-card:hover .press-content {
+        transform: translateY(0);
+    }
+    
+    /* Navigation Buttons */
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: #a96ee4;
+        background: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+        background: #a96ee4;
+        color: white;
+    }
+    
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 20px;
+    }
+    
+    /* Pagination */
+    .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+        background: #ddd;
+        opacity: 1;
+    }
+    
+    .swiper-pagination-bullet-active {
+        background: #a96ee4;
+        transform: scale(1.2);
+    }
+    
+    /* Press Releases */
+    .release-card {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        height: 100%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #eee;
+    }
+    
+    .release-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .release-date {
+        font-size: 14px;
+        color: #a96ee4;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .release-card h5 {
+        color: #2d3748;
+        margin-bottom: 12px;
+    }
+    
+    .release-card p {
+        color: #718096;
+        margin-bottom: 15px;
+        font-size: 15px;
+    }
+    
+    .read-more {
+        color: #a96ee4;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+    
+    .read-more:hover {
+        color: #8e5ac9;
+    }
+    
+    .read-more i {
+        transition: transform 0.3s ease;
+    }
+    
+    .read-more:hover i {
+        transform: translateX(5px);
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+        .press-gallery {
+            padding: 0 30px;
+        }
+        
+        .swiper-button-next,
+        .swiper-button-prev {
+            width: 40px;
+            height: 40px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .press-section {
+            padding: 80px 0;
+        }
+        
+        .press-slider {
+            padding: 15px 0;
+        }
+        
+        .press-overlay {
+            padding: 15px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .press-gallery {
+            padding: 0 15px;
+        }
+        
+        .swiper-button-next,
+        .swiper-button-prev {
+            width: 35px;
+            height: 35px;
+            font-size: 14px;
+        }
+        
+        .press-content h5 {
+            font-size: 16px;
+        }
+        
+        .press-content p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 12px;
+        }
+    }
+</style>
+
+<!-- Initialize Swiper -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const pressSwiper = new Swiper('.press-slider', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            768: {
+                slidesPerView: 2,
+            },
+            992: {
+                slidesPerView: 3,
+            }
+        }
+    });
+});
+</script>
+@endsection

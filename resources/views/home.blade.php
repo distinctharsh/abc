@@ -43,7 +43,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="aboutDropdown" style="display: none; position: absolute; top: 100%; left: 0; z-index: 9999; min-width: 200px; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: none; padding: 0.5rem; margin-top: 10px; transform: none !important;">
                             <li><a class="dropdown-item" href="#gallery"><i class="fas fa-images me-2"></i>Gallery</a></li>
-                            <li><a class="dropdown-item" href="#press"><i class="fas fa-newspaper me-2"></i>Press</a></li>
+                            <li><a class="dropdown-item" href="{{ route('press') }}"><i class="fas fa-newspaper me-2"></i>Press & Media</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
