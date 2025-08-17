@@ -327,6 +327,10 @@
 }
 
     </style>
+@php
+    $imageCount = 41; // Total number of press images
+@endphp
+
 <section class="base-template mt-5 text-white">
 	<div class="wrapper base-template__wrapper">
 		<div class="base-template__content">
@@ -352,13 +356,16 @@
 				<div class="emotions-slider__slider swiper">
 					<div class="emotions-slider__wrapper swiper-wrapper">
 
-						<!-- Slider: Slide 1 -->
-
+						<!-- Slider: Press Images -->
+						@for($i = 1; $i <= 41; $i++)
 						<div class="emotions-slider__slide swiper-slide">
 							<div class="emotions-slider__item emotions-slider-item">
 								<div class="emotions-slider-item__image">
-									<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/slide-1.jpg" alt="Winds of Change" />
+									<img src="{{ asset('images/press/p' . $i . '.jpg') }}" alt="Press Image {{ $i }}" />
 								</div>
+							</div>
+						</div>
+						@endfor
 
 								<div class="emotions-slider-item__content">
 									<div class="emotions-slider-item__header">
@@ -396,345 +403,12 @@
 
 						<!-- Slider: Slide 2 -->
 
-						<div class="emotions-slider__slide swiper-slide">
-							<div class="emotions-slider__item emotions-slider-item">
-								<div class="emotions-slider-item__badge">Popular Now</div>
 
-								<div class="emotions-slider-item__image">
-									<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/slide-2.jpg" alt="Flames of Passion" />
-								</div>
-
-								<div class="emotions-slider-item__content">
-									<div class="emotions-slider-item__header">
-										<div class="emotions-slider-item__header-inner">
-											<div class="emotions-slider-item__price">Test</div>
-											<div class="emotions-slider-item__author">
-												<div class="emotions-slider-item__author-image">
-													<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/author-2.jpg" alt="Alex Bilyk" />
-												</div>
-												<div class="emotions-slider-item__author-name">
-                                                    Dr. Sarkar Family
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__info">
-										<h2 class="emotions-slider-item__title">
-											Flames of Passion
-										</h2>
-										<div class="emotions-slider-item__text">
-											This piece represents the fire of inspiration burning within us all. Feel the warmth of emotions in a swirl of red and yellow tones.
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__footer">
-										<a class="emotions-slider-item__btn" href="/" onclick="event.preventDefault();">
-											<span class="emotions-slider-item__btn-text">View more</span>
-											<span class="emotions-slider-item__btn-icon"></span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Slider: Slide 3 -->
-
-						<div class="emotions-slider__slide swiper-slide">
-							<div class="emotions-slider__item emotions-slider-item">
-								<div class="emotions-slider-item__image">
-									<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/slide-3.jpg" alt="Oceans of Serenity" />
-								</div>
-
-								<div class="emotions-slider-item__content">
-									<div class="emotions-slider-item__header">
-										<div class="emotions-slider-item__header-inner">
-											<div class="emotions-slider-item__price">Test</div>
-											<div class="emotions-slider-item__author">
-												<div class="emotions-slider-item__author-image">
-													<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/author-3.jpg" alt="Inna Grande" />
-												</div>
-												<div class="emotions-slider-item__author-name">
-                                                    Dr. Sarkar Family
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__info">
-										<h2 class="emotions-slider-item__title">
-											Oceans of Serenity
-										</h2>
-										<div class="emotions-slider-item__text">
-											Immerse yourself in the depths of calm and harmony. Blue waves of art take you into a world of meditation and inner balance.
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__footer">
-										<a class="emotions-slider-item__btn" href="/" onclick="event.preventDefault();">
-											<span class="emotions-slider-item__btn-text">View more</span>
-											<span class="emotions-slider-item__btn-icon"></span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Slider: Slide 4 -->
-
-						<div class="emotions-slider__slide swiper-slide">
-							<div class="emotions-slider__item emotions-slider-item">
-								<div class="emotions-slider-item__image">
-									<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/slide-1.jpg" alt="Winds of Change" />
-								</div>
-
-								<div class="emotions-slider-item__content">
-									<div class="emotions-slider-item__header">
-										<div class="emotions-slider-item__header-inner">
-											<div class="emotions-slider-item__price">Test</div>
-											<div class="emotions-slider-item__author">
-												<div class="emotions-slider-item__author-image">
-													<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/author-1.jpg" alt="Andrew Kelman" />
-												</div>
-												<div class="emotions-slider-item__author-name">
-                                                Dr. Sarkar Family
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__info">
-										<h2 class="emotions-slider-item__title">
-											Winds of Change
-										</h2>
-										<div class="emotions-slider-item__text">
-											Gentle pink and blue hues remind us of moments when everything changes for the better.
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__footer">
-										<a class="emotions-slider-item__btn" href="/" onclick="event.preventDefault();">
-											<span class="emotions-slider-item__btn-text">View more</span>
-											<span class="emotions-slider-item__btn-icon"></span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Slider: Slide 5 -->
-
-						<div class="emotions-slider__slide swiper-slide">
-							<div class="emotions-slider__item emotions-slider-item">
-								<div class="emotions-slider-item__badge">Popular Now</div>
-
-								<div class="emotions-slider-item__image">
-									<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/slide-2.jpg" alt="Flames of Passion" />
-								</div>
-
-								<div class="emotions-slider-item__content">
-									<div class="emotions-slider-item__header">
-										<div class="emotions-slider-item__header-inner">
-											<div class="emotions-slider-item__price">Test</div>
-											<div class="emotions-slider-item__author">
-												<div class="emotions-slider-item__author-image">
-													<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/author-2.jpg" alt="Alex Bilyk" />
-												</div>
-												<div class="emotions-slider-item__author-name">
-                                                    Dr. Sarkar Family
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__info">
-										<h2 class="emotions-slider-item__title">
-											Flames of Passion
-										</h2>
-										<div class="emotions-slider-item__text">
-											This piece represents the fire of inspiration burning within us all. Feel the warmth of emotions in a swirl of red and yellow tones.
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__footer">
-										<a class="emotions-slider-item__btn" href="/" onclick="event.preventDefault();">
-											<span class="emotions-slider-item__btn-text">View more</span>
-											<span class="emotions-slider-item__btn-icon"></span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Slider: Slide 6 -->
-
-						<div class="emotions-slider__slide swiper-slide">
-							<div class="emotions-slider__item emotions-slider-item">
-								<div class="emotions-slider-item__image">
-									<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/slide-3.jpg" alt="Oceans of Serenity" />
-								</div>
-
-								<div class="emotions-slider-item__content">
-									<div class="emotions-slider-item__header">
-										<div class="emotions-slider-item__header-inner">
-											<div class="emotions-slider-item__price">Test</div>
-											<div class="emotions-slider-item__author">
-												<div class="emotions-slider-item__author-image">
-													<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/author-3.jpg" alt="Inna Grande" />
-												</div>
-												<div class="emotions-slider-item__author-name">
-													Dr. Sarkar Family
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__info">
-										<h2 class="emotions-slider-item__title">
-											Oceans of Serenity
-										</h2>
-										<div class="emotions-slider-item__text">
-											Immerse yourself in the depths of calm and harmony. Blue waves of art take you into a world of meditation and inner balance.
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__footer">
-										<a class="emotions-slider-item__btn" href="/" onclick="event.preventDefault();">
-											<span class="emotions-slider-item__btn-text">View more</span>
-											<span class="emotions-slider-item__btn-icon"></span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Slider: Slide 7 -->
-
-						<div class="emotions-slider__slide swiper-slide">
-							<div class="emotions-slider__item emotions-slider-item">
-								<div class="emotions-slider-item__image">
-									<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/slide-1.jpg" alt="Winds of Change" />
-								</div>
-
-								<div class="emotions-slider-item__content">
-									<div class="emotions-slider-item__header">
-										<div class="emotions-slider-item__header-inner">
-											<div class="emotions-slider-item__price">Test</div>
-											<div class="emotions-slider-item__author">
-												<div class="emotions-slider-item__author-image">
-													<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/author-1.jpg" alt="Andrew Kelman" />
-												</div>
-												<div class="emotions-slider-item__author-name">
-													Dr. Sarkar Family
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__info">
-										<h2 class="emotions-slider-item__title">
-											Winds of Change
-										</h2>
-										<div class="emotions-slider-item__text">
-											Gentle pink and blue hues remind us of moments when everything changes for the better.
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__footer">
-										<a class="emotions-slider-item__btn" href="/" onclick="event.preventDefault();">
-											<span class="emotions-slider-item__btn-text">View more</span>
-											<span class="emotions-slider-item__btn-icon"></span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Slider: Slide 8 -->
-
-						<div class="emotions-slider__slide swiper-slide">
-							<div class="emotions-slider__item emotions-slider-item">
-								<div class="emotions-slider-item__badge">Popular Now</div>
-
-								<div class="emotions-slider-item__image">
-									<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/slide-2.jpg" alt="Flames of Passion" />
-								</div>
-
-								<div class="emotions-slider-item__content">
-									<div class="emotions-slider-item__header">
-										<div class="emotions-slider-item__header-inner">
-											<div class="emotions-slider-item__price">Test</div>
-											<div class="emotions-slider-item__author">
-												<div class="emotions-slider-item__author-image">
-													<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/author-2.jpg" alt="Alex Bilyk" />
-												</div>
-												<div class="emotions-slider-item__author-name">
-													Dr. Sarkar Family
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__info">
-										<h2 class="emotions-slider-item__title">
-											Flames of Passion
-										</h2>
-										<div class="emotions-slider-item__text">
-											This piece represents the fire of inspiration burning within us all. Feel the warmth of emotions in a swirl of red and yellow tones.
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__footer">
-										<a class="emotions-slider-item__btn" href="/" onclick="event.preventDefault();">
-											<span class="emotions-slider-item__btn-text">View more</span>
-											<span class="emotions-slider-item__btn-icon"></span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
+					
 
 						<!-- Slider: Slide 9 -->
 
-						<div class="emotions-slider__slide swiper-slide">
-							<div class="emotions-slider__item emotions-slider-item">
-								<div class="emotions-slider-item__image">
-									<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/slide-3.jpg" alt="Oceans of Serenity" />
-								</div>
-
-								<div class="emotions-slider-item__content">
-									<div class="emotions-slider-item__header">
-										<div class="emotions-slider-item__header-inner">
-											<div class="emotions-slider-item__price">Test</div>
-											<div class="emotions-slider-item__author">
-												<div class="emotions-slider-item__author-image">
-													<img src="https://bato-web-agency.github.io/bato-shared/img/slider-1/author-3.jpg" alt="Inna Grande" />
-												</div>
-												<div class="emotions-slider-item__author-name">
-													Dr. Sarkar Family
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__info">
-										<h2 class="emotions-slider-item__title">
-											Oceans of Serenity
-										</h2>
-										<div class="emotions-slider-item__text">
-											Immerse yourself in the depths of calm and harmony. Blue waves of art take you into a world of meditation and inner balance.
-										</div>
-									</div>
-
-									<div class="emotions-slider-item__footer">
-										<a class="emotions-slider-item__btn" href="/" onclick="event.preventDefault();">
-											<span class="emotions-slider-item__btn-text">View more</span>
-											<span class="emotions-slider-item__btn-icon"></span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
+					
 					</div>
 				</div>
 
