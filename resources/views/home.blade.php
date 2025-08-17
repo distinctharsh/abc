@@ -113,7 +113,7 @@
                 <div class="hero-image-container">
                     <div class="hero-image">
                         <div class="image-wrapper">
-                            <img src="{{ asset('images/sir.png') }}" alt="Hero Image" class="hero-sir" style="max-width: 100%; height: auto; display: block;">
+                            <img src="{{ asset('images/sir.png') }}" alt="Hero Image" class="hero-sir" style="max-width: 100%; height: auto; display: block; cursor: pointer; transition: transform 0.3s ease;" data-bs-toggle="modal" data-bs-target="#doctorBioModal">
                             <div class="floating-elements">
                                 <div class="floating-dot dot-1"></div>
                                 <div class="floating-dot dot-2"></div>
@@ -327,6 +327,67 @@
             </div>
         </div>
     </section>
+
+    <!-- Doctor Bio Modal -->
+    <div class="modal fade" id="doctorBioModal" tabindex="-1" aria-labelledby="doctorBioModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content doctor-bio-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="doctorBioModalLabel">About Dr. Sarkar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 text-center mb-4 mb-md-0">
+                            <div class="doctor-avatar">
+                                <img src="{{ asset('images/sir.png') }}" alt="Dr. Sarkar" class="img-fluid rounded-circle border border-4 border-white shadow">
+                                <div class="doctor-status">
+                                    <span class="status-dot"></span>
+                                    <span>Available Today</span>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h5 class="mb-1">Dr. Suvankar Sarkar</h5>
+                                <p class="text-muted mb-2">BDS, MDS (Prosthodontics)</p>
+                                <div class="social-links">
+                                    <a href="#" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="text-info me-2"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="text-danger me-2"><i class="fab fa-instagram"></i></a>
+                                    <a href="#" class="text-primary"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="bio-content">
+                                <h6 class="text-uppercase text-primary mb-3">About Me</h6>
+                                <p>With over 15 years of experience in dental surgery and prosthodontics, Dr. Suvankar Sarkar is a renowned dental surgeon dedicated to providing exceptional patient care. His expertise includes cosmetic dentistry, dental implants, and full mouth rehabilitation.</p>
+                                
+                                <h6 class="text-uppercase text-primary mt-4 mb-3">Education</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-graduation-cap text-primary me-2"></i> BDS - Dental College, 2005</li>
+                                    <li class="mb-2"><i class="fas fa-graduation-cap text-primary me-2"></i> MDS in Prosthodontics - University of Dental Sciences, 2009</li>
+                                    <li class="mb-2"><i class="fas fa-certificate text-primary me-2"></i> Fellowship in Implantology, 2011</li>
+                                </ul>
+                                
+                                <h6 class="text-uppercase text-primary mt-4 mb-3">Specializations</h6>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <span class="badge bg-light text-dark">Dental Implants</span>
+                                    <span class="badge bg-light text-dark">Cosmetic Dentistry</span>
+                                    <span class="badge bg-light text-dark">Full Mouth Rehabilitation</span>
+                                    <span class="badge bg-light text-dark">Teeth Whitening</span>
+                                    <span class="badge bg-light text-dark">Veneers & Crowns</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#appointment" class="btn btn-primary" data-bs-dismiss="modal">Book Appointment</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Info Drawer (shared) -->
     <div id="infoOverlay" class="info-overlay" aria-hidden="true"></div>
