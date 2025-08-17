@@ -35,10 +35,10 @@
         @endforeach
     </div>
 
-    <div class="text-center mt-5">
+    <!-- <div class="text-center mt-5">
         <a href="{{ url('/') }}" class="btn btn-primary">
             <i class="fas fa-arrow-left me-2"></i> Back to Home
         </a>
-    </div>
+    </div> -->
 </div>
 @endsection

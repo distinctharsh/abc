@@ -45,14 +45,14 @@
                 </div>
             </div>
 
-            <div class="text-center">
+            <!-- <div class="text-center">
                 <a href="{{ url()->previous() }}" class="btn btn-primary">
                     <i class="fas fa-arrow-left me-2"></i> Back to {{ $sectionData['title'] }}
                 </a>
                 <a href="{{ route('home') }}" class="btn btn-outline-primary ms-2">
                     <i class="fas fa-home me-2"></i> Back to Home
                 </a>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
