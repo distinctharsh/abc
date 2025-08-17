@@ -54,15 +54,57 @@
                                 <h6 class="mb-0 small">{{ ucfirst($post['platform']) }}</h6>
                             </div>
                             <div class="card-body p-0">
-                                <div style="height: 200px; overflow: hidden;">
-                                    <iframe 
-                                        src="https://www.facebook.com/plugins/post.php?href={{ urlencode($post['url']) }}&show_text=true&width=300" 
-                                        style="border:none;overflow:hidden; width: 100%; height: 100%;" 
-                                        scrolling="no" 
-                                        frameborder="0" 
-                                        allowfullscreen="true" 
-                                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-                                    </iframe>
+                                <div style="height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #f8f9fa;">
+                                    @if($post['platform'] === 'facebook')
+                                        @if(str_contains($post['url'], 'videos/'))
+                                            <iframe 
+                                                src="https://www.facebook.com/plugins/video.php?href={{ urlencode($post['url']) }}&show_text=0&width=300" 
+                                                style="border:none;overflow:hidden; width: 100%; height: 100%;" 
+                                                scrolling="no" 
+                                                frameborder="0" 
+                                                allowfullscreen="true" 
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                            </iframe>
+                                        @else
+                                            <iframe 
+                                                src="https://www.facebook.com/plugins/post.php?href={{ urlencode($post['url']) }}&show_text=true&width=300" 
+                                                style="border:none;overflow:hidden; width: 100%; height: 100%;" 
+                                                scrolling="no" 
+                                                frameborder="0" 
+                                                allowfullscreen="true" 
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                            </iframe>
+                                        @endif
+                                    @elseif($post['platform'] === 'twitter' || $post['platform'] === 'x')
+                                        @php
+                                            // Extract status ID from Twitter URL
+                                            $urlParts = explode('/', rtrim($post['url'], '/'));
+                                            $statusId = $urlParts[array_search('status', $urlParts) + 1] ?? '';
+                                        @endphp
+                                        @if($statusId)
+                                            <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
+                                                <a href="https://twitter.com/x/status/{{ $statusId }}"></a>
+                                            </blockquote>
+                                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                        @else
+                                            <div class="text-center p-4">
+                                                <i class="fab fa-twitter fa-3x text-muted mb-2"></i>
+                                                <p class="mb-0">Twitter post not available</p>
+                                                <a href="{{ $post['url'] }}" target="_blank" class="btn btn-sm btn-outline-info mt-2">
+                                                    View on X <i class="fas fa-external-link-alt ms-1"></i>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @elseif($post['platform'] === 'instagram')
+                                        <iframe 
+                                            src="https://www.instagram.com/p/{{ last(explode('/', rtrim(parse_url($post['url'], PHP_URL_PATH), '/'))) }}/embed" 
+                                            style="border:none;overflow:hidden; width: 300px; height: 100%;" 
+                                            scrolling="no" 
+                                            frameborder="0" 
+                                            allowfullscreen="true" 
+                                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                        </iframe>
+                                    @endif
                                 </div>
                             </div>
                             <div class="card-footer bg-white text-center">
@@ -140,6 +182,7 @@
     @endpush
 
     @push('scripts')
+    <!-- Twitter widgets.js is loaded dynamically when needed -->
     <script>
         // Social Media Slider Navigation
         const slider = document.getElementById('socialMediaContainer');
@@ -173,6 +216,17 @@
             });
         });
         
+        // Function to load Twitter widgets
+        function loadTwitterWidgets() {
+            if (window.twttr && window.twttr.widgets) {
+                window.twttr.widgets.load();
+            } else if (window.twttr) {
+                window.twttr.ready(function(twttr) {
+                    twttr.widgets.load();
+                });
+            }
+        }
+
         // Add new post functionality
         document.getElementById('addPostForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -188,38 +242,132 @@
             // Create a unique ID for the iframe to avoid conflicts
             const iframeId = 'post-' + Math.random().toString(36).substr(2, 9);
             
-            slide.innerHTML = `
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-header bg-white d-flex align-items-center">
-                        <i class="fab fa-${platform} fa-lg me-2 text-${
-                            platform === 'facebook' ? 'primary' : 
-                            (platform === 'twitter' ? 'info' : 'danger')
-                        }"></i>
-                        <h6 class="mb-0 small">${platform.charAt(0).toUpperCase() + platform.slice(1)}</h6>
-                    </div>
-                    <div class="card-body p-0">
-                        <div style="height: 200px; overflow: hidden;">
-                            <iframe 
-                                id="${iframeId}"
-                                src="https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true&width=300" 
-                                style="border:none;overflow:hidden; width: 100%; height: 100%;" 
-                                scrolling="no" 
-                                frameborder="0" 
-                                allowfullscreen="true" 
-                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-                            </iframe>
+            let embedHtml = '';
+            
+            if (platform === 'facebook') {
+                const isVideo = url.includes('videos/');
+                embedHtml = `
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-header bg-white d-flex align-items-center">
+                            <i class="fab fa-${platform} fa-lg me-2 text-primary"></i>
+                            <h6 class="mb-0 small">${platform.charAt(0).toUpperCase() + platform.slice(1)}</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            <div style="height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #f8f9fa;">
+                                <iframe 
+                                    id="${iframeId}"
+                                    src="https://www.facebook.com/plugins/${isVideo ? 'video' : 'post'}.php?href=${encodeURIComponent(url)}&show_text=true&width=300" 
+                                    style="border:none;overflow:hidden; width: 100%; height: 100%;" 
+                                    scrolling="no" 
+                                    frameborder="0" 
+                                    allowfullscreen="true" 
+                                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                </iframe>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white text-center">
+                            <a href="${url}" target="_blank" class="btn btn-sm btn-outline-primary w-100">
+                                View Post <i class="fas fa-external-link-alt ms-1"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="card-footer bg-white text-center">
-                        <a href="${url}" target="_blank" class="btn btn-sm btn-outline-primary w-100">
-                            View Post <i class="fas fa-external-link-alt ms-1"></i>
-                        </a>
+                `;
+            } else if (platform === 'twitter' || platform === 'x') {
+                // Extract status ID from Twitter URL
+                const urlParts = url.split('/');
+                const statusIndex = urlParts.findIndex(part => part === 'status');
+                const statusId = statusIndex !== -1 ? urlParts[statusIndex + 1] : '';
+                
+                if (statusId) {
+                    embedHtml = `
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-header bg-white d-flex align-items-center">
+                                <i class="fab fa-twitter fa-lg me-2 text-info"></i>
+                                <h6 class="mb-0 small">Twitter</h6>
+                            </div>
+                            <div class="card-body p-0">
+                                <div style="height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #f8f9fa; padding: 10px;">
+                                    <blockquote class="twitter-tweet" data-theme="light" data-dnt="true">
+                                        <a href="https://twitter.com/x/status/${statusId}"></a>
+                                    </blockquote>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-white text-center">
+                                <a href="${url}" target="_blank" class="btn btn-sm btn-outline-info w-100">
+                                    View on X <i class="fas fa-external-link-alt ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Fallback for invalid Twitter URLs
+                    embedHtml = `
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-header bg-white d-flex align-items-center">
+                                <i class="fab fa-twitter fa-lg me-2 text-info"></i>
+                                <h6 class="mb-0 small">Twitter</h6>
+                            </div>
+                            <div class="card-body d-flex align-items-center justify-content-center">
+                                <div class="text-center p-4">
+                                    <i class="fab fa-twitter fa-3x text-muted mb-2"></i>
+                                    <p class="mb-0">Could not load this post</p>
+                                    <a href="${url}" target="_blank" class="btn btn-sm btn-outline-info mt-2">
+                                        View on X <i class="fas fa-external-link-alt ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            } else if (platform === 'instagram') {
+                const postId = url.split('/').filter(Boolean).pop();
+                embedHtml = `
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-header bg-white d-flex align-items-center">
+                            <i class="fab fa-instagram fa-lg me-2 text-danger"></i>
+                            <h6 class="mb-0 small">Instagram</h6>
+                        </div>
+                        <div class="card-body p-0">
+                            <div style="height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #f8f9fa;">
+                                <iframe 
+                                    id="${iframeId}"
+                                    src="https://www.instagram.com/p/${postId}/embed" 
+                                    style="border:none;overflow:hidden; width: 300px; height: 100%;" 
+                                    scrolling="no" 
+                                    frameborder="0" 
+                                    allowfullscreen="true" 
+                                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                </iframe>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white text-center">
+                            <a href="${url}" target="_blank" class="btn btn-sm btn-outline-danger w-100">
+                                View on Instagram <i class="fas fa-external-link-alt ms-1"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
+            }
+            
+            slide.innerHTML = embedHtml;
             
             // Add the new slide at the beginning of the slider
             slider.insertBefore(slide, slider.firstChild);
+            
+            // Load Twitter widgets if this is a Twitter post
+            if (platform === 'twitter' || platform === 'x') {
+                // Check if Twitter widgets.js is already loaded
+                if (!document.querySelector('script[src*="platform.twitter.com/widgets.js"]')) {
+                    const script = document.createElement('script');
+                    script.src = 'https://platform.twitter.com/widgets.js';
+                    script.charset = 'utf-8';
+                    script.async = true;
+                    script.onload = loadTwitterWidgets;
+                    document.body.appendChild(script);
+                } else {
+                    loadTwitterWidgets();
+                }
+            }
             
             // Reset the form
             document.getElementById('postUrl').value = '';

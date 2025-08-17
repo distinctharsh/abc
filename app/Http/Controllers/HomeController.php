@@ -75,7 +75,7 @@ class HomeController extends Controller
                     'platform' => 'facebook'
                 ],
                 [
-                    'url' => 'https://x.com/mansukhmandviya/status/1703426121227026550',
+                    'url' => 'https://x.com/MrSinha_/status/1956680640515981546/photo/1',
                     'platform' => 'twitter'
                 ],
                 [
