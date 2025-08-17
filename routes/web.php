@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about/{about}', [HomeController::class, 'showAbout'])->name('about.show');
 Route::resource('youtube-highlights', YoutubeHighlightController::class);
 
 // Authentication Routes

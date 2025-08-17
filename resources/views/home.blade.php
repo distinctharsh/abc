@@ -140,27 +140,29 @@
             <div class="row g-4">
                 @foreach($abouts as $index => $about)
                 <div class="col-lg-4 col-md-6 fade-in-up" data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}" style="animation-delay: {{ 0.2 + ($index * 0.1) }}s;">
-                    <div class="project-card card h-100 border-0 shadow-sm overflow-hidden">
-                        <div class="position-relative overflow-hidden">
-                            <img src="{{ asset($about->image) }}" class="card-img-top project-image" alt="{{ $about->title }}" style="width: 100%; height: 200px; object-fit: cover;">
-                            <div class="project-overlay d-flex align-items-center justify-content-center">
-                                <a href="#" class="btn btn-primary rounded-circle p-3" style="background: var(--gradient-primary); border: none; box-shadow: var(--shadow-medium);">
-                                    <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge" style="background: var(--gradient-primary); border: none;">{{ $about->title ?? 'Web Design' }}</span>
-                                <div class="project-links">
-                                    <a href="#" class="text-muted me-2 hover-lift"><i class="far fa-heart"></i></a>
-                                    <a href="#" class="text-muted hover-lift"><i class="fas fa-share-alt"></i></a>
+                    <a href="{{ route('about.show', $about) }}" class="text-decoration-none text-dark">
+                        <div class="project-card card h-100 border-0 shadow-sm overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <img src="{{ asset($about->image) }}" class="card-img-top project-image" alt="{{ $about->title }}" style="width: 100%; height: 200px; object-fit: cover;">
+                                <div class="project-overlay d-flex align-items-center justify-content-center">
+                                    <span class="btn btn-primary rounded-circle p-3" style="background: var(--gradient-primary); border: none; box-shadow: var(--shadow-medium);">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
                                 </div>
                             </div>
-                            <h5 class="card-title fw-bold mb-2">{{ $about->title }}</h5>
-                            <p class="card-text text-muted">{{ $about->description }}</p>
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge" style="background: var(--gradient-primary); border: none;">{{ $about->title ?? 'About' }}</span>
+                                    <div class="project-links">
+                                        <span class="text-muted me-2 hover-lift"><i class="far fa-heart"></i></span>
+                                        <span class="text-muted hover-lift"><i class="fas fa-share-alt"></i></span>
+                                    </div>
+                                </div>
+                                <h5 class="card-title fw-bold mb-2">{{ $about->title }}</h5>
+                                <p class="card-text text-muted">{{ $about->description }}</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 @endforeach
             </div>
