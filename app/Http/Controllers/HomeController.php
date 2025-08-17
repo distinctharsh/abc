@@ -96,4 +96,86 @@ class HomeController extends Controller
         // For other about items, just show a simple page with title and description
         return view('about.simple', compact('about'));
     }
+    
+    public function getSectionData()
+    {
+        return [
+            'dr-sarkar' => [
+                'title' => 'Dr. Sarkar Official',
+                'description' => 'Official updates and activities of Dr. Sarkar',
+                'type' => 'social',
+                'content' => [
+                    'ward' => [
+                        'title' => 'Ward No. 84',
+                        'image' => 'ward.png',
+                        'description' => 'Updates and activities from Ward 84',
+                        'full_content' => 'Detailed information about Ward 84 activities and development projects.'
+                    ],
+                    'borough' => [
+                        'title' => 'Borough VI',
+                        'image' => 'borough.png',
+                        'description' => 'Updates from Borough VI',
+                        'full_content' => 'Information about Borough VI initiatives and community programs.'
+                    ],
+                    'adda' => [
+                        'title' => 'ADDA Activities',
+                        'image' => 'adda.png',
+                        'description' => 'Community engagement activities',
+                        'full_content' => 'Details about various ADDA activities and community programs.'
+                    ]
+                ]
+            ],
+            'capigen-highlights' => [
+                'title' => 'Capigen Highlights',
+                'description' => 'Latest highlights and updates from Capigen',
+                'type' => 'highlights',
+                'content' => [
+                    'pase-achi' => [
+                        'title' => 'Pase Achi Asansol',
+                        'image' => 'asansol.png',
+                        'description' => 'Building a better tomorrow for Asansol',
+                        'full_content' => 'Information about the Pase Achi Asansol initiative.'
+                    ],
+                    'make-asansol-greater' => [
+                        'title' => 'Make Asansol Greater Again',
+                        'image' => 'blank-cover.png',
+                        'description' => 'Revitalizing our city\'s infrastructure',
+                        'full_content' => 'Details about the Make Asansol Greater Again campaign.'
+                    ],
+                    'ek-daake-daktar' => [
+                        'title' => 'Ek Daake Daktar',
+                        'image' => 'blank-cover.png',
+                        'description' => 'Healthcare initiatives and medical services',
+                        'full_content' => 'Information about the Ek Daake Daktar healthcare program.'
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    public function showSection($section)
+    {
+        $sections = $this->getSectionData();
+
+        if (!array_key_exists($section, $sections)) {
+            abort(404);
+        }
+
+        $sectionData = $sections[$section];
+        return view('sections.show', compact('sectionData'));
+    }
+
+    public function showSectionItem($section, $item)
+    {
+        $sections = $this->getSectionData();
+
+        if (!isset($sections[$section]['content'][$item])) {
+            abort(404);
+        }
+
+        $sectionData = $sections[$section];
+        $itemData = $sectionData['content'][$item];
+        
+        return view('sections.item', compact('sectionData', 'itemData'));
+    }
 }

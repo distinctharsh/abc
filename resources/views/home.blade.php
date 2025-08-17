@@ -483,7 +483,7 @@
     </script>
 
     <section class="py-5 text-center" style="background: #f8fafc;">
-        <div class=" gap-4 flex-direction-column">
+        <div class="gap-4 d-flex justify-content-center">
             <!-- Dr. Sarkar Official Button -->
             <button type="button" class="btn popup-btn" data-bs-toggle="modal" data-bs-target="#drSarkarModal">
                 Dr. Sarkar Official
@@ -491,8 +491,82 @@
             
             <!-- Capigen Highlights Button -->
             <button type="button" class="btn popup-btn" data-bs-toggle="modal" data-bs-target="#capigenModal">
-                Capigen highlights
+                Capigen Highlights
             </button>
+        </div>
+        
+        <!-- Dr. Sarkar Modal -->
+        <div class="modal fade" id="drSarkarModal" tabindex="-1" aria-labelledby="drSarkarModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: linear-gradient(to right, #a96ee4, #46ff46); color: #fff;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="drSarkarModalLabel">Dr. Sarkar Official</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div class="row g-4">
+                            @foreach([
+                                ['key' => 'ward', 'title' => 'Ward No. 84', 'image' => 'ward.png'],
+                                ['key' => 'borough', 'title' => 'Borough VI', 'image' => 'borough.png'],
+                                ['key' => 'adda', 'title' => 'ADDA Activities', 'image' => 'adda.png']
+                            ] as $item)
+                            <div class="col-md-4">
+                                <a href="{{ route('section.item', ['section' => 'dr-sarkar', 'item' => $item['key']]) }}" class="text-decoration-none">
+                                    <div class="card border-0 bg-transparent h-100">
+                                        <div class="position-relative">
+                                            <img src="{{ asset('images/' . $item['image']) }}" class="card-img-top rounded-3 mb-3" alt="{{ $item['title'] }}" style="height: 200px; object-fit: cover;">
+                                            <div class="card-overlay">
+                                                <span class="btn btn-primary rounded-pill">View Details</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-1">
+                                            <h5 class="card-title fw-bold mb-0 flex-grow-1 text-white">{{ $item['title'] }}</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Capigen Highlights Modal -->
+        <div class="modal fade" id="capigenModal" tabindex="-1" aria-labelledby="capigenModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content" style="background: linear-gradient(to right, #a96ee4, #46ff46); color: #fff;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="capigenModalLabel">Capigen Highlights</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div class="row g-4">
+                            @foreach([
+                                ['key' => 'pase-achi', 'title' => 'Pase Achi Asansol', 'image' => 'asansol.png'],
+                                ['key' => 'make-asansol-greater', 'title' => 'Make Asansol Greater Again', 'image' => 'blank-cover.png'],
+                                ['key' => 'ek-daake-daktar', 'title' => 'Ek Daake Daktar', 'image' => 'blank-cover.png']
+                            ] as $item)
+                            <div class="col-md-4">
+                                <a href="{{ route('section.item', ['section' => 'capigen-highlights', 'item' => $item['key']]) }}" class="text-decoration-none">
+                                    <div class="card border-0 bg-transparent h-100">
+                                        <div class="position-relative">
+                                            <img src="{{ asset('images/' . $item['image']) }}" class="card-img-top rounded-3 mb-3" alt="{{ $item['title'] }}" style="height: 200px; object-fit: cover;">
+                                            <div class="card-overlay">
+                                                <span class="btn btn-primary rounded-pill">View Details</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-1">
+                                            <h5 class="card-title fw-bold mb-0 flex-grow-1 text-white">{{ $item['title'] }}</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <!-- Dr. Sarkar Modal -->
