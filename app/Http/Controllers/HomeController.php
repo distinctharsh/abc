@@ -66,12 +66,15 @@ class HomeController extends Controller
 
     public function showAbout(About $about)
     {
+        // Debug: Check the about title
+        \Log::info('About title:', ['title' => $about->title]);
+        
         // For Dr. Sarkar Social, show a detailed page with social media posts and videos
-        if (str_contains(strtolower($about->title), 'dr. sarkar social')) {
+        if (str_contains(strtolower($about->title), 'dr. sarkar social') || str_contains(strtolower($about->title), 'social')) {
             // Array of social media post URLs to show as previews
             $socialMediaPosts = [
                 [
-                    'url' => 'https://www.facebook.com/CrackAddictzYT/videos/799548115735810',
+                    'url' => 'https://www.facebook.com/indraprasthaapollohospitals/videos/thyroid-health-is-key-to-overall-well-being-early-detection-and-treatment-can-ma/3838719823057456/',
                     'platform' => 'facebook'
                 ],
                 [
@@ -83,6 +86,9 @@ class HomeController extends Controller
                     'platform' => 'instagram'
                 ]
             ];
+            
+            // Debug: Check if data is being passed correctly
+            // dd($socialMediaPosts);
 
             // Dummy data for YouTube videos
             $videos = [
