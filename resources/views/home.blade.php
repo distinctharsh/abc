@@ -116,6 +116,168 @@
         .background-video:not(.loaded) {
             opacity: 0;
         }
+
+        /* News Ticker Styles */
+        .news-ticker-container {
+            background: linear-gradient(90deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            border-top: 2px solid rgba(0, 212, 255, 0.3);
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+        }
+
+        .news-ticker {
+            display: flex;
+            align-items: center;
+            padding: 27px 0;
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), rgba(78, 205, 196, 0.1));
+            backdrop-filter: blur(10px);
+        }
+
+        .ticker-icon {
+            background: linear-gradient(45deg, #00d4ff, #4ecdc4);
+            color: #000;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            margin-left: 20px;
+            flex-shrink: 0;
+            animation: pulse-glow 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            }
+            50% { 
+                transform: scale(1.1); 
+                box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
+            }
+        }
+
+        .ticker-content {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ticker-text {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            animation: ticker-scroll 60s linear infinite;
+            gap: 30px;
+        }
+
+        @keyframes ticker-scroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .ticker-item {
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 1.2rem;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .ticker-item:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .ticker-separator {
+            color: #00d4ff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            animation: separator-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes separator-pulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Pause animation on hover */
+        .news-ticker-container:hover .ticker-text {
+            animation-play-state: paused;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .ticker-icon {
+                width: 35px;
+                height: 35px;
+                margin-right: 15px;
+                margin-left: 15px;
+            }
+            
+            .ticker-item {
+                font-size: 0.85rem;
+                padding: 6px 12px;
+            }
+            
+            .ticker-text {
+                animation-duration: 45s;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ticker-icon {
+                width: 30px;
+                height: 30px;
+                margin-right: 10px;
+                margin-left: 10px;
+            }
+            
+            .ticker-item {
+                font-size: 0.8rem;
+                padding: 5px 10px;
+            }
+            
+            .ticker-text {
+                animation-duration: 35s;
+                gap: 15px;
+            }
+        }
+
+        /* Enhanced visibility */
+        .news-ticker-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(0, 212, 255, 0.05) 20%, 
+                rgba(0, 212, 255, 0.05) 80%, 
+                transparent 100%
+            );
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -227,6 +389,34 @@
         </div>
     </section>
 
+
+     <!-- News Ticker Section -->
+     <div class="news-ticker-container">
+        <div class="news-ticker">
+            <div class="ticker-icon">
+                <i class="fas fa-broadcast-tower"></i>
+            </div>
+            <div class="ticker-content">
+                <div class="ticker-text">
+                    <span class="ticker-item">🏥 Orodental Hospital - First Dental Hospital in Burdwan District</span>
+                    <span class="ticker-separator">•</span>
+                    <span class="ticker-item">🦷 Dr. Sarkar treating 100+ patients daily with advanced dental care</span>
+                    <span class="ticker-separator">•</span>
+                    <span class="ticker-item">👨‍⚕️ 15+ years of excellence in dental surgery and prosthodontics</span>
+                    <span class="ticker-separator">•</span>
+                    <span class="ticker-item">🏛️ Ward 84 Councillor working for community development</span>
+                    <span class="ticker-separator">•</span>
+                    <span class="ticker-item">🌟 Transforming smiles, transforming lives in Asansol</span>
+                    <span class="ticker-separator">•</span>
+                    <span class="ticker-item">📱 Follow us on social media for latest updates and dental tips</span>
+                    <span class="ticker-separator">•</span>
+                    <span class="ticker-item">🎯 Specialized in dental implants, cosmetic dentistry & full mouth rehabilitation</span>
+                    <span class="ticker-separator">•</span>
+                    <span class="ticker-item">💙 Trusted by 1000+ happy patients</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
        <!-- Enhanced Projects Section with 3D animations -->
        <section class="projects-section py-5" style="background: linear-gradient(135deg, var(--secondary-white) 0%, var(--accent-white) 100%);">
