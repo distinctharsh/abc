@@ -16,6 +16,107 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-papm6Q+..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
+    <style>
+        /* Video Background Styles */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            min-width: 100%;
+            min-height: 100%;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg, 
+                rgba(0, 0, 0, 0.6) 0%, 
+                rgba(0, 0, 0, 0.4) 50%, 
+                rgba(0, 0, 0, 0.7) 100%
+            );
+            z-index: 1;
+        }
+
+        .services-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .services-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Enhanced text readability over video */
+        .services-section .text-white {
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive video adjustments */
+        @media (max-width: 768px) {
+            .background-video {
+                object-position: center center;
+            }
+            
+            .services-section .text-white {
+                font-size: 2.5rem !important;
+                text-align: center;
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-section .text-white {
+                font-size: 2rem !important;
+            }
+        }
+
+        /* Video loading fallback */
+        .video-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            z-index: -1;
+        }
+
+        /* Smooth video transitions */
+        .background-video {
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .background-video.loaded {
+            opacity: 1;
+        }
+
+        .background-video:not(.loaded) {
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
     <!-- Enhanced Responsive Navbar with 3D effects -->
@@ -176,9 +277,17 @@
         </div>
     </div>
 
-    <!-- Enhanced Services Section with glassmorphism effects -->
-    <section class="services-section" style="background: url({{ asset('images/abbg.png') }}) no-repeat center center/cover; position: relative;">
-        <div class="services-overlay"></div>
+    <!-- Enhanced Services Section with video background -->
+    <section class="services-section" style="position: relative; overflow: hidden;">
+        <!-- Video Background -->
+        <div class="video-background">
+            <video autoplay muted loop playsinline class="background-video">
+                <source src="{{ asset('images/video.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        
         <div class="container text-center position-relative">
             <div class="d-flex text-center justify-content-center align-items-center">
                 <div class="doctor-card fade-in-up" style="left: 36px; position: absolute; animation-delay: 0.2s;">
@@ -331,7 +440,7 @@
     <!-- Doctor Bio Modal -->
     <div class="modal fade" id="doctorBioModal" tabindex="-1" aria-labelledby="doctorBioModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content doctor-bio-modal">
+            <div class="modal-content doctor-bio-modal" style="margin-top: 70px;">
                 <div class="modal-header">
                     <h5 class="modal-title" id="doctorBioModalLabel">About Dr. Sarkar</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -540,6 +649,37 @@
 
             document.querySelectorAll('.service-card[data-title]').forEach(attach);
             document.querySelectorAll('.doctor-card[data-title]').forEach(attach);
+        });
+
+        // Video background handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.background-video');
+            if (video) {
+                // Add loaded class when video is ready
+                video.addEventListener('loadeddata', function() {
+                    video.classList.add('loaded');
+                });
+
+                // Ensure video plays on mobile devices
+                video.addEventListener('canplay', function() {
+                    video.play().catch(function(error) {
+                        console.log('Video autoplay failed:', error);
+                    });
+                });
+
+                // Pause video when not visible to save resources
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            video.play().catch(e => console.log('Video play failed:', e));
+                        } else {
+                            video.pause();
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                observer.observe(video);
+            }
         });
     </script>
 

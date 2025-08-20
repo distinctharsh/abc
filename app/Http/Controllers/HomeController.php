@@ -74,15 +74,15 @@ class HomeController extends Controller
             // Array of social media post URLs to show as previews
             $socialMediaPosts = [
                 [
-                    'url' => 'https://www.facebook.com/indraprasthaapollohospitals/videos/thyroid-health-is-key-to-overall-well-being-early-detection-and-treatment-can-ma/3838719823057456/',
+                    'url' => 'https://www.facebook.com/drdebashissarkar/videos/623506467472129',
                     'platform' => 'facebook'
                 ],
+                // [
+                //     'url' => 'https://x.com/MrSinha_/status/1956680640515981546/photo/1',
+                //     'platform' => 'twitter'
+                // ],
                 [
-                    'url' => 'https://x.com/MrSinha_/status/1956680640515981546/photo/1',
-                    'platform' => 'twitter'
-                ],
-                [
-                    'url' => 'https://www.instagram.com/reels/DHQvEpYS6ja/',
+                    'url' => 'https://www.instagram.com/p/DMnxyHczswo/',
                     'platform' => 'instagram'
                 ]
             ];
@@ -92,8 +92,8 @@ class HomeController extends Controller
 
             // Dummy data for YouTube videos
             $videos = [
-                ['id' => 'U91AUYttTyc', 'title' => 'Day in the Life: Heart Surgeon', 'url' => 'https://youtu.be/U91AUYttTyc?si=dIWyTbYYRdH31VaN'],
-                ['id' => 'RN3zhb9Y4jc', 'title' => 'The AIIMS Neurosurgery Story', 'url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'],
+                ['id' => 'IaiwtFOmC04', 'title' => 'Healthy and beautiful. MLA and friend Shri Narendra Nath Chakraborty, Pandaveswar Assembly', 'url' => 'https://www.youtube.com/watch?v=IaiwtFOmC04'],
+                ['id' => 'oUoxM7nLrUk', 'title' => 'Our neighborhood, our solution.', 'url' => 'https://www.youtube.com/watch?v=oUoxM7nLrUk'],
             ];
 
             return view('about.detail', compact('about', 'socialMediaPosts', 'videos'));
