@@ -278,6 +278,170 @@
             );
             pointer-events: none;
         }
+
+        /* Clickable Service Cards */
+        .clickable-service-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .clickable-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .clickable-service-card:active {
+            transform: translateY(-2px);
+        }
+
+        /* Service Popup Modal */
+        .service-popup-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .service-popup-content {
+            background: linear-gradient(135deg, #6b46c1 0%, #38b2ac 100%);
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 50px 100px rgba(107, 70, 193, 0.5);
+        }
+
+        .service-popup-header {
+            padding: 30px 30px 20px 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-popup-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .service-popup-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin: 10px 0 0 0;
+        }
+
+        .service-popup-body {
+            padding: 30px;
+            color: white;
+        }
+
+        .service-popup-image {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .service-popup-image img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-popup-description {
+            text-align: center;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .service-popup-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-popup-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .service-popup-actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .service-popup-btn {
+            padding: 12px 25px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .service-popup-btn.primary {
+            background: linear-gradient(45deg, #00d4ff, #4ecdc4);
+            color: #000;
+        }
+
+        .service-popup-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .service-popup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animation for popup */
+        .service-popup-modal.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .service-popup-content.show {
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -492,7 +656,8 @@
             <div class="row g-4 d-flex justify-content-center align-items-center">
              
                 <div class="col-md-5 col-lg-5 fade-in-up" style="animation-delay: 0.6s;">
-                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden" data-title="Dental Care" data-description="Comprehensive dental treatments including root canals, implants, cosmetic dentistry, and preventive care by experienced dentists." data-image="{{ asset('images/dental.jpg') }}">
+                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden clickable-service-card" 
+                         style="cursor: pointer;">
                         <div class="position-relative overflow-hidden">
                             <img src="{{ asset('images/dental.jpg') }}" class="card-img-top project-image" alt="Dental Care">
                             <div class="service-overlay">
@@ -509,7 +674,8 @@
                 </div>
 
                 <div class="col-md-5 col-lg-5 fade-in-up" style="animation-delay: 0.8s;">
-                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden" data-title="Eye Care" data-description="Advanced eye examinations, cataract surgery, LASIK, glaucoma management, and pediatric ophthalmology." data-image="{{ asset('images/eye.jpg') }}">
+                    <div class="service-card card h-100 border-0 shadow-sm overflow-hidden clickable-service-card" 
+                         style="cursor: pointer;">
                         <div class="position-relative overflow-hidden">
                             <img src="{{ asset('images/eye.jpg') }}" class="card-img-top project-image" alt="Eye Care">
                             <div class="service-overlay">
@@ -626,6 +792,33 @@
             </div>
         </div>
     </section>
+
+    <!-- Service Popup Modal -->
+    <div id="servicePopupModal" class="service-popup-modal">
+        <div class="service-popup-content">
+            <button class="service-popup-close" id="servicePopupClose">&times;</button>
+            
+            <div class="service-popup-header">
+                <h2 id="servicePopupTitle" class="service-popup-title"></h2>
+                <p class="service-popup-subtitle">Advanced Healthcare Solutions</p>
+            </div>
+            
+            <div class="service-popup-body">
+                <div class="service-popup-image">
+                    <img id="servicePopupImage" src="" alt="">
+                </div>
+                
+                <div class="service-popup-description">
+                    <p id="servicePopupDescription"></p>
+                </div>
+                
+                <div class="service-popup-actions">
+                    <button class="service-popup-btn primary">Book Appointment</button>
+                    <button class="service-popup-btn secondary">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Doctor Bio Modal -->
     <div class="modal fade" id="doctorBioModal" tabindex="-1" aria-labelledby="doctorBioModalLabel" aria-hidden="true">
@@ -839,6 +1032,65 @@
 
             document.querySelectorAll('.service-card[data-title]').forEach(attach);
             document.querySelectorAll('.doctor-card[data-title]').forEach(attach);
+        });
+
+        // Service Popup Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const popupModal = document.getElementById('servicePopupModal');
+            const popupClose = document.getElementById('servicePopupClose');
+            const popupTitle = document.getElementById('servicePopupTitle');
+            const popupImage = document.getElementById('servicePopupImage');
+            const popupDescription = document.getElementById('servicePopupDescription');
+            
+            // Get all clickable service cards
+            const serviceCards = document.querySelectorAll('.clickable-service-card');
+            
+            // Add click event to each service card
+            serviceCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const title = this.getAttribute('data-title');
+                    const description = this.getAttribute('data-description');
+                    const image = this.getAttribute('data-image');
+                    
+                    // Set popup content
+                    popupTitle.textContent = title;
+                    popupDescription.textContent = description;
+                    popupImage.src = image;
+                    popupImage.alt = title;
+                    
+                    // Show popup
+                    popupModal.classList.add('show');
+                    popupModal.querySelector('.service-popup-content').classList.add('show');
+                    
+                    // Prevent body scroll
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close popup when close button is clicked
+            popupClose.addEventListener('click', function() {
+                closePopup();
+            });
+            
+            // Close popup when clicking outside
+            popupModal.addEventListener('click', function(e) {
+                if (e.target === popupModal) {
+                    closePopup();
+                }
+            });
+            
+            // Close popup with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && popupModal.classList.contains('show')) {
+                    closePopup();
+                }
+            });
+            
+            function closePopup() {
+                popupModal.classList.remove('show');
+                popupModal.querySelector('.service-popup-content').classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
         });
 
         // Video background handling
