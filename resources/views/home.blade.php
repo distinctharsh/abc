@@ -843,9 +843,9 @@
                                 <p class="text-muted mb-2">BDS, MDS (Prosthodontics)</p>
                                 <div class="social-links">
                                     <a href="https://www.facebook.com/drdebashissarkar" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="text-info me-2"><i class="fab fa-twitter"></i></a>
+                                    <a href="https://www.youtube.com/@drdebashissarkartmc" class="text-info me-2"><i class="fab fa-youtube"></i></a>
                                     <a href="https://www.instagram.com/sarkardr.debasish/" class="text-danger me-2"><i class="fab fa-instagram"></i></a>
-                                    <a href="#" class="text-primary"><i class="fab fa-linkedin-in"></i></a>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -1371,11 +1371,11 @@
                     </a>
 
                     <!-- Twitter -->
-                    <a href="#" class="social-icon-link">
+                    <!-- <a href="#" class="social-icon-link">
                         <div class="social-icon twitter">
                             <i class="fa-brands fa-twitter"></i>
                         </div>
-                    </a>
+                    </a> -->
 
                     <!-- Instagram -->
                     <a href="https://www.instagram.com/sarkardr.debasish" class="social-icon-link">
