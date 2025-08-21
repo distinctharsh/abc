@@ -303,8 +303,6 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
         }
 
         .service-popup-content {
@@ -442,6 +440,30 @@
             from { transform: translateY(-50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+
+
+        .service-popup-content .show {
+   
+    background-color: rgba(0, 0, 0, 0.4); /* thoda halka transparent */
+    backdrop-filter: blur(8px); /* blur effect */
+}
+
+.service-popup-content {
+    background: rgba(255, 255, 255, 0.1); /* transparent box */
+    border-radius: 12px;
+    padding: 20px;
+    color: #fff; /* text white */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Text ko aur readable banane ke liye */
+.service-popup-title,
+.service-popup-subtitle,
+.service-popup-description p {
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
     </style>
 </head>
 <body>
@@ -1413,7 +1435,7 @@
                     </div>
                     <p class="footer-desc">Clarity gives you the blocks and components you need to create a truly professional website.</p>
                     <div class="d-flex gap-2">
-                        <a href="#" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #fff; border-radius: 50%; border: 1.5px solid #e5e7eb; color: #111;"><i class="fa-brands fa-twitter"></i></a>
+                       
                         <a href="https://www.facebook.com/drdebashissarkar" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #2563eb; border-radius: 50%; color: #fff;"><i class="fa-brands fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/sarkardr.debasish?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #fff; border-radius: 50%; border: 1.5px solid #e5e7eb; color: #111;"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://www.youtube.com/@drdebashissarkartmc/" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #fff; border-radius: 50%; border: 1.5px solid #e5e7eb; color: #111;"><i class="fa-brands fa-youtube"></i></a>
