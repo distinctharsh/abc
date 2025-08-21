@@ -82,7 +82,7 @@ class HomeController extends Controller
                 //     'platform' => 'twitter'
                 // ],
                 [
-                    'url' => 'https://www.instagram.com/p/DMnxyHczswo/',
+                    'url' => 'https://www.instagram.com/sarkardr.debasish',
                     'platform' => 'instagram'
                 ]
             ];

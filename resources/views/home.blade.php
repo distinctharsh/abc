@@ -842,9 +842,9 @@
                                 <h5 class="mb-1">Dr. Suvankar Sarkar</h5>
                                 <p class="text-muted mb-2">BDS, MDS (Prosthodontics)</p>
                                 <div class="social-links">
-                                    <a href="#" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://www.facebook.com/drdebashissarkar" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
                                     <a href="#" class="text-info me-2"><i class="fab fa-twitter"></i></a>
-                                    <a href="#" class="text-danger me-2"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.instagram.com/sarkardr.debasish/" class="text-danger me-2"><i class="fab fa-instagram"></i></a>
                                     <a href="#" class="text-primary"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
                             </div>
@@ -1364,7 +1364,7 @@
                 <div class="social-icons-container d-flex justify-content-center align-items-center gap-4 flex-wrap">
                     
                     <!-- Facebook -->
-                    <a href="#" class="social-icon-link">
+                    <a href="https://www.facebook.com/drdebashissarkar" class="social-icon-link">
                         <div class="social-icon facebook">
                             <i class="fa-brands fa-facebook-f"></i>
                         </div>
