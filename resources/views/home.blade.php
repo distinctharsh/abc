@@ -312,6 +312,7 @@
         .service-popup-content {
             /* width: min(600px, 92vw); */
             width: min(300px, 32vw);
+            width: min(500px, 52vw);
             border-radius: 20px;
             background: rgba(255, 255, 255, 0.08); /* transparent glass */
             border: 1px solid rgba(255,255,255,0.18);
@@ -476,7 +477,7 @@
         <div class="container-fluid hero-container">
             <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row">
                 <!-- Left Content -->
-                <div class="hero-content fade-in-up" style="animation-delay: 0.2s;">
+                <div class="hero-content fade-in-up order-2 order-lg-1" style="animation-delay: 0.2s;">
 
                <div class="health-box">
                     <!-- Corner lines -->
@@ -512,7 +513,7 @@
                 </div>
                 
                 <!-- Right Image with enhanced 3D effects -->
-                <div class="hero-image-container">
+                <div class="hero-image-container order-1 order-lg-2">
                     <div class="hero-image">
                         <div class="image-wrapper">
                             <img src="{{ asset('images/sir.png') }}" alt="Hero Image" class="hero-sir" style="max-width: 100%; height: auto; display: block; cursor: pointer; transition: transform 0.3s ease;" data-bs-toggle="modal" data-bs-target="#doctorBioModal">

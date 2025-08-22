@@ -1474,16 +1474,12 @@ html {
     }
 
     .hero-sir {
-        max-width: 80%;
-        margin: 0 auto;
+        max-width: 85% !important;
+        margin: 20% auto;
     }
 }
 
-@media (max-width: 576px) {
-    .hero-sir {
-        max-width: 90%;
-    }
-}
+
 
 /* Performance optimizations */
 .project-card,
