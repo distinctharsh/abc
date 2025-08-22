@@ -552,8 +552,8 @@
                         A trusted dental surgeon and dedicated social contributor, bringing advanced healthcare and meaningful community development to the people of Asansol.
                     </p>
                 
-                    <button class="hero-btn">
-                        <i class="fas fa-rocket me-2"></i>Book an Appointment
+                    <button class="hero-btn" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">
+                        <i class="fas fa-rocket me-2"></i>Book Appointment
                     </button>
               
                 </div>
@@ -835,12 +835,54 @@
                 </div>
                 
                 <div class="service-popup-actions">
-                    <button class="service-popup-btn primary">Book Appointment</button>
+                    <button class="service-popup-btn primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Appointment</button>
                     <button class="service-popup-btn secondary">Learn More</button>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content" style="background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border: none; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                <div class="modal-header border-0 pb-0 text-center">
+                    <div class="w-100 text-center">
+                        <h5 class="modal-title fw-bold text-primary mb-1" id="appointmentModalLabel" style="font-size: 1.4rem;">Book Appointment</h5>
+                        <p class="text-muted small mb-0">We'll get back to you soon</p>
+                    </div>
+                    <button type="button" class="btn-close position-absolute" style="top: 1rem; right: 1rem;" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 pt-2">
+                    <form id="appointmentForm" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <input type="text" class="form-control form-control-lg" id="name" required 
+                                   placeholder="Your Name" 
+                                   style="border-radius: 10px; border: 2px solid #e9ecef; padding: 12px 15px; font-size: 0.95rem;">
+                            <div class="invalid-feedback">Please enter your name</div>
+                        </div>
+                        <div class="mb-4">
+                            <input type="date" class="form-control form-control-lg" id="date" required 
+                                   style="border-radius: 10px; border: 2px solid #e9ecef; padding: 12px 15px; font-size: 0.95rem;">
+                            <div class="invalid-feedback">Please select a date</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100" 
+                                style="background: linear-gradient(135deg, #a96ee4 0%, #46ff46 100%); 
+                                       border: none; 
+                                       padding: 12px; 
+                                       font-weight: 600; 
+                                       border-radius: 10px; 
+                                       letter-spacing: 0.5px;
+                                       box-shadow: 0 4px 15px rgba(169, 110, 228, 0.3);
+                                       transition: all 0.3s ease;">
+                            Confirm Appointment
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Doctor Bio Modal -->
     <div class="modal fade" id="doctorBioModal" tabindex="-1" aria-labelledby="doctorBioModalLabel" aria-hidden="true">
@@ -897,7 +939,7 @@
                 </div>
                 <div class="modal-footer border-0">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="#appointment" class="btn btn-primary" data-bs-dismiss="modal">Book Appointment</a>
+                    <a href="#appointment" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Appointment</a>
                 </div>
             </div>
         </div>
