@@ -310,7 +310,8 @@
 
         /* Card itself */
         .service-popup-content {
-            width: min(600px, 92vw);
+            /* width: min(600px, 92vw); */
+            width: min(300px, 32vw);
             border-radius: 20px;
             background: rgba(255, 255, 255, 0.08); /* transparent glass */
             border: 1px solid rgba(255,255,255,0.18);
@@ -321,7 +322,26 @@
             padding: 24px;
             position: relative;
             overflow: hidden;
+            /* background: linear-gradient(135deg, #00e0ff, #6b46c1); turquoise → purple */
         }
+
+
+        /* Gradient Border Line */
+.service-popup-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;                /* cover whole box */
+  border-radius: inherit;
+  padding: 2px;            /* border thickness */
+  background: linear-gradient(135deg, #00e0ff, #6b46c1); /* turquoise → purple */
+  
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
 
         /* Close button */
         .service-popup-close {
@@ -769,7 +789,7 @@
                 
                 <div class="service-popup-actions">
                     <button class="service-popup-btn primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Appointment</button>
-                    <button class="service-popup-btn secondary">Learn More</button>
+                    <!-- <button class="service-popup-btn secondary">Learn More</button> -->
                 </div>
             </div>
         </div>
@@ -837,7 +857,7 @@
                             </div>
                             <div class="mt-3">
                                 <h5 class="mb-1">Dr. Suvankar Sarkar</h5>
-                                <p class="text-muted mb-2">BDS, MDS (Prosthodontics)</p>
+                                <!-- <p class="text-muted mb-2">BDS, MDS (Prosthodontics)</p> -->
                                 <div class="social-links">
                                     <a href="https://www.facebook.com/drdebashissarkar" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
                                     <a href="https://www.youtube.com/@drdebashissarkartmc" class="text-info me-2"><i class="fab fa-youtube"></i></a>
@@ -848,10 +868,17 @@
                         </div>
                         <div class="col-md-8">
                             <div class="bio-content">
-                                <h6 class="text-uppercase text-primary mb-3">About Me</h6>
-                                <p>With over 15 years of experience in dental surgery and prosthodontics, Dr. Suvankar Sarkar is a renowned dental surgeon dedicated to providing exceptional patient care. His expertise includes cosmetic dentistry, dental implants, and full mouth rehabilitation.</p>
+                                <h6 class="text-uppercase text-primary mb-3">Dr. Suvankar Sarkar</h6>
+                                <p>Dr. Debasish Sarkar is popularly known as Daktar Babu. He is currently serving as Borough Chairman-VI and Councillor of Ward No. 84 in Asansol Municipal Corporation. Recently, he became the Mayor’s Representative in ADDA (Asansol Durgapur Development Authority).
+<br>
+He fought for the first time in the Municipality Election (AITC ticket) and, for the first time in history, secured victory for Ward No. 84— a ward untouched by AITC since its inception in 1998.
+<br>
+Dr. Sarkar is very active in public activities, including political, administrative, and social work. As a renowned dentist, his Orodental Hospital initiative has outreach to over 6 lakh households.
+<br>
+Historic contribution includes initiating the naming of a road after Justice Radha Binod Paul, the first in West Bengal or any major metro city.
+</p>
                                 
-                                <h6 class="text-uppercase text-primary mt-4 mb-3">Education</h6>
+                                <!-- <h6 class="text-uppercase text-primary mt-4 mb-3">Education</h6>
                                 <ul class="list-unstyled">
                                     <li class="mb-2"><i class="fas fa-graduation-cap text-primary me-2"></i> BDS - Dental College, 2005</li>
                                     <li class="mb-2"><i class="fas fa-graduation-cap text-primary me-2"></i> MDS in Prosthodontics - University of Dental Sciences, 2009</li>
@@ -865,7 +892,7 @@
                                     <span class="badge bg-light text-dark">Full Mouth Rehabilitation</span>
                                     <span class="badge bg-light text-dark">Teeth Whitening</span>
                                     <span class="badge bg-light text-dark">Veneers & Crowns</span>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -1400,9 +1427,9 @@
                 <div class="col-md-4">
                     <div class="d-flex align-items-center mb-2">
                         <div class="footer-logo">
-                            <span class="footer-logo-text">C</span>
+                            <!-- <span class="footer-logo-text">C</span> -->
                         </div>
-                        <span class="footer-title">ClarityUI</span>
+                        <!-- <span class="footer-title">ClarityUI</span> -->
                     </div>
                     <p class="footer-desc">Clarity gives you the blocks and components you need to create a truly professional website.</p>
                     <div class="d-flex gap-2">
