@@ -294,176 +294,109 @@
             transform: translateY(-2px);
         }
 
-        /* Service Popup Modal */
+      /* ===== MODAL OVERLAY (full-screen) ===== */
+        /* Remove fullscreen background */
         .service-popup-modal {
             display: none;
             position: fixed;
+            inset: 0;
             z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .service-popup-content {
-            background: linear-gradient(135deg, #6b46c1 0%, #38b2ac 100%);
-            margin: 5% auto;
-            padding: 0;
-            border-radius: 25px;
-            width: 90%;
-            max-width: 600px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 50px 100px rgba(107, 70, 193, 0.5);
-        }
-
-        .service-popup-header {
-            padding: 30px 30px 20px 30px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .service-popup-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: white;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .service-popup-subtitle {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            margin: 10px 0 0 0;
-        }
-
-        .service-popup-body {
-            padding: 30px;
-            color: white;
-        }
-
-        .service-popup-image {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .service-popup-image img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        .service-popup-description {
-            text-align: center;
-            line-height: 1.6;
-            font-size: 1.1rem;
-            margin: 20px 0;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .service-popup-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(0,0,0,0.55); /* sirf halka dark overlay */
+            backdrop-filter: blur(4px);
         }
 
+        /* Card itself */
+        .service-popup-content {
+            width: min(600px, 92vw);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.08); /* transparent glass */
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: 0 12px 40px rgba(0,0,0,.5);
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
+            color: #fff;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Close button */
+        .service-popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
         .service-popup-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
+            background: rgba(255,255,255,0.35);
+            transform: scale(1.05);
         }
 
+        /* Title + subtitle */
+        .service-popup-title {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .service-popup-subtitle {
+            margin: 6px 0 18px 0;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Image in hexagon */
+        .service-popup-image img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            margin: 20px auto;
+            display: block;
+        }
+
+        /* Buttons */
         .service-popup-actions {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 20px;
         }
-
         .service-popup-btn {
-            padding: 12px 25px;
-            margin: 0 10px;
-            border: none;
+            padding: 10px 22px;
             border-radius: 25px;
-            font-weight: 600;
-            font-size: 1rem;
+            border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            transition: 0.3s;
         }
-
         .service-popup-btn.primary {
-            background: linear-gradient(45deg, #00d4ff, #4ecdc4);
+            background: linear-gradient(45deg, #00e0ff, #37d7c7);
             color: #000;
         }
-
         .service-popup-btn.secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255,255,255,0.2);
+            color: #fff;
         }
-
         .service-popup-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.3);
         }
-
-        /* Animation for popup */
-        .service-popup-modal.show {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .service-popup-content.show {
-            animation: slideIn 0.4s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-
-        .service-popup-content .show {
-   
-    background-color: rgba(0, 0, 0, 0.4); /* thoda halka transparent */
-    backdrop-filter: blur(8px); /* blur effect */
-}
-
-.service-popup-content {
-    background: rgba(255, 255, 255, 0.1); /* transparent box */
-    border-radius: 12px;
-    padding: 20px;
-    color: #fff; /* text white */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-}
-
-/* Text ko aur readable banane ke liye */
-.service-popup-title,
-.service-popup-subtitle,
-.service-popup-description p {
-    color: #fff;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
-}
-
     </style>
 </head>
 <body>
@@ -654,7 +587,7 @@
     </div>
 
     <!-- Enhanced Services Section with video background -->
-    <section class="services-section" style="position: relative; overflow: hidden;">
+    <section class="services-section" style="position: relative; overflow: hidden;" >
         <!-- Video Background -->
         <div class="video-background">
             <video autoplay muted loop playsinline class="background-video">
@@ -677,7 +610,7 @@
             <!-- Enhanced Service Cards -->
             <div class="row g-4 d-flex justify-content-center align-items-center">
              
-                <div class="col-md-5 col-lg-5 fade-in-up" style="animation-delay: 0.6s;">
+                <div class="col-md-5 col-lg-5 fade-in-up" style="animation-delay: 0.6s;" data-modal="servicePopupModal" data-title="Service Popup">
                     <div class="service-card card h-100 border-0 shadow-sm overflow-hidden clickable-service-card" 
                          style="cursor: pointer;">
                         <div class="position-relative overflow-hidden">
@@ -695,7 +628,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-5 col-lg-5 fade-in-up" style="animation-delay: 0.8s;">
+                <div class="col-md-5 col-lg-5 fade-in-up" style="animation-delay: 0.8s;" data-modal="servicePopupModal" data-title="Service Popup">
                     <div class="service-card card h-100 border-0 shadow-sm overflow-hidden clickable-service-card" 
                          style="cursor: pointer;">
                         <div class="position-relative overflow-hidden">
@@ -816,7 +749,7 @@
     </section>
 
     <!-- Service Popup Modal -->
-    <div id="servicePopupModal" class="service-popup-modal">
+    <div id="servicePopupModal" class="service-popup-modal" style="display: none;">
         <div class="service-popup-content">
             <button class="service-popup-close" id="servicePopupClose">&times;</button>
             
@@ -1112,9 +1045,9 @@
             // Add click event to each service card
             serviceCards.forEach(card => {
                 card.addEventListener('click', function() {
-                    const title = this.getAttribute('data-title');
-                    const description = this.getAttribute('data-description');
-                    const image = this.getAttribute('data-image');
+                    const title = this.querySelector('.card-title').textContent;
+                    const description = this.querySelector('.card-text').textContent;
+                    const image = this.querySelector('img').src;
                     
                     // Set popup content
                     popupTitle.textContent = title;
@@ -1123,10 +1056,7 @@
                     popupImage.alt = title;
                     
                     // Show popup
-                    popupModal.classList.add('show');
-                    popupModal.querySelector('.service-popup-content').classList.add('show');
-                    
-                    // Prevent body scroll
+                    popupModal.style.display = 'flex';
                     document.body.style.overflow = 'hidden';
                 });
             });
@@ -1145,14 +1075,13 @@
             
             // Close popup with Escape key
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && popupModal.classList.contains('show')) {
+                if (e.key === 'Escape' && popupModal.style.display === 'flex') {
                     closePopup();
                 }
             });
             
             function closePopup() {
-                popupModal.classList.remove('show');
-                popupModal.querySelector('.service-popup-content').classList.remove('show');
+                popupModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
