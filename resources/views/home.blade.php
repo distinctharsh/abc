@@ -876,6 +876,8 @@ He fought for the first time in the Municipality Election (AITC ticket) and, for
 Dr. Sarkar is very active in public activities, including political, administrative, and social work. As a renowned dentist, his Orodental Hospital initiative has outreach to over 6 lakh households.
 <br>
 Historic contribution includes initiating the naming of a road after Justice Radha Binod Paul, the first in West Bengal or any major metro city.
+<br>
+During his tenure, a total of ₹24.5 crore+ has been allocated for the development of eight wards, with 85% work sanctioned and ongoing, and 15% in DPR stage.
 </p>
                                 
                                 <!-- <h6 class="text-uppercase text-primary mt-4 mb-3">Education</h6>

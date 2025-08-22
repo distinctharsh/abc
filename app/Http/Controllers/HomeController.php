@@ -114,22 +114,267 @@ class HomeController extends Controller
                     'ward' => [
                         'title' => 'Ward No. 84',
                         'image' => 'ward.png',
-                        'description' => 'Updates and activities from Ward 84',
-                        'full_content' => 'Detailed information about Ward 84 activities and development projects.'
+                        'description' => 'Updates and Development Activities',
+                        'full_content' => '
+                            <div class="ward-section">
+                                <div class="initiatives-section mt-5">
+                                    <h3 class="section-title">Ward No. 84</h3>
+                                    <ul class="initiatives-list">
+                                        <li>Daily ward visits on bike</li>
+                                        <li>Rainwater Management Project (2022)</li>
+                                        <li>Transparent Tender Practices (2023)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <style>
+                                .ward-section {
+                                    font-family: \'Segoe UI\', Tahoma, Geneva, Verdana, sans-serif;
+                                    line-height: 1.7;
+                                    color: #333;
+                                }
+                                .section-title {
+                                    color: #2c3e50;
+                                    border-bottom: 2px solid #3498db;
+                                    padding-bottom: 8px;
+                                    margin: 25px 0 15px;
+                                }
+                                .highlights-grid {
+                                    display: grid;
+                                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                                    gap: 20px;
+                                    margin: 20px 0;
+                                }
+                                .highlight-card {
+                                    background: white;
+                                    padding: 20px;
+                                    border-radius: 10px;
+                                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                                    transition: transform 0.3s ease;
+                                }
+                                .highlight-card:hover {
+                                    transform: translateY(-5px);
+                                }
+                                .highlight-icon {
+                                    font-size: 2rem;
+                                    color: #3498db;
+                                    margin-bottom: 15px;
+                                }
+                                .initiatives-list {
+                                    list-style-type: none;
+                                    padding: 0;
+                                }
+                                .initiatives-list li {
+                                    background: #f8f9fa;
+                                    margin: 8px 0;
+                                    padding: 12px 15px;
+                                    border-radius: 6px;
+                                    border-left: 4px solid #2ecc71;
+                                    transition: transform 0.2s, box-shadow 0.2s;
+                                }
+                                .initiatives-list li:hover {
+                                    transform: translateX(5px);
+                                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                                }
+                                .gallery-grid {
+                                    display: grid;
+                                    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                                    gap: 15px;
+                                    margin-top: 15px;
+                                }
+                                .gallery-item {
+                                    position: relative;
+                                    overflow: hidden;
+                                    border-radius: 8px;
+                                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                                }
+                                .gallery-caption {
+                                    position: absolute;
+                                    bottom: 0;
+                                    left: 0;
+                                    right: 0;
+                                    background: rgba(0,0,0,0.7);
+                                    color: white;
+                                    padding: 8px;
+                                    text-align: center;
+                                    font-size: 0.9rem;
+                                }
+                                @media (max-width: 768px) {
+                                    .highlights-grid {
+                                        grid-template-columns: 1fr;
+                                    }
+                                    .gallery-grid {
+                                        grid-template-columns: repeat(2, 1fr);
+                                    }
+                                }
+                            </style>'
                     ],
                     'borough' => [
                         'title' => 'Borough VI',
                         'image' => 'borough.png',
                         'description' => 'Updates from Borough VI',
-                        'full_content' => 'Information about Borough VI initiatives and community programs.'
+                        'full_content' => 'Renovation of Borough VI Office'
                     ],
                     'adda' => [
                         'title' => 'ADDA Activities',
                         'image' => 'adda.png',
-                        'description' => 'Community engagement activities',
-                        'full_content' => 'Details about various ADDA activities and community programs.'
-                    ]
-                ]
+                        'description' => 'Asansol Durgapur Development Authority',
+                        'full_content' => '
+                            <div class="adda-section">
+                                <div class="adda-about mb-4">
+                                    <h3 class="section-title">About ADDA</h3>
+                                    <p>ADDA stands for Asansol Durgapur Development Authority. It is a government statutory body responsible for the planning, development, and maintenance of infrastructure and public amenities across the Asansol-Durgapur region. Its scope includes urban planning, road construction, water supply management, housing projects, industrial development, environmental improvement, and community welfare programs.</p>
+                                </div>
+
+                                <div class="role-section mb-4">
+                                    <h3 class="section-title">Role of Dr. Debasish Sarkar in ADDA</h3>
+                                    <p>As the Mayor\'s Representative in ADDA, Dr. Sarkar plays a key role in policy decision-making, project supervision, and ensuring transparency in development works. His responsibilities include liaising between the community and ADDA, prioritizing projects that benefit citizens, and monitoring the execution of developmental schemes.</p>
+                                </div>
+
+                                <div class="initiatives-section">
+                                    <h3 class="section-title">Major ADDA-Related Initiatives</h3>
+                                    <ul class="initiatives-list">
+                                        <li>Revival of Ismile Holriboe Mandir</li>
+                                        <li>Reclaiming Vidya Sagar Playground</li>
+                                        <li>Restoration of Rajiv Gandhi Statue</li>
+                                        <li>Advocacy for labor rights and anti-corruption policies</li>
+                                    </ul>
+                                </div>
+
+                                <div class="highlights-section mt-5">
+                                    <h3 class="section-title">Work Highlights</h3>
+                                    <div class="highlights-grid">
+                                        <div class="highlight-card">
+                                            <i class="fas fa-road highlight-icon"></i>
+                                            <h4>Road Renaming</h4>
+                                            <p>Successfully led the initiative to rename a major road after Justice Radha Binod Paul, the first such honor in West Bengal.</p>
+                                        </div>
+                                        <div class="highlight-card">
+                                            <i class="fas fa-rupee-sign highlight-icon"></i>
+                                            <h4>Development Funds</h4>
+                                            <p>Secured and allocated over ₹24.5 crore for various development projects across the region.</p>
+                                        </div>
+                                        <div class="highlight-card">
+                                            <i class="fas fa-users highlight-icon"></i>
+                                            <h4>Public Engagement</h4>
+                                            <p>Conducted extensive public engagement programs and welfare initiatives for community development.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="gallery-section mt-5">
+                                    <h3 class="section-title">Public Engagements</h3>
+                                    <div class="gallery-grid">
+                                        <div class="gallery-item">
+                                            <img src="' . asset('images/placeholder1.jpg') . '" alt="Public Engagement 1" class="img-fluid rounded">
+                                            <div class="gallery-caption">Community Meeting</div>
+                                        </div>
+                                        <div class="gallery-item">
+                                            <img src="' . asset('images/placeholder2.jpg') . '" alt="Public Engagement 2" class="img-fluid rounded">
+                                            <div class="gallery-caption">Project Inauguration</div>
+                                        </div>
+                                        <div class="gallery-item">
+                                            <img src="' . asset('images/placeholder3.jpg') . '" alt="Public Engagement 3" class="img-fluid rounded">
+                                            <div class="gallery-caption">Public Hearing</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <style>
+                                .adda-section {
+                                    font-family: \'Segoe UI\', Tahoma, Geneva, Verdana, sans-serif;
+                                    line-height: 1.7;
+                                    color: #333;
+                                }
+                                .section-title {
+                                    color: #2c3e50;
+                                    border-bottom: 2px solid #3498db;
+                                    padding-bottom: 8px;
+                                    margin: 25px 0 15px;
+                                }
+                                .initiatives-list {
+                                    list-style-type: none;
+                                    padding: 0;
+                                }
+                                .initiatives-list li {
+                                    background: #f8f9fa;
+                                    margin: 8px 0;
+                                    padding: 12px 15px;
+                                    border-radius: 6px;
+                                    border-left: 4px solid #3498db;
+                                    transition: transform 0.2s, box-shadow 0.2s;
+                                }
+                                .initiatives-list li:hover {
+                                    transform: translateX(5px);
+                                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                                }
+                                .role-section {
+                                    background: #f8f9fa;
+                                    padding: 20px;
+                                    border-radius: 8px;
+                                    border-left: 4px solid #2ecc71;
+                                }
+                                
+                                .highlights-grid {
+                                    display: grid;
+                                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                                    gap: 20px;
+                                    margin: 20px 0;
+                                }
+                                
+                                .highlight-card {
+                                    background: white;
+                                    padding: 20px;
+                                    border-radius: 10px;
+                                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                                    transition: transform 0.3s ease;
+                                }
+                                
+                                .highlight-card:hover {
+                                    transform: translateY(-5px);
+                                }
+                                
+                                .highlight-icon {
+                                    font-size: 2rem;
+                                    color: #3498db;
+                                    margin-bottom: 15px;
+                                }
+                                
+                                .gallery-grid {
+                                    display: grid;
+                                    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                                    gap: 15px;
+                                    margin-top: 15px;
+                                }
+                                
+                                .gallery-item {
+                                    position: relative;
+                                    overflow: hidden;
+                                    border-radius: 8px;
+                                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                                }
+                                
+                                .gallery-caption {
+                                    position: absolute;
+                                    bottom: 0;
+                                    left: 0;
+                                    right: 0;
+                                    background: rgba(0,0,0,0.7);
+                                    color: white;
+                                    padding: 8px;
+                                    text-align: center;
+                                    font-size: 0.9rem;
+                                }
+                                @media (max-width: 768px) {
+                                    .initiatives-list li {
+                                        padding: 10px;
+                                    }
+                                }
+                            </style>'
+                        
+                    ],
+                ],
             ],
             'capigen-highlights' => [
                 'title' => 'Capigen Highlights',

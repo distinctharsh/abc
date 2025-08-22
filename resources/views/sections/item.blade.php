@@ -18,7 +18,9 @@
             <div class="card border-0 shadow-sm mb-5">
                 <div class="card-body p-4">
                     <div class="content">
-                        <p>{{ $itemData['full_content'] }}</p>
+                        <div class="ward-content-wrapper">
+                            {!! $itemData['full_content'] !!}
+                        </div>
                         
                         <!-- Add any additional content specific to this item here -->
                         @if(isset($itemData['videos']))
