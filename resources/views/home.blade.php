@@ -1149,17 +1149,20 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
     </script>
 
     <section class="py-5 text-center" style="background: #f8fafc;">
-        <div class="gap-4 d-flex justify-content-center">
+        <div class="d-flex flex-wrap gap-3 justify-content-center">
             <!-- Dr. Sarkar Official Button -->
-            <button type="button" class="btn popup-btn" data-bs-toggle="modal" data-bs-target="#drSarkarModal">
+            <button type="button" class="btn popup-btn flex-fill flex-md-grow-0"
+                data-bs-toggle="modal" data-bs-target="#drSarkarModal">
                 Dr. Sarkar Official
             </button>
             
             <!-- Capigen Highlights Button -->
-            <button type="button" class="btn popup-btn" data-bs-toggle="modal" data-bs-target="#capigenModal">
+            <button type="button" class="btn popup-btn flex-fill flex-md-grow-0"
+                data-bs-toggle="modal" data-bs-target="#capigenModal">
                 Capigen Highlights
             </button>
         </div>
+
         
         <!-- Dr. Sarkar Modal -->
         <div class="modal fade" id="drSarkarModal" tabindex="-1" aria-labelledby="drSarkarModalLabel" aria-hidden="true">

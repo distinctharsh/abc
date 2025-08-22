@@ -1232,6 +1232,7 @@ html {
 .popup-btn:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-medium);
+    color: #ffff;
 }
 
 /* Additional enhanced elements */
@@ -1469,13 +1470,29 @@ html {
 
     .hero-image-container {
         margin-top: 2rem;
-        text-align: center;
         overflow: unset;
     }
 
     .hero-sir {
         max-width: 85% !important;
         margin: 20% auto;
+    }
+
+    .hero-image {
+       margin-left: 8%;
+       display: block !important;
+    }
+
+    .health-box{
+        width: 338px !important;
+    }
+    .label-hygiene {
+        font-size: 22px !important;
+    }
+    .hero-description{
+        width: 89% !important;
+        font-size: 12px !important;
+        margin-top: 0px !important;
     }
 }
 
