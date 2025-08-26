@@ -1,14 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+
+
+<style>
+
+
+</style>
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="text-center mb-5">
                 <img src="{{ asset('images/' . $itemData['image']) }}" 
-                     alt="{{ $itemData['title'] }}" 
-                     class="img-fluid rounded-circle mb-4" 
-                     style="width: 200px; height: 200px; object-fit: cover;">
+     alt="{{ $itemData['title'] }}" 
+     class="  mb-4 " style="max-width: 200px;">
+
                 <h1 class="display-4 fw-bold mb-3" style="background: linear-gradient(135deg, #a96ee4 0%, #46ff46 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
                     {{ $itemData['title'] }}
                 </h1>
@@ -18,7 +24,9 @@
             <div class="card border-0 shadow-sm mb-5">
                 <div class="card-body p-4">
                     <div class="content">
-                        <p>{{ $itemData['full_content'] }}</p>
+                        <div class="ward-content-wrapper">
+                            {!! $itemData['full_content'] !!}
+                        </div>
                         
                         <!-- Add any additional content specific to this item here -->
                         @if(isset($itemData['videos']))
@@ -56,4 +64,5 @@
         </div>
     </div>
 </div>
+
 @endsection

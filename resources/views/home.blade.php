@@ -294,154 +294,141 @@
             transform: translateY(-2px);
         }
 
-        /* Service Popup Modal */
+      /* ===== MODAL OVERLAY (full-screen) ===== */
+        /* Remove fullscreen background */
         .service-popup-modal {
             display: none;
             position: fixed;
+            inset: 0;
             z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-        }
-
-        .service-popup-content {
-            background: linear-gradient(135deg, #6b46c1 0%, #38b2ac 100%);
-            margin: 5% auto;
-            padding: 0;
-            border-radius: 25px;
-            width: 90%;
-            max-width: 600px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 50px 100px rgba(107, 70, 193, 0.5);
-        }
-
-        .service-popup-header {
-            padding: 30px 30px 20px 30px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .service-popup-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: white;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .service-popup-subtitle {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            margin: 10px 0 0 0;
-        }
-
-        .service-popup-body {
-            padding: 30px;
-            color: white;
-        }
-
-        .service-popup-image {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .service-popup-image img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        .service-popup-description {
-            text-align: center;
-            line-height: 1.6;
-            font-size: 1.1rem;
-            margin: 20px 0;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .service-popup-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(0,0,0,0.55); /* sirf halka dark overlay */
+            backdrop-filter: blur(4px);
         }
 
+        /* Card itself */
+        .service-popup-content {
+            /* width: min(600px, 92vw); */
+            width: min(300px, 32vw);
+            width: min(500px, 52vw);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.08); /* transparent glass */
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: 0 12px 40px rgba(0,0,0,.5);
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
+            color: #fff;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            /* background: linear-gradient(135deg, #00e0ff, #6b46c1); turquoise → purple */
+        }
+
+
+        /* Gradient Border Line */
+.service-popup-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;                /* cover whole box */
+  border-radius: inherit;
+  padding: 2px;            /* border thickness */
+  background: linear-gradient(135deg, #00e0ff, #6b46c1); /* turquoise → purple */
+  
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+        /* Close button */
+        .service-popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
         .service-popup-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
+            background: rgba(255,255,255,0.35);
+            transform: scale(1.05);
         }
 
+        /* Title + subtitle */
+        .service-popup-title {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .service-popup-subtitle {
+            margin: 6px 0 18px 0;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Image in hexagon */
+        .service-popup-image img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            margin: 20px auto;
+            display: block;
+        }
+
+        /* Buttons */
         .service-popup-actions {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 20px;
         }
-
         .service-popup-btn {
-            padding: 12px 25px;
-            margin: 0 10px;
-            border: none;
+            padding: 10px 22px;
             border-radius: 25px;
-            font-weight: 600;
-            font-size: 1rem;
+            border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            transition: 0.3s;
         }
-
         .service-popup-btn.primary {
-            background: linear-gradient(45deg, #00d4ff, #4ecdc4);
+            background: linear-gradient(45deg, #00e0ff, #37d7c7);
             color: #000;
         }
-
         .service-popup-btn.secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255,255,255,0.2);
+            color: #fff;
         }
-
         .service-popup-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.3);
         }
-
-        /* Animation for popup */
-        .service-popup-modal.show {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .service-popup-content.show {
-            animation: slideIn 0.4s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        
+fieldset {
+  border: 1px solid white;
+  color: white;
+  text-align: center;
+  width: 200px;
+}
+legend {
+  padding: 0 10px;
+}
+        
     </style>
 </head>
 <body>
@@ -501,7 +488,7 @@
         <div class="container-fluid hero-container">
             <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row">
                 <!-- Left Content -->
-                <div class="hero-content fade-in-up" style="animation-delay: 0.2s;">
+                <div class="hero-content fade-in-up order-2 order-lg-1" style="animation-delay: 0.2s;">
 
                <div class="health-box">
                     <!-- Corner lines -->
@@ -522,6 +509,7 @@
                 
                 </div>
 
+
                     <div class="tagline">
                         Transforming Smiles <span class="star">★</span> Transforming Lives
                     </div>
@@ -530,14 +518,14 @@
                         A trusted dental surgeon and dedicated social contributor, bringing advanced healthcare and meaningful community development to the people of Asansol.
                     </p>
                 
-                    <button class="hero-btn">
-                        <i class="fas fa-rocket me-2"></i>Book an Appointment
+                    <button class="hero-btn" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">
+                        <i class="fas fa-rocket me-2"></i>Book Appointment
                     </button>
               
                 </div>
                 
                 <!-- Right Image with enhanced 3D effects -->
-                <div class="hero-image-container">
+                <div class="hero-image-container order-1 order-lg-2">
                     <div class="hero-image">
                         <div class="image-wrapper">
                             <img src="{{ asset('images/sir.png') }}" alt="Hero Image" class="hero-sir" style="max-width: 100%; height: auto; display: block; cursor: pointer; transition: transform 0.3s ease;" data-bs-toggle="modal" data-bs-target="#doctorBioModal">
@@ -632,7 +620,7 @@
     </div>
 
     <!-- Enhanced Services Section with video background -->
-    <section class="services-section" style="position: relative; overflow: hidden;">
+    <section class="services-section" style="position: relative; overflow: hidden;" >
         <!-- Video Background -->
         <div class="video-background">
             <video autoplay muted loop playsinline class="background-video">
@@ -655,7 +643,7 @@
             <!-- Enhanced Service Cards -->
             <div class="row g-4 d-flex justify-content-center align-items-center">
              
-                <div class="col-md-5 col-lg-5 fade-in-up" style="animation-delay: 0.6s;">
+                <div class="col-md-5 col-lg-5 fade-in-up" style="animation-delay: 0.6s;" data-modal="servicePopupModal" data-title="Service Popup">
                     <div class="service-card card h-100 border-0 shadow-sm overflow-hidden clickable-service-card" 
                          style="cursor: pointer;">
                         <div class="position-relative overflow-hidden">
@@ -673,7 +661,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-5 col-lg-5 fade-in-up" style="animation-delay: 0.8s;">
+                <div class="col-md-5 col-lg-5 fade-in-up" style="animation-delay: 0.8s;" data-modal="servicePopupModal" data-title="Service Popup">
                     <div class="service-card card h-100 border-0 shadow-sm overflow-hidden clickable-service-card" 
                          style="cursor: pointer;">
                         <div class="position-relative overflow-hidden">
@@ -794,7 +782,7 @@
     </section>
 
     <!-- Service Popup Modal -->
-    <div id="servicePopupModal" class="service-popup-modal">
+    <div id="servicePopupModal" class="service-popup-modal" style="display: none;">
         <div class="service-popup-content">
             <button class="service-popup-close" id="servicePopupClose">&times;</button>
             
@@ -813,12 +801,54 @@
                 </div>
                 
                 <div class="service-popup-actions">
-                    <button class="service-popup-btn primary">Book Appointment</button>
-                    <button class="service-popup-btn secondary">Learn More</button>
+                    <button class="service-popup-btn primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Appointment</button>
+                    <!-- <button class="service-popup-btn secondary">Learn More</button> -->
                 </div>
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content" style="background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border: none; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                <div class="modal-header border-0 pb-0 text-center">
+                    <div class="w-100 text-center">
+                        <h5 class="modal-title fw-bold text-primary mb-1" id="appointmentModalLabel" style="font-size: 1.4rem;">Book Appointment</h5>
+                        <p class="text-muted small mb-0">We'll get back to you soon</p>
+                    </div>
+                    <button type="button" class="btn-close position-absolute" style="top: 1rem; right: 1rem;" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 pt-2">
+                    <form id="appointmentForm" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <input type="text" class="form-control form-control-lg" id="name" required 
+                                   placeholder="Your Name" 
+                                   style="border-radius: 10px; border: 2px solid #e9ecef; padding: 12px 15px; font-size: 0.95rem;">
+                            <div class="invalid-feedback">Please enter your name</div>
+                        </div>
+                        <div class="mb-4">
+                            <input type="date" class="form-control form-control-lg" id="date" required 
+                                   style="border-radius: 10px; border: 2px solid #e9ecef; padding: 12px 15px; font-size: 0.95rem;">
+                            <div class="invalid-feedback">Please select a date</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100" 
+                                style="background: linear-gradient(135deg, #a96ee4 0%, #46ff46 100%); 
+                                       border: none; 
+                                       padding: 12px; 
+                                       font-weight: 600; 
+                                       border-radius: 10px; 
+                                       letter-spacing: 0.5px;
+                                       box-shadow: 0 4px 15px rgba(169, 110, 228, 0.3);
+                                       transition: all 0.3s ease;">
+                            Confirm Appointment
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Doctor Bio Modal -->
     <div class="modal fade" id="doctorBioModal" tabindex="-1" aria-labelledby="doctorBioModalLabel" aria-hidden="true">
@@ -840,21 +870,30 @@
                             </div>
                             <div class="mt-3">
                                 <h5 class="mb-1">Dr. Suvankar Sarkar</h5>
-                                <p class="text-muted mb-2">BDS, MDS (Prosthodontics)</p>
+                                <!-- <p class="text-muted mb-2">BDS, MDS (Prosthodontics)</p> -->
                                 <div class="social-links">
-                                    <a href="#" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="text-info me-2"><i class="fab fa-twitter"></i></a>
-                                    <a href="#" class="text-danger me-2"><i class="fab fa-instagram"></i></a>
-                                    <a href="#" class="text-primary"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="https://www.facebook.com/drdebashissarkar" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://www.youtube.com/@drdebashissarkartmc" class="text-info me-2"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://www.instagram.com/sarkardr.debasish/" class="text-danger me-2"><i class="fab fa-instagram"></i></a>
+                                   
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="bio-content">
-                                <h6 class="text-uppercase text-primary mb-3">About Me</h6>
-                                <p>With over 15 years of experience in dental surgery and prosthodontics, Dr. Suvankar Sarkar is a renowned dental surgeon dedicated to providing exceptional patient care. His expertise includes cosmetic dentistry, dental implants, and full mouth rehabilitation.</p>
+                                <h6 class="text-uppercase text-primary mb-3">Dr. Suvankar Sarkar</h6>
+                                <p>Dr. Debasish Sarkar is popularly known as Daktar Babu. He is currently serving as Borough Chairman-VI and Councillor of Ward No. 84 in Asansol Municipal Corporation. Recently, he became the Mayor’s Representative in ADDA (Asansol Durgapur Development Authority).
+<br>
+He fought for the first time in the Municipality Election (AITC ticket) and, for the first time in history, secured victory for Ward No. 84— a ward untouched by AITC since its inception in 1998.
+<br>
+Dr. Sarkar is very active in public activities, including political, administrative, and social work. As a renowned dentist, his Orodental Hospital initiative has outreach to over 6 lakh households.
+<br>
+Historic contribution includes initiating the naming of a road after Justice Radha Binod Paul, the first in West Bengal or any major metro city.
+<br>
+During his tenure, a total of ₹24.5 crore+ has been allocated for the development of eight wards, with 85% work sanctioned and ongoing, and 15% in DPR stage.
+</p>
                                 
-                                <h6 class="text-uppercase text-primary mt-4 mb-3">Education</h6>
+                                <!-- <h6 class="text-uppercase text-primary mt-4 mb-3">Education</h6>
                                 <ul class="list-unstyled">
                                     <li class="mb-2"><i class="fas fa-graduation-cap text-primary me-2"></i> BDS - Dental College, 2005</li>
                                     <li class="mb-2"><i class="fas fa-graduation-cap text-primary me-2"></i> MDS in Prosthodontics - University of Dental Sciences, 2009</li>
@@ -868,14 +907,14 @@
                                     <span class="badge bg-light text-dark">Full Mouth Rehabilitation</span>
                                     <span class="badge bg-light text-dark">Teeth Whitening</span>
                                     <span class="badge bg-light text-dark">Veneers & Crowns</span>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer border-0">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="#appointment" class="btn btn-primary" data-bs-dismiss="modal">Book Appointment</a>
+                    <a href="#appointment" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Appointment</a>
                 </div>
             </div>
         </div>
@@ -1048,9 +1087,9 @@
             // Add click event to each service card
             serviceCards.forEach(card => {
                 card.addEventListener('click', function() {
-                    const title = this.getAttribute('data-title');
-                    const description = this.getAttribute('data-description');
-                    const image = this.getAttribute('data-image');
+                    const title = this.querySelector('.card-title').textContent;
+                    const description = this.querySelector('.card-text').textContent;
+                    const image = this.querySelector('img').src;
                     
                     // Set popup content
                     popupTitle.textContent = title;
@@ -1059,10 +1098,7 @@
                     popupImage.alt = title;
                     
                     // Show popup
-                    popupModal.classList.add('show');
-                    popupModal.querySelector('.service-popup-content').classList.add('show');
-                    
-                    // Prevent body scroll
+                    popupModal.style.display = 'flex';
                     document.body.style.overflow = 'hidden';
                 });
             });
@@ -1081,14 +1117,13 @@
             
             // Close popup with Escape key
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && popupModal.classList.contains('show')) {
+                if (e.key === 'Escape' && popupModal.style.display === 'flex') {
                     closePopup();
                 }
             });
             
             function closePopup() {
-                popupModal.classList.remove('show');
-                popupModal.querySelector('.service-popup-content').classList.remove('show');
+                popupModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
@@ -1126,17 +1161,20 @@
     </script>
 
     <section class="py-5 text-center" style="background: #f8fafc;">
-        <div class="gap-4 d-flex justify-content-center">
+        <div class="d-flex flex-wrap gap-3 justify-content-center">
             <!-- Dr. Sarkar Official Button -->
-            <button type="button" class="btn popup-btn" data-bs-toggle="modal" data-bs-target="#drSarkarModal">
+            <button type="button" class="btn popup-btn flex-fill flex-md-grow-0"
+                data-bs-toggle="modal" data-bs-target="#drSarkarModal">
                 Dr. Sarkar Official
             </button>
             
             <!-- Capigen Highlights Button -->
-            <button type="button" class="btn popup-btn" data-bs-toggle="modal" data-bs-target="#capigenModal">
+            <button type="button" class="btn popup-btn flex-fill flex-md-grow-0"
+                data-bs-toggle="modal" data-bs-target="#capigenModal">
                 Capigen Highlights
             </button>
         </div>
+
         
         <!-- Dr. Sarkar Modal -->
         <div class="modal fade" id="drSarkarModal" tabindex="-1" aria-labelledby="drSarkarModalLabel" aria-hidden="true">
@@ -1364,18 +1402,18 @@
                 <div class="social-icons-container d-flex justify-content-center align-items-center gap-4 flex-wrap">
                     
                     <!-- Facebook -->
-                    <a href="#" class="social-icon-link">
+                    <a href="https://www.facebook.com/drdebashissarkar" class="social-icon-link">
                         <div class="social-icon facebook">
                             <i class="fa-brands fa-facebook-f"></i>
                         </div>
                     </a>
 
                     <!-- Twitter -->
-                    <a href="#" class="social-icon-link">
+                    <!-- <a href="#" class="social-icon-link">
                         <div class="social-icon twitter">
                             <i class="fa-brands fa-twitter"></i>
                         </div>
-                    </a>
+                    </a> -->
 
                     <!-- Instagram -->
                     <a href="https://www.instagram.com/sarkardr.debasish" class="social-icon-link">
@@ -1407,13 +1445,13 @@
                 <div class="col-md-4">
                     <div class="d-flex align-items-center mb-2">
                         <div class="footer-logo">
-                            <span class="footer-logo-text">C</span>
+                            <!-- <span class="footer-logo-text">C</span> -->
                         </div>
-                        <span class="footer-title">ClarityUI</span>
+                        <!-- <span class="footer-title">ClarityUI</span> -->
                     </div>
                     <p class="footer-desc">Clarity gives you the blocks and components you need to create a truly professional website.</p>
                     <div class="d-flex gap-2">
-                        <a href="#" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #fff; border-radius: 50%; border: 1.5px solid #e5e7eb; color: #111;"><i class="fa-brands fa-twitter"></i></a>
+                       
                         <a href="https://www.facebook.com/drdebashissarkar" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #2563eb; border-radius: 50%; color: #fff;"><i class="fa-brands fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/sarkardr.debasish?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #fff; border-radius: 50%; border: 1.5px solid #e5e7eb; color: #111;"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://www.youtube.com/@drdebashissarkartmc/" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #fff; border-radius: 50%; border: 1.5px solid #e5e7eb; color: #111;"><i class="fa-brands fa-youtube"></i></a>
