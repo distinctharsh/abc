@@ -117,12 +117,80 @@ class HomeController extends Controller
                         'description' => 'Updates and Development Activities',
                         'full_content' => '
                             <div class="ward-section">
+                                <h3 class="section-title">Ward No. 84 Development Report</h3>
+                                <p>By Dr. Debasish Sarkar</p>
+                                <p>This report highlights the key development initiatives completed in Ward No. 84 of Asansol Municipal Corporation under the leadership of Dr. Debasish Sarkar. The works focus on infrastructure, social welfare, cultural support, sanitation, and community services, all aimed at improving the daily lives of residents.</p>
+
                                 <div class="initiatives-section mt-5">
-                                    <h3 class="section-title">Ward No. 84</h3>
+                                    <h4 class="section-subtitle">Social Welfare & Community Support</h4>
                                     <ul class="initiatives-list">
-                                        <li>Daily ward visits on bike</li>
-                                        <li>Rainwater Management Project (2022)</li>
-                                        <li>Transparent Tender Practices (2023)</li>
+                                        <li>Pension schemes implemented: Lakshmi Bhandar, Old Age Pension, Widow Pension, Humane Pension – benefiting more than 1,800 residents.</li>
+                                        <li>Financial aid provided for funerals, marriages, and Shraddha ceremonies.</li>
+                                        <li>Free drinking water arranged during weddings and religious events.</li>
+                                    </ul>
+
+                                    <h4 class="section-subtitle">Cultural & Festival Support</h4>
+                                    <ul class="initiatives-list">
+                                        <li>Durga Puja 2022: Financial assistance to local clubs.</li>
+                                        <li>Idol Immersion Arrangements: Hydra & AMC support, drinking water, seating, attractive lighting.</li>
+                                        <li>Ward 84 became the first in the industrial area to feature live bands at immersions.</li>
+                                    </ul>
+
+                                    <h5>Festival Decorations:</h5>
+                                    <ul class="initiatives-list">
+                                        <li>Durga Puja & Kali Puja – full ward decorations.</li>
+                                        <li>Chhath Puja – decorated Chhath Ghat.</li>
+                                        <li>Eid – special lighting in minority areas.</li>
+                                    </ul>
+
+                                    <h4 class="section-subtitle">Sanitation & Waste Management</h4>
+                                    <ul class="initiatives-list">
+                                        <li>Daily household garbage collection through Nirmal Sathi & Nirmal Sahayika.</li>
+                                        <li>Master dustbin constructed at Netaji Maidan for improved waste management.</li>
+                                        <li>First-ever underground electrical cable network in Ward 84.</li>
+                                        <li>Pipeline upgrades (after 40 years):
+                                            <ul>
+                                                <li>Central Park (Purnashree, Pragati Granthgar Road)</li>
+                                                <li>Tul Tala</li>
+                                                <li>Guru Nanak Palli</li>
+                                                <li>Muchi Para</li>
+                                                <li>Netaji Maidan to Karmakar Parash (500 ft)</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+
+                                    <h4 class="section-subtitle">Community Centres</h4>
+                                    <ul class="initiatives-list">
+                                        <li>Completed: Netaji Maidan Community Centre.</li>
+                                        <li>Under Construction: Kora Para, Bajrang Bali Mandir.</li>
+                                        <li>Proposed: Guru Nanak Palli, Lane 4 (Kali Mandir).</li>
+                                    </ul>
+
+                                    <h4 class="section-subtitle">Road Infrastructure</h4>
+                                    <p>Major road repairs and new constructions across Ward 84:</p>
+                                    <ul class="initiatives-list">
+                                        <li>Vivekananda Palli opposite PHE (repair).</li>
+                                        <li>Netaji Maidan to Barracks (Bihari Bari).</li>
+                                        <li>Lakhikanta Store Road Drain.</li>
+                                        <li>Dukhini Barrack (200 ft).</li>
+                                        <li>Shilpi Jamini Roy Sarani to Bhuvan Barrack (350 ft).</li>
+                                        <li>Shilpi Jamini Roy Sarani (Asha Shop, 200 ft).</li>
+                                        <li>SUR Engineering Road (500 ft).</li>
+                                        <li>Madhu Paramanik Road (30 ft).</li>
+                                        <li>Pratima Sanga to Lakhikanta Store (600 ft).</li>
+                                        <li>Bhama Charan Ghatak Lane.</li>
+                                        <li>Gurunanak Palli Priyanka Beauty Parlor Road.</li>
+                                        <li>Purnashree Palli Road (Anirban Pan).</li>
+                                        <li>Gurunanak Palli Lane 7 & 8 Connector Road.</li>
+                                        <li>Gurunanak Palli Lane 10.</li>
+                                        <li>Gurunanak Palli Lane 11.</li>
+                                        <li>Kalijhariya Road (repair & renovation).</li>
+                                    </ul>
+
+                                    <h4 class="section-subtitle">Drainage & Culverts</h4>
+                                    <ul class="initiatives-list">
+                                        <li>RCC Drains: Guru Nanak Palli Lane 3 & 4, Central Park Lower, Lakhikanta Store Road.</li>
+                                        <li>Culverts constructed: Dhibar Para and Roy Para.</li>
                                     </ul>
                                 </div>
                             </div>

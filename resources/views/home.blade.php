@@ -1388,7 +1388,7 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
 
 <!-- Social Media Section -->
 <section class="social-media-section py-5 mb-5 relative overflow-hidden"
-    style="background: linear-gradient(135deg, #1fd51f 0%, #16a016 100%); position: relative;">
+    style="position: relative;">
     
     <div class="container relative z-10">
         <div class="row justify-content-center">
