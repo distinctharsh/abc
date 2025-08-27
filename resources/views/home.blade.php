@@ -873,6 +873,7 @@ legend {
                                 <!-- <p class="text-muted mb-2">BDS, MDS (Prosthodontics)</p> -->
                                 <div class="social-links">
                                     <a href="https://www.facebook.com/drdebashissarkar" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://x.com/drdebashis_2000" class="text-primary me-2"><i class="fab fa-twitter"></i></a>
                                     <a href="https://www.youtube.com/@drdebashissarkartmc" class="text-info me-2"><i class="fab fa-youtube"></i></a>
                                     <a href="https://www.instagram.com/sarkardr.debasish/" class="text-danger me-2"><i class="fab fa-instagram"></i></a>
                                    
@@ -1409,11 +1410,11 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
                     </a>
 
                     <!-- Twitter -->
-                    <!-- <a href="#" class="social-icon-link">
+                    <a href="https://x.com/drdebashis_2000" class="social-icon-link">
                         <div class="social-icon twitter">
                             <i class="fa-brands fa-twitter"></i>
                         </div>
-                    </a> -->
+                    </a>
 
                     <!-- Instagram -->
                     <a href="https://www.instagram.com/sarkardr.debasish" class="social-icon-link">
@@ -1453,6 +1454,7 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
                     <div class="d-flex gap-2">
                        
                         <a href="https://www.facebook.com/drdebashissarkar" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #2563eb; border-radius: 50%; color: #fff;"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://x.com/drdebashis_2000" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #2563eb; border-radius: 50%; color: #fff;"><i class="fa-brands fa-twitter"></i></a>
                         <a href="https://www.instagram.com/sarkardr.debasish?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #fff; border-radius: 50%; border: 1.5px solid #e5e7eb; color: #111;"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://www.youtube.com/@drdebashissarkartmc/" class="d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: #fff; border-radius: 50%; border: 1.5px solid #e5e7eb; color: #111;"><i class="fa-brands fa-youtube"></i></a>
                     </div>
