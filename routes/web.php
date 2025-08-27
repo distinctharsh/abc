@@ -8,8 +8,25 @@ use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+use Illuminate\Support\Facades\File;
+
 Route::get('/gallery', function () {
-    return view('gallery');
+    $pressPath = public_path('images/press');
+    $images = [];
+    
+    if (File::exists($pressPath)) {
+        $files = File::files($pressPath);
+        
+        $images = array_map(function($file) {
+            return [
+                'src' => 'images/press/' . $file->getFilename(),
+                'category' => 'press',
+                'title' => 'Press Coverage ' . pathinfo($file->getFilename(), PATHINFO_FILENAME)
+            ];
+        }, $files);
+    }
+    
+    return view('gallery', ['images' => $images]);
 })->name('gallery');
 
 Route::get('/press', function () {
