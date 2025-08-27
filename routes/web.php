@@ -8,6 +8,10 @@ use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/gallery', function () {
+    return view('gallery');
+})->name('gallery');
+
 Route::get('/press', function () {
     return view('press');
 })->name('press');
