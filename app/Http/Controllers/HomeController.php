@@ -278,10 +278,98 @@ class HomeController extends Controller
                             </style>'
                     ],
                     'borough' => [
-                        'title' => 'Borough VI',
+                        'title' => 'Borough Development Updates',
                         'image' => 'borough.png',
-                        'description' => 'Updates from Borough VI',
-                        'full_content' => 'Renovation of Borough VI Office'
+                        'description' => 'Latest Infrastructure and Community Development Projects',
+                        'full_content' => '
+                            <div class="development-updates">
+                                <h3>Road & Infrastructure Development</h3>
+                                <ul class="project-list">
+                                    <li>
+                                        <strong>Chaitanya Tarani By-Lane</strong> (Ward not specified):
+                                        <p>Repaired a small road on April 5, 2025, improving daily access for residents.</p>
+                                    </li>
+                                    <li>
+                                        <strong>Vivekananda Palli to Netaji Maidan</strong> (Major Project):
+                                        <p>A strong new road built on June 1, 2025, now supports around 10,000 daily commuters.</p>
+                                    </li>
+                                    <li>
+                                        <strong>Ward 86:</strong>
+                                        <ul>
+                                            <li>Repaired and strengthened a culvert on June 27, 2025.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <strong>Kalijhariya & Kalipahari Colliery (Kora Para):</strong>
+                                        <p>Assisted local residents in relocating and accessing the Kali Temple on July 7, 2025.</p>
+                                    </li>
+                                </ul>
+
+                                <h3>Community & Social Support</h3>
+                                <ul class="project-list">
+                                    <li>
+                                        <strong>Self-Help Groups:</strong>
+                                        <p>Provided financial assistance to women\'s self-help groups on April 17, 2025, strengthening local livelihoods.</p>
+                                    </li>
+                                    <li>
+                                        <strong>Temple Facilities:</strong>
+                                        <p><strong>Loknath Temple</strong> (June 4, 2025): Arranged water and essential services for devotees during Baba Loknath Dev Puja.</p>
+                                    </li>
+                                </ul>
+
+                                <div class="highlights">
+                                    <h3>Highlights of Development</h3>
+                                    <ul>
+                                        <li>Strengthened connectivity in key areas through major road projects.</li>
+                                        <li>Supported local communities with financial aid and livelihood support.</li>
+                                        <li>Ensured religious and cultural events were smoothly conducted with proper facilities.</li>
+                                        <li>Improved infrastructure in Ward 86 through culvert repair and roadwork.</li>
+                                    </ul>
+                                </div>
+
+                                <style>
+                                    .development-updates {
+                                        font-family: Arial, sans-serif;
+                                        line-height: 1.6;
+                                    }
+                                    .development-updates h3 {
+                                        color: #2c5282;
+                                        margin: 1.5em 0 0.8em;
+                                        border-bottom: 2px solid #e2e8f0;
+                                        padding-bottom: 0.3em;
+                                    }
+                                    .project-list {
+                                        list-style-type: none;
+                                        padding-left: 1em;
+                                    }
+                                    .project-list li {
+                                        margin-bottom: 1.2em;
+                                        position: relative;
+                                        padding-left: 1.5em;
+                                    }
+                                    .project-list li:before {
+                                        content: "•";
+                                        color: #2c5282;
+                                        font-weight: bold;
+                                        position: absolute;
+                                        left: 0;
+                                    }
+                                    .highlights {
+                                        background-color: #f7fafc;
+                                        padding: 1.2em;
+                                        border-radius: 8px;
+                                        margin-top: 2em;
+                                        border-left: 4px solid #2c5282;
+                                    }
+                                    .highlights ul {
+                                        list-style-type: disc;
+                                        padding-left: 1.5em;
+                                    }
+                                    .highlights li {
+                                        margin-bottom: 0.5em;
+                                    }
+                                </style>
+                            </div>'
                     ],
                     'adda' => [
                         'title' => 'ADDA Activities',
