@@ -78,7 +78,8 @@ class HomeController extends Controller
                     'platform' => 'facebook'
                 ],
                 [
-                    'url' => 'https://www.facebook.com/share/v/17UZhdKuYx/?mibextid=wwXIfr',
+                    // Canonical video URL (embed-friendly) replacing share link
+                    'url' => 'https://www.facebook.com/sctelevisionnetwork/videos/1076661023943505/',
                     'platform' => 'facebook'
                 ],
                 

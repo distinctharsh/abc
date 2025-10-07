@@ -54,24 +54,51 @@
                                 <h6 class="mb-0 small">{{ ucfirst($post['platform']) }}</h6>
                             </div>
                             <div class="card-body p-0">
-                                <div style="height: 200px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #f8f9fa;">
+                                <div style="height: 500px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #f8f9fa;">
                                     @if($post['platform'] === 'facebook')
-                                        @if(str_contains($post['url'], 'videos/'))
+                                        @php
+                                            $url = $post['url'];
+                                            // Handle Facebook share video links e.g., /share/v/{id}
+                                            $isShareVideo = \Illuminate\Support\Str::contains($url, '/share/v/');
+                                            if ($isShareVideo) {
+                                                // try to convert to a watch URL which is embeddable
+                                                $parts = explode('/', trim(parse_url($url, PHP_URL_PATH), '/'));
+                                                $vIndex = array_search('v', $parts);
+                                                $shareId = $vIndex !== false && isset($parts[$vIndex + 1]) ? $parts[$vIndex + 1] : null;
+                                                if ($shareId) {
+                                                    $url = 'https://www.facebook.com/watch/?v=' . $shareId;
+                                                }
+                                            }
+                                            $isVideo = \Illuminate\Support\Str::contains($url, ['videos/', '/video.php', '/watch/?v=']);
+                                            $isPost  = \Illuminate\Support\Str::contains($url, ['/posts/', 'story_fbid=']);
+                                            $isPage  = !$isVideo && !$isPost; // profile/page link
+                                        @endphp
+                                        @if($isVideo)
                                             <iframe 
-                                                src="https://www.facebook.com/plugins/video.php?href={{ urlencode($post['url']) }}&show_text=0&width=300" 
-                                                style="border:none;overflow:hidden; width: 100%; height: 100%;" 
+                                                src="https://www.facebook.com/plugins/video.php?href={{ urlencode($url) }}&show_text=0&width=300&height=500" 
+                                                style="border:none;overflow:hidden; width: 100%; height: 500px;" 
+                                                scrolling="no" 
+                                                frameborder="0" 
+                                                allowfullscreen="true" 
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                            </iframe>
+                                        @elseif($isPost)
+                                            <iframe 
+                                                src="https://www.facebook.com/plugins/post.php?href={{ urlencode($url) }}&show_text=true&width=300&height=500" 
+                                                style="border:none;overflow:hidden; width: 100%; height: 500px;" 
                                                 scrolling="no" 
                                                 frameborder="0" 
                                                 allowfullscreen="true" 
                                                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
                                             </iframe>
                                         @else
-                                            <iframe 
-                                                src="https://www.facebook.com/plugins/post.php?href={{ urlencode($post['url']) }}&show_text=true&width=300" 
-                                                style="border:none;overflow:hidden; width: 100%; height: 100%;" 
-                                                scrolling="no" 
-                                                frameborder="0" 
-                                                allowfullscreen="true" 
+                                            <!-- Fallback to Page Plugin when a profile/page URL is provided -->
+                                            <iframe
+                                                src="https://www.facebook.com/plugins/page.php?href={{ urlencode($url) }}&tabs=timeline&width=300&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+                                                style="border:none;overflow:hidden; width: 100%; height: 500px;"
+                                                scrolling="no"
+                                                frameborder="0"
+                                                allowfullscreen="true"
                                                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
                                             </iframe>
                                         @endif
@@ -96,14 +123,33 @@
                                             </div>
                                         @endif
                                     @elseif($post['platform'] === 'instagram')
-                                        <iframe 
-                                            src="https://www.instagram.com/p/{{ last(explode('/', rtrim(parse_url($post['url'], PHP_URL_PATH), '/'))) }}/embed" 
-                                            style="border:none;overflow:hidden; width: 300px; height: 100%;" 
-                                            scrolling="no" 
-                                            frameborder="0" 
-                                            allowfullscreen="true" 
-                                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-                                        </iframe>
+                                        @php
+                                            $igUrl = $post['url'];
+                                            $path = parse_url($igUrl, PHP_URL_PATH) ?? '';
+                                            $isMedia = \Illuminate\Support\Str::contains($path, ['/p/', '/reel/', '/tv/']);
+                                        @endphp
+                                        @if($isMedia)
+                                            @php
+                                                $segments = array_values(array_filter(explode('/', trim($path, '/'))));
+                                                $mediaId = end($segments);
+                                            @endphp
+                                            <iframe 
+                                                src="https://www.instagram.com/p/{{ $mediaId }}/embed" 
+                                                style="border:none;overflow:hidden; width: 300px; height: 500px;" 
+                                                scrolling="no" 
+                                                frameborder="0" 
+                                                allowfullscreen="true" 
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                            </iframe>
+                                        @else
+                                            <div class="text-center p-4 w-100" style="height:460px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                                                <i class="fab fa-instagram fa-3x text-danger mb-3"></i>
+                                                <p class="mb-2">Profile embeds are not supported. Open the Instagram profile to view posts.</p>
+                                                <a href="{{ $igUrl }}" target="_blank" class="btn btn-sm btn-outline-danger">
+                                                    View Profile <i class="fas fa-external-link-alt ms-1"></i>
+                                                </a>
+                                            </div>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
@@ -168,7 +214,7 @@
         }
         .social-slide {
             flex: 0 0 300px;
-            height: 350px;
+            height: 620px; /* header (~60) + embed (500) + footer (~60) */
         }
         .social-slide .card {
             height: 100%;
