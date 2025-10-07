@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -8,6 +8,39 @@ use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+use Illuminate\Support\Facades\File;
+
+
+Route::get('/gallery', function (Request $request) {
+    $pressPath = public_path('images/gallery');
+    $items = [];
+
+    if (File::exists($pressPath)) {
+        $files = File::files($pressPath);
+        foreach ($files as $file) {
+            $items[] = [
+                'src'      => 'images/gallery/' . $file->getFilename(),
+                'title'    => pathinfo($file->getFilename(), PATHINFO_FILENAME),
+                'category' => 'gallery',
+                'date'     => date('Y-m-d', $file->getMTime()),
+            ];
+        }
+    }
+
+    // paginate so view->hasPages() works
+    $perPage = 12;
+    $page = LengthAwarePaginator::resolveCurrentPage();
+    $collection = collect($items);
+    $currentPageItems = $collection->slice(($page - 1) * $perPage, $perPage)->values();
+    $paginator = new LengthAwarePaginator($currentPageItems, $collection->count(), $perPage, $page, [
+        'path' => LengthAwarePaginator::resolveCurrentPath(),
+    ]);
+
+    return view('gallery', ['images' => $paginator]);
+})->name('gallery');
+
+
+
 Route::get('/press', function () {
     return view('press');
 })->name('press');

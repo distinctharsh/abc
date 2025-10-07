@@ -33,6 +33,7 @@
     @stack('styles')
 </head>
 <body class="font-sans antialiased">
+   
     <div id="app">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
