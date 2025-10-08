@@ -53,18 +53,22 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#about">
-                                <i class="fas fa-info-circle me-1"></i> About
+                            <a class="nav-link dropdown-toggle fade-in-up" href="#about" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="animation-delay: 0.3s;">
+                                About Us
                             </a>
+                            <ul class="dropdown-menu" aria-labelledby="aboutDropdown" style="display: none; position: absolute; top: 100%; left: 0; z-index: 9999; min-width: 200px; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: none; padding: 0.5rem; margin-top: 10px; transform: none !important;">
+                                <li><a class="dropdown-item" href="{{ route('gallery') }}"><i class="fas fa-images me-2"></i>Gallery</a></li>
+                                <li><a class="dropdown-item" href="{{ route('press') }}"><i class="fas fa-newspaper me-2"></i>Press & Media</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#services">
-                                <i class="fas fa-teeth me-1"></i> Services
+                                <i class="fas fa-teeth me-1"></i> Orodental
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#contact">
-                                <i class="fas fa-envelope me-1"></i> Contact
+                                <i class="fas fa-envelope me-1"></i> Dr. Sarkar Social
                             </a>
                         </li>
                     </ul>

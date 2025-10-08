@@ -66,4 +66,16 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
     ];
+    
+    
+    /**
+     * Legacy route middleware map for Laravel < 10 compatibility.
+     * If the framework ignores $middlewareAliases, this ensures
+     * aliases like 'admin' are still recognized.
+     *
+     * @var array<string, class-string|string>
+     */
+    protected $routeMiddleware = [
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+    ];
 }

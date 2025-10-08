@@ -30,14 +30,14 @@
     <section class="mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="h3 mb-0">Social Media Updates</h2>
-            <div>
+            <!-- <div>
                 <button class="btn btn-sm btn-outline-secondary me-2" id="prevBtn">
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 <button class="btn btn-sm btn-outline-secondary" id="nextBtn">
                     <i class="fas fa-chevron-right"></i>
                 </button>
-            </div>
+            </div> -->
         </div>
         
         <div class="position-relative">

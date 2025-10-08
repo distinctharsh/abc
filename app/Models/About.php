@@ -9,6 +9,7 @@ class About extends Model
     protected $fillable = [
         'title',
         'description',
+        'content',
         'image',
         'order',
         'is_active'

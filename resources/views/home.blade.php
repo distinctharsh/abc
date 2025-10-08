@@ -430,420 +430,6 @@ legend {
 }
         
     </style>
-    
-    <style>
-        /* Video Background Styles */
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .background-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            min-width: 100%;
-            min-height: 100%;
-        }
-
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                135deg, 
-                rgba(0, 0, 0, 0.6) 0%, 
-                rgba(0, 0, 0, 0.4) 50%, 
-                rgba(0, 0, 0, 0.7) 100%
-            );
-            z-index: 1;
-        }
-
-        .services-section {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .services-section .container {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Enhanced text readability over video */
-        .services-section .text-white {
-            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        /* Responsive video adjustments */
-        @media (max-width: 768px) {
-            .background-video {
-                object-position: center center;
-            }
-            
-            .services-section .text-white {
-                font-size: 2.5rem !important;
-                text-align: center;
-                padding: 0 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .services-section .text-white {
-                font-size: 2rem !important;
-            }
-        }
-
-        /* Video loading fallback */
-        .video-background::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            z-index: -1;
-        }
-
-        /* Smooth video transitions */
-        .background-video {
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .background-video.loaded {
-            opacity: 1;
-        }
-
-        .background-video:not(.loaded) {
-            opacity: 0;
-        }
-
-        /* News Ticker Styles */
-        .news-ticker-container {
-            background: linear-gradient(90deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            border-top: 2px solid rgba(0, 212, 255, 0.3);
-            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
-            overflow: hidden;
-            position: relative;
-            z-index: 10;
-        }
-
-        .news-ticker {
-            display: flex;
-            align-items: center;
-            padding: 27px 0;
-            background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), rgba(78, 205, 196, 0.1));
-            backdrop-filter: blur(10px);
-        }
-
-        .ticker-icon {
-            background: linear-gradient(45deg, #00d4ff, #4ecdc4);
-            color: #000;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-            margin-left: 20px;
-            flex-shrink: 0;
-            animation: pulse-glow 2s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { 
-                transform: scale(1); 
-                box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-            }
-            50% { 
-                transform: scale(1.1); 
-                box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
-            }
-        }
-
-        .ticker-content {
-            flex: 1;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .ticker-text {
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-            animation: ticker-scroll 60s linear infinite;
-            gap: 30px;
-        }
-
-        @keyframes ticker-scroll {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-
-        .ticker-item {
-            color: #ffffff;
-            font-weight: 500;
-            font-size: 1.2rem;
-            padding: 8px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .ticker-item:hover {
-            background: rgba(0, 212, 255, 0.2);
-            border-color: rgba(0, 212, 255, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
-        }
-
-        .ticker-separator {
-            color: #00d4ff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            animation: separator-pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes separator-pulse {
-            0%, 100% { opacity: 0.7; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* Pause animation on hover */
-        .news-ticker-container:hover .ticker-text {
-            animation-play-state: paused;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .ticker-icon {
-                width: 35px;
-                height: 35px;
-                margin-right: 15px;
-                margin-left: 15px;
-            }
-            
-            .ticker-item {
-                font-size: 0.85rem;
-                padding: 6px 12px;
-            }
-            
-            .ticker-text {
-                animation-duration: 45s;
-                gap: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .ticker-icon {
-                width: 30px;
-                height: 30px;
-                margin-right: 10px;
-                margin-left: 10px;
-            }
-            
-            .ticker-item {
-                font-size: 0.8rem;
-                padding: 5px 10px;
-            }
-            
-            .ticker-text {
-                animation-duration: 35s;
-                gap: 15px;
-            }
-        }
-
-        /* Enhanced visibility */
-        .news-ticker-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(0, 212, 255, 0.05) 20%, 
-                rgba(0, 212, 255, 0.05) 80%, 
-                transparent 100%
-            );
-            pointer-events: none;
-        }
-
-        /* Clickable Service Cards */
-        .clickable-service-card {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .clickable-service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .clickable-service-card:active {
-            transform: translateY(-2px);
-        }
-
-      /* ===== MODAL OVERLAY (full-screen) ===== */
-        /* Remove fullscreen background */
-        .service-popup-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0,0,0,0.55); /* sirf halka dark overlay */
-            backdrop-filter: blur(4px);
-        }
-
-        /* Card itself */
-        .service-popup-content {
-            /* width: min(600px, 92vw); */
-            width: min(300px, 32vw);
-            width: min(500px, 52vw);
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.08); /* transparent glass */
-            border: 1px solid rgba(255,255,255,0.18);
-            box-shadow: 0 12px 40px rgba(0,0,0,.5);
-            backdrop-filter: blur(16px) saturate(140%);
-            -webkit-backdrop-filter: blur(16px) saturate(140%);
-            color: #fff;
-            padding: 24px;
-            position: relative;
-            overflow: hidden;
-            /* background: linear-gradient(135deg, #00e0ff, #6b46c1); turquoise → purple */
-        }
-
-
-        /* Gradient Border Line */
-.service-popup-content::before {
-  content: "";
-  position: absolute;
-  inset: 0;                /* cover whole box */
-  border-radius: inherit;
-  padding: 2px;            /* border thickness */
-  background: linear-gradient(135deg, #00e0ff, #6b46c1); /* turquoise → purple */
-  
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  pointer-events: none;
-}
-
-        /* Close button */
-        .service-popup-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            border: none;
-            background: rgba(255,255,255,0.2);
-            color: #fff;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-        }
-        .service-popup-close:hover {
-            background: rgba(255,255,255,0.35);
-            transform: scale(1.05);
-        }
-
-        /* Title + subtitle */
-        .service-popup-title {
-            margin: 0;
-            font-size: 2rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .service-popup-subtitle {
-            margin: 6px 0 18px 0;
-            font-size: 1rem;
-            color: rgba(255,255,255,0.7);
-        }
-
-        /* Image in hexagon */
-        .service-popup-image img {
-            width: 160px;
-            height: 160px;
-            object-fit: cover;
-            clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
-            border: 2px solid rgba(255,255,255,0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            margin: 20px auto;
-            display: block;
-        }
-
-        /* Buttons */
-        .service-popup-actions {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .service-popup-btn {
-            padding: 10px 22px;
-            border-radius: 25px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .service-popup-btn.primary {
-            background: linear-gradient(45deg, #00e0ff, #37d7c7);
-            color: #000;
-        }
-        .service-popup-btn.secondary {
-            background: rgba(255,255,255,0.2);
-            color: #fff;
-        }
-        .service-popup-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-        }
-        
-fieldset {
-  border: 1px solid white;
-  color: white;
-  text-align: center;
-  width: 200px;
-}
-legend {
-  padding: 0 10px;
-}
-        
-    </style>
 </head>
 <body>
     <!-- Enhanced Responsive Navbar with 3D effects -->
@@ -871,7 +457,6 @@ legend {
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="aboutDropdown" style="display: none; position: absolute; top: 100%; left: 0; z-index: 9999; min-width: 200px; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: none; padding: 0.5rem; margin-top: 10px; transform: none !important;">
                             <li><a class="dropdown-item" href="{{ route('gallery') }}"><i class="fas fa-images me-2"></i>Gallery</a></li>
-                            <li><a class="dropdown-item" href="{{ route('gallery') }}"><i class="fas fa-images me-2"></i>Gallery</a></li>
                             <li><a class="dropdown-item" href="{{ route('press') }}"><i class="fas fa-newspaper me-2"></i>Press & Media</a></li>
                         </ul>
                     </li>
@@ -881,13 +466,7 @@ legend {
                     <li class="nav-item">
                         <a class="nav-link fade-in-up" href="#" style="animation-delay: 0.5s;">Dr. Sarkar Social</a>
                     </li>
-                    @auth
-                        <li class="nav-item">
-                            <a class="nav-link fade-in-up" href="{{ route('admin.abouts.index') }}" style="animation-delay: 0.6s;">
-                                <i class="fas fa-cog"></i> Admin
-                            </a>
-                        </li>
-                    @endauth
+                 
                 </ul>
                 
                 <!-- Enhanced Contact Button -->
@@ -903,7 +482,6 @@ legend {
         <div class="container-fluid hero-container">
             <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row">
                 <!-- Left Content -->
-                <div class="hero-content fade-in-up order-2 order-lg-1" style="animation-delay: 0.2s;">
                 <div class="hero-content fade-in-up order-2 order-lg-1" style="animation-delay: 0.2s;">
 
                <div class="health-box">
@@ -926,7 +504,6 @@ legend {
                 </div>
 
 
-
                     <div class="tagline">
                         Transforming Smiles <span class="star">★</span> Transforming Lives
                     </div>
@@ -937,14 +514,11 @@ legend {
                 
                     <button class="hero-btn" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">
                         <i class="fas fa-rocket me-2"></i>Book Appointment
-                    <button class="hero-btn" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">
-                        <i class="fas fa-rocket me-2"></i>Book Appointment
                     </button>
               
                 </div>
                 
                 <!-- Right Image with enhanced 3D effects -->
-                <div class="hero-image-container order-1 order-lg-2">
                 <div class="hero-image-container order-1 order-lg-2">
                     <div class="hero-image">
                         <div class="image-wrapper">
@@ -961,34 +535,6 @@ legend {
         </div>
     </section>
 
-
-     <!-- News Ticker Section -->
-     <div class="news-ticker-container">
-        <div class="news-ticker">
-            <div class="ticker-icon">
-                <i class="fas fa-broadcast-tower"></i>
-            </div>
-            <div class="ticker-content">
-                <div class="ticker-text">
-                    <span class="ticker-item">🏥 Orodental Hospital - First Dental Hospital in Burdwan District</span>
-                    <span class="ticker-separator">•</span>
-                    <span class="ticker-item">🦷 Dr. Sarkar treating 100+ patients daily with advanced dental care</span>
-                    <span class="ticker-separator">•</span>
-                    <span class="ticker-item">👨‍⚕️ 15+ years of excellence in dental surgery and prosthodontics</span>
-                    <span class="ticker-separator">•</span>
-                    <span class="ticker-item">🏛️ Ward 84 Councillor working for community development</span>
-                    <span class="ticker-separator">•</span>
-                    <span class="ticker-item">🌟 Transforming smiles, transforming lives in Asansol</span>
-                    <span class="ticker-separator">•</span>
-                    <span class="ticker-item">📱 Follow us on social media for latest updates and dental tips</span>
-                    <span class="ticker-separator">•</span>
-                    <span class="ticker-item">🎯 Specialized in dental implants, cosmetic dentistry & full mouth rehabilitation</span>
-                    <span class="ticker-separator">•</span>
-                    <span class="ticker-item">💙 Trusted by 1000+ happy patients</span>
-                </div>
-            </div>
-        </div>
-    </div>
 
      <!-- News Ticker Section -->
      <div class="news-ticker-container">
@@ -1067,17 +613,6 @@ legend {
         </div>
     </div>
 
-    <!-- Enhanced Services Section with video background -->
-    <section class="services-section" style="position: relative; overflow: hidden;" >
-        <!-- Video Background -->
-        <div class="video-background">
-            <video autoplay muted loop playsinline class="background-video">
-                <source src="{{ asset('images/video.mp4') }}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-overlay"></div>
-        </div>
-        
     <!-- Enhanced Services Section with video background -->
     <section class="services-section" style="position: relative; overflow: hidden;" >
         <!-- Video Background -->
@@ -1527,7 +1062,6 @@ legend {
     <div class="modal fade" id="doctorBioModal" tabindex="-1" aria-labelledby="doctorBioModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content doctor-bio-modal" style="margin-top: 70px;">
-            <div class="modal-content doctor-bio-modal" style="margin-top: 70px;">
                 <div class="modal-header">
                     <h5 class="modal-title" id="doctorBioModalLabel">About Dr. Sarkar</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1545,13 +1079,7 @@ legend {
                             <div class="mt-3">
                                 <h5 class="mb-1">Dr. Suvankar Sarkar</h5>
                                 <!-- <p class="text-muted mb-2">BDS, MDS (Prosthodontics)</p> -->
-                                <!-- <p class="text-muted mb-2">BDS, MDS (Prosthodontics)</p> -->
                                 <div class="social-links">
-                                    <a href="https://www.facebook.com/drdebashissarkar" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="https://x.com/drdebashis_2000" class="text-primary me-2"><i class="fab fa-twitter"></i></a>
-                                    <a href="https://www.youtube.com/@drdebashissarkartmc" class="text-info me-2"><i class="fab fa-youtube"></i></a>
-                                    <a href="https://www.instagram.com/sarkardr.debasish/" class="text-danger me-2"><i class="fab fa-instagram"></i></a>
-                                   
                                     <a href="https://www.facebook.com/drdebashissarkar" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
                                     <a href="https://x.com/drdebashis_2000" class="text-primary me-2"><i class="fab fa-twitter"></i></a>
                                     <a href="https://www.youtube.com/@drdebashissarkartmc" class="text-info me-2"><i class="fab fa-youtube"></i></a>
@@ -1562,19 +1090,6 @@ legend {
                         </div>
                         <div class="col-md-8">
                             <div class="bio-content">
-                                <h6 class="text-uppercase text-primary mb-3">Dr. Suvankar Sarkar</h6>
-                                <p>Dr. Debasish Sarkar is popularly known as Daktar Babu. He is currently serving as Borough Chairman-VI and Councillor of Ward No. 84 in Asansol Municipal Corporation. Recently, he became the Mayor’s Representative in ADDA (Asansol Durgapur Development Authority).
-<br>
-He fought for the first time in the Municipality Election (AITC ticket) and, for the first time in history, secured victory for Ward No. 84— a ward untouched by AITC since its inception in 1998.
-<br>
-Dr. Sarkar is very active in public activities, including political, administrative, and social work. As a renowned dentist, his Orodental Hospital initiative has outreach to over 6 lakh households.
-<br>
-Historic contribution includes initiating the naming of a road after Justice Radha Binod Paul, the first in West Bengal or any major metro city.
-<br>
-During his tenure, a total of ₹24.5 crore+ has been allocated for the development of eight wards, with 85% work sanctioned and ongoing, and 15% in DPR stage.
-</p>
-                                
-                                <!-- <h6 class="text-uppercase text-primary mt-4 mb-3">Education</h6>
                                 <h6 class="text-uppercase text-primary mb-3">Dr. Suvankar Sarkar</h6>
                                 <p>Dr. Debasish Sarkar is popularly known as Daktar Babu. He is currently serving as Borough Chairman-VI and Councillor of Ward No. 84 in Asansol Municipal Corporation. Recently, he became the Mayor’s Representative in ADDA (Asansol Durgapur Development Authority).
 <br>
@@ -1602,14 +1117,12 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
                                     <span class="badge bg-light text-dark">Teeth Whitening</span>
                                     <span class="badge bg-light text-dark">Veneers & Crowns</span>
                                 </div> -->
-                                </div> -->
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer border-0">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="#appointment" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Appointment</a>
                     <a href="#appointment" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Appointment</a>
                 </div>
             </div>
@@ -1905,10 +1418,7 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
 
     <section class="py-5 text-center" style="background: #f8fafc;">
         <div class="d-flex flex-wrap gap-3 justify-content-center">
-        <div class="d-flex flex-wrap gap-3 justify-content-center">
             <!-- Dr. Sarkar Official Button -->
-            <button type="button" class="btn popup-btn flex-fill flex-md-grow-0"
-                data-bs-toggle="modal" data-bs-target="#drSarkarModal">
             <button type="button" class="btn popup-btn flex-fill flex-md-grow-0"
                 data-bs-toggle="modal" data-bs-target="#drSarkarModal">
                 Dr. Sarkar Official
@@ -1920,7 +1430,6 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
                Campaign Highlights
             </button>
         </div>
-
 
         
         <!-- Dr. Sarkar Modal -->
@@ -1972,7 +1481,7 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
                         <div class="row g-4">
                             @foreach([
                                 ['key' => 'pase-achi', 'title' => 'Pase Achi Asansol', 'image' => 'asansol.png'],
-                                ['key' => 'puja-paxo', 'title' => 'Puja Paxo', 'image' => 'puja.jpg'],
+                                ['key' => 'pujo-pokkho', 'title' => 'Pujo Pokkho', 'image' => 'puja.jpg'],
                                 ['key' => 'make-asansol-greater', 'title' => 'Make Asansol Greater Again', 'image' => 'blank-cover.png'],
                                 ['key' => 'ek-daake-daktar', 'title' => 'Ek Daake Daktar', 'image' => 'blank-cover.png']
                             ] as $item)
@@ -2047,7 +1556,6 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
 <!-- Social Media Section -->
 <section class="social-media-section py-5 mb-5 relative overflow-hidden"
     style="position: relative;">
-    style="position: relative;">
     
     <div class="container relative z-10">
         <div class="row justify-content-center">
@@ -2062,14 +1570,12 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
                     
                     <!-- Facebook -->
                     <a href="https://www.facebook.com/drdebashissarkar" class="social-icon-link">
-                    <a href="https://www.facebook.com/drdebashissarkar" class="social-icon-link">
                         <div class="social-icon facebook">
                             <i class="fa-brands fa-facebook-f"></i>
                         </div>
                     </a>
 
                     <!-- Twitter -->
-                    <a href="https://x.com/drdebashis_2000" class="social-icon-link">
                     <a href="https://x.com/drdebashis_2000" class="social-icon-link">
                         <div class="social-icon twitter">
                             <i class="fa-brands fa-twitter"></i>
