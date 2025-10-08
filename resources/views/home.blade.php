@@ -845,6 +845,57 @@ legend {
 
 </style>
 
+<!-- Responsive overrides for Service Popup (dental/eye) -->
+<style>
+  /* Make popup content adapt to viewport and allow internal scrolling */
+  .service-popup-content {
+    width: min(560px, 92vw);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .service-popup-body {
+    overflow-y: auto;
+    max-height: 70vh;
+  }
+
+  /* Features: use grid and override inline flex */
+  .service-popup-features {
+    display: grid !important; /* override inline display:flex */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .service-popup-features ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .service-popup-features li {
+    line-height: 1.5;
+  }
+
+  /* Mobile tweaks */
+  @media (max-width: 576px) {
+    .service-popup-content {
+      width: 95vw;
+      padding: 16px;
+      border-radius: 14px;
+    }
+    .service-popup-body {
+      max-height: 65vh;
+    }
+    .service-popup-features {
+      grid-template-columns: 1fr; /* single column for long lists */
+      gap: 8px;
+    }
+    .service-popup-image img {
+      width: 120px;
+      height: 120px;
+    }
+  }
+</style>
+
             
             <!-- Enhanced Meet Our Doctors Section with staggered animations -->
             <div class="text-center pt-5">
