@@ -1666,62 +1666,33 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
   padding: 4rem 1rem;
   border-radius: 16px;
 }
-
 /* Heading & paragraph */
 .social-media-section h2 {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   letter-spacing: 1.2px;
   margin-bottom: 1rem;
 }
-
 .social-media-section p {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 600px;
   margin: 0 auto 3rem auto;
 }
 
+/* Ensure content sits above decorative shapes */
+.social-media-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Make entire icon area reliably tappable */
+.social-icon-link {
+  display: inline-block;
+}
+
 /* Social icons container */
 .social-icons-container {
   gap: 2rem;
 }
-
-/* Social icon wrapper */
-.social-icon {
-  width: 60px;
-  height: 60px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 28px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
-}
-
-/* Hover effects */
-.social-icon:hover {
-  background: white;
-  color: #764ba2;
-  transform: scale(1.15);
-  box-shadow: 0 6px 20px rgba(118, 75, 162, 0.6);
-}
-
-/* Specific brand colors on hover */
-.social-icon.facebook:hover {
-  color: #3b5998;
-}
-
-.social-icon.twitter:hover {
-  color: #1da1f2;
-}
-
-.social-icon.instagram:hover {
-  color: #e4405f;
-}
-
 .social-icon.youtube:hover {
   color: #ff0000;
 }
@@ -1732,14 +1703,14 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.3;
-  z-index: 1;
+  z-index: 0;            /* keep behind content */
+  pointer-events: none;   /* do not block clicks/taps */
 }
 
 .circle-shape {
   width: 300px;
   height: 300px;
   background: #764ba2;
-  top: -100px;
   left: -100px;
 }
 
