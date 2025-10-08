@@ -446,6 +446,97 @@
             @endforeach
         </div>
     </section>
+
+    <!-- Press Coverage Section -->
+    @if(!empty($pressItems ?? []))
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h3 mb-0">Press Coverage</h2>
+        </div>
+
+        <div class="row g-4">
+            @foreach($pressItems as $press)
+                @php
+                    $type = strtolower($press['type'] ?? 'website');
+                    $url  = $press['url'] ?? '';
+                    $title = $press['title'] ?? null;
+                    $domain = parse_url($url, PHP_URL_HOST) ?: $url;
+                @endphp
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-header bg-white d-flex align-items-center">
+                            @if($type === 'youtube')
+                                <i class="fab fa-youtube fa-lg me-2 text-danger"></i>
+                                <h6 class="mb-0 small">YouTube</h6>
+                            @elseif($type === 'facebook')
+                                <i class="fab fa-facebook fa-lg me-2 text-primary"></i>
+                                <h6 class="mb-0 small">Facebook</h6>
+                            @else
+                                <i class="fas fa-newspaper fa-lg me-2 text-secondary"></i>
+                                <h6 class="mb-0 small">Website</h6>
+                            @endif
+                        </div>
+                        <div class="card-body p-0">
+                            <div style="height: 260px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #f8f9fa;">
+                                @if($type === 'youtube')
+                                    @php
+                                        $ytId = '';
+                                        $parts = parse_url($url);
+                                        $path = $parts['path'] ?? '';
+                                        parse_str($parts['query'] ?? '', $q);
+                                        if (!empty($q['v'])) { $ytId = $q['v']; }
+                                        elseif (preg_match('#^/(?:embed/|shorts/|watch/|live/)?([A-Za-z0-9_-]{6,})#', $path, $m)) { $ytId = $m[1]; }
+                                    @endphp
+                                    @if($ytId)
+                                        <div class="ratio ratio-16x9 w-100">
+                                            <iframe src="https://www.youtube.com/embed/{{ $ytId }}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        </div>
+                                    @else
+                                        <div class="text-center p-4">
+                                            <i class="fab fa-youtube fa-3x text-danger mb-2"></i>
+                                            <p class="mb-0">Unable to preview this YouTube link</p>
+                                        </div>
+                                    @endif
+                                @elseif($type === 'facebook')
+                                    @php
+                                        $fbUrl = $url;
+                                        $isShareVideo = \Illuminate\Support\Str::contains($fbUrl, '/share/v/');
+                                        if ($isShareVideo) {
+                                            $pathParts = explode('/', trim(parse_url($fbUrl, PHP_URL_PATH), '/'));
+                                            $vIndex = array_search('v', $pathParts);
+                                            $shareId = $vIndex !== false && isset($pathParts[$vIndex + 1]) ? $pathParts[$vIndex + 1] : null;
+                                            if ($shareId) { $fbUrl = 'https://www.facebook.com/watch/?v=' . $shareId; }
+                                        }
+                                        $isVideo = \Illuminate\Support\Str::contains($fbUrl, ['videos/', '/video.php', '/watch/?v=']);
+                                        $isPost  = \Illuminate\Support\Str::contains($fbUrl, ['/posts/', 'story_fbid=']);
+                                        $isPage  = !$isVideo && !$isPost;
+                                    @endphp
+                                    @if($isVideo)
+                                        <iframe src="https://www.facebook.com/plugins/video.php?href={{ urlencode($fbUrl) }}&show_text=0&width=300&height=260" style="border:none;overflow:hidden; width: 100%; height: 260px;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                    @elseif($isPost)
+                                        <iframe src="https://www.facebook.com/plugins/post.php?href={{ urlencode($fbUrl) }}&show_text=true&width=300&height=260" style="border:none;overflow:hidden; width: 100%; height: 260px;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                    @else
+                                        <iframe src="https://www.facebook.com/plugins/page.php?href={{ urlencode($fbUrl) }}&tabs=timeline&width=300&height=260&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" style="border:none;overflow:hidden; width: 100%; height: 260px;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                    @endif
+                                @else
+                                    <iframe src="{{ $url }}" style="border:0; width: 100%; height: 260px; background:#fff;" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <div class="small text-muted text-truncate">{{ $title ?? $domain }}</div>
+                            <a href="{{ $url }}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary w-100 mt-2">
+                                Read Full <i class="fas fa-external-link-alt ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </section>
+    @endif
+
 </div>
 
 <style>

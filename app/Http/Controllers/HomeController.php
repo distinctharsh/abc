@@ -97,7 +97,26 @@ class HomeController extends Controller
                 ['id' => 'oUoxM7nLrUk', 'title' => 'Our neighborhood, our solution.', 'url' => 'https://www.youtube.com/watch?v=oUoxM7nLrUk'],
             ];
 
-            return view('about.detail', compact('about', 'socialMediaPosts', 'videos'));
+            // Press items: websites, YouTube, Facebook (will render if provided)
+            $pressItems = [
+                [
+                    'type' => 'website',
+                    'url'  => 'https://sanmarg.in/asansol/dr-debashish-sarkar-and-manas-das-will-serve-as-mayors-representatives-at-the-adda',
+                    'title'=> 'Sanmarg: Mayor’s representatives at ADDA',
+                ],
+                [
+                    'type' => 'youtube',
+                    'url'  => 'https://www.youtube.com/watch?v=IaiwtFOmC04',
+                    'title'=> 'Interview/Highlight on YouTube',
+                ],
+                [
+                    'type' => 'facebook',
+                    'url'  => 'https://www.facebook.com/drdebashissarkar',
+                    'title'=> 'Facebook Page Updates',
+                ],
+            ];
+
+            return view('about.detail', compact('about', 'socialMediaPosts', 'videos', 'pressItems'));
         }
 
         // For other about items, just show a simple page with title and description
