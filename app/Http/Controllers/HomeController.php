@@ -77,17 +77,13 @@ class HomeController extends Controller
                     'url' => 'https://www.facebook.com/drdebashissarkar?mibextid=ZbWKwL',
                     'platform' => 'facebook'
                 ],
-                [
-                    'url' => 'https://www.facebook.com/share/v/17UZhdKuYx/?mibextid=wwXIfr',
-                    'platform' => 'facebook'
-                ],
                 
                 // [
                 //     'url' => 'https://x.com/MrSinha_/status/1956680640515981546/photo/1',
                 //     'platform' => 'twitter'
                 // ],
                 [
-                    'url' => 'https://www.instagram.com/sarkardr.debasish',
+                    'url' => 'https://www.instagram.com/p/DNr7AKM4kSR/',
                     'platform' => 'instagram'
                 ]
             ];
