@@ -160,6 +160,10 @@ class HomeController extends Controller
                     'url' => 'https://www.facebook.com/drdebashissarkar?mibextid=ZbWKwL',
                     'platform' => 'facebook'
                 ],
+                [
+                    'url' => 'https://www.youtube.com/@drdebashissarkartmc/',
+                    'platform' => 'youtube'
+                ],
                 
                 // [
                 //     'url' => 'https://x.com/MrSinha_/status/1956680640515981546/photo/1',
@@ -170,6 +174,56 @@ class HomeController extends Controller
                     'platform' => 'instagram'
                 ]
             ];
+            // Enrich YouTube entries to make them embeddable (video or uploads playlist)
+            $socialMediaPosts = array_map(function ($item) {
+                if (($item['platform'] ?? '') !== 'youtube') return $item;
+                $url = $item['url'] ?? '';
+                if (!$url) return $item;
+
+                $parts = parse_url($url);
+                $path  = $parts['path'] ?? '';
+                parse_str($parts['query'] ?? '', $q);
+
+                // Direct video links
+                if (!empty($q['v'])) {
+                    $item['yt'] = ['type' => 'video', 'id' => $q['v']];
+                    return $item;
+                }
+                if (preg_match('#^/(?:embed/|shorts/|watch/|live/)?([A-Za-z0-9_-]{6,})#', $path, $m)) {
+                    $item['yt'] = ['type' => 'video', 'id' => $m[1]];
+                    return $item;
+                }
+
+                // Resolve channel -> uploads playlist
+                $channelId = null;
+                if (preg_match('#/channel/(UC[\w-]+)#', $path, $m2)) {
+                    $channelId = $m2[1];
+                } else {
+                    try {
+                        $resp = Http::timeout(5)->withHeaders([
+                            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+                            'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                        ])->get($url);
+                        if ($resp->ok()) {
+                            $html = $resp->body();
+                            if (preg_match('#"channelId"\s*:\s*"(UC[\w-]+)"#', $html, $mm)) {
+                                $channelId = $mm[1];
+                            } elseif (preg_match('#"externalId"\s*:\s*"(UC[\w-]+)"#', $html, $mm2)) {
+                                $channelId = $mm2[1];
+                            }
+                        }
+                    } catch (\Throwable $e) {
+                        // ignore failures
+                    }
+                }
+
+                if ($channelId) {
+                    $uploadsPlaylist = 'UU' . substr($channelId, 2); // UC... -> UU...
+                    $item['yt'] = ['type' => 'playlist', 'playlistId' => $uploadsPlaylist];
+                }
+
+                return $item;
+            }, $socialMediaPosts);
             
             // Debug: Check if data is being passed correctly
             // dd($socialMediaPosts);

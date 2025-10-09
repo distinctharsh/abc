@@ -150,6 +150,58 @@
                                                 </a>
                                             </div>
                                         @endif
+                                    @elseif($post['platform'] === 'youtube')
+                                        @php
+                                            $ytUrl = $post['url'];
+                                            $yt = $post['yt'] ?? null; // ['type' => 'playlist'|'video', 'playlistId'| 'id']
+                                        @endphp
+                                        @if($yt && ($yt['type'] ?? '') === 'playlist' && !empty($yt['playlistId'] ?? ''))
+                                            <div class="ratio ratio-16x9 w-100" style="max-width:480px;">
+                                                <iframe 
+                                                    src="https://www.youtube.com/embed/videoseries?list={{ $yt['playlistId'] }}" 
+                                                    title="YouTube playlist" 
+                                                    frameborder="0" 
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                                    allowfullscreen></iframe>
+                                            </div>
+                                        @elseif($yt && ($yt['type'] ?? '') === 'video' && !empty($yt['id'] ?? ''))
+                                            <div class="ratio ratio-16x9 w-100" style="max-width:480px;">
+                                                <iframe 
+                                                    src="https://www.youtube.com/embed/{{ $yt['id'] }}" 
+                                                    title="YouTube video" 
+                                                    frameborder="0" 
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                                    allowfullscreen></iframe>
+                                            </div>
+                                        @else
+                                            @php
+                                                // Fallback: parse URL for video id; if not found treat as channel
+                                                $ytParts = parse_url($ytUrl);
+                                                $ytPath = $ytParts['path'] ?? '';
+                                                parse_str($ytParts['query'] ?? '', $ytQ);
+                                                $ytId = '';
+                                                if (!empty($ytQ['v'])) { $ytId = $ytQ['v']; }
+                                                elseif (preg_match('#^/(?:embed/|shorts/|watch/|live/)?([A-Za-z0-9_-]{6,})#', $ytPath, $m)) { $ytId = $m[1]; }
+                                            @endphp
+                                            @if($ytId)
+                                                <div class="ratio ratio-16x9 w-100" style="max-width:480px;">
+                                                    <iframe 
+                                                        src="https://www.youtube.com/embed/{{ $ytId }}" 
+                                                        title="YouTube video" 
+                                                        frameborder="0" 
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                                        allowfullscreen></iframe>
+                                                </div>
+                                            @else
+                                                <div class="text-center p-4 w-100" style="height:460px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                                                    <i class="fab fa-youtube fa-3x text-danger mb-3"></i>
+                                                    <p class="mb-2">YouTube channel preview is not embeddable here.</p>
+                                                    <a href="{{ $ytUrl }}" target="_blank" class="btn btn-sm btn-outline-danger">
+                                                        View Channel <i class="fas fa-external-link-alt ms-1"></i>
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        @endif
                                     @endif
                                 </div>
                             </div>
