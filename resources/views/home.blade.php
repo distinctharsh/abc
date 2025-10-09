@@ -323,7 +323,7 @@
             padding: 24px;
             position: relative;
             overflow: hidden;
-            /* background: linear-gradient(135deg, #00e0ff, #6b46c1); turquoise → purple */
+            /* background: linear-gradient(135deg, #00e0ff, #6b46c1); turquoise â†’ purple */
         }
 
 
@@ -334,7 +334,7 @@
   inset: 0;                /* cover whole box */
   border-radius: inherit;
   padding: 2px;            /* border thickness */
-  background: linear-gradient(135deg, #00e0ff, #6b46c1); /* turquoise → purple */
+  background: linear-gradient(135deg, #00e0ff, #6b46c1); /* turquoise â†’ purple */
   
   -webkit-mask: 
     linear-gradient(#fff 0 0) content-box, 
@@ -461,10 +461,10 @@ legend {
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fade-in-up" href="#" style="animation-delay: 0.4s;">Orodental</a>
+                        <a class="nav-link fade-in-up" href="/about/1" style="animation-delay: 0.4s;">Orodental</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fade-in-up" href="#" style="animation-delay: 0.5s;">Dr. Sarkar Social</a>
+                        <a class="nav-link fade-in-up" href="/about/3" style="animation-delay: 0.5s;">Dr. Sarkar Social</a>
                     </li>
                  
                 </ul>
@@ -505,11 +505,11 @@ legend {
 
 
                     <div class="tagline">
-                        Transforming Smiles <span class="star">★</span> Transforming Lives
+                        Transforming Smiles <span class="star">â˜…</span> Transforming Lives
                     </div>
                   
                     <p class="hero-description">
-                        A trusted dental surgeon and dedicated social contributor, bringing advanced healthcare and meaningful community development to the people of Asansol.
+                        A trusted dental surgeon and dedicated social contributor, bringing advanced healthcare and meaningful community development to the peopleÂ ofÂ Asansol.
                     </p>
                 
                     <button class="hero-btn" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">
@@ -544,7 +544,9 @@ legend {
             </div>
             <div class="ticker-content">
                 <div class="ticker-text">
-                    <span class="ticker-item">🏥 Orodental Hospital - First Dental Hospital in Burdwan District</span>
+                     <a href="https://www.youtube.com/@drdebashissarkartmc" class="ticker-item">🏥 https://www.youtube.com/@drdebashissarkartmc</a>
+                    <span class="ticker-separator">•</span>
+                     <span class="ticker-item">🏥 Orodental Hospital - First Dental Hospital in Burdwan District</span>
                     <span class="ticker-separator">•</span>
                     <span class="ticker-item">🦷 Dr. Sarkar treating 100+ patients daily with advanced dental care</span>
                     <span class="ticker-separator">•</span>
@@ -577,7 +579,11 @@ legend {
             <div class="row g-4">
                 @foreach($abouts as $index => $about)
                 <div class="col-lg-4 col-md-6 fade-in-up" data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}" style="animation-delay: {{ 0.2 + ($index * 0.1) }}s;">
-                    <a href="{{ route('about.show', $about) }}" class="text-decoration-none text-dark">
+    @if(isset($about->id) && (int)$about->id === 2)
+        <a href="#" class="text-decoration-none text-dark" role="button" data-bs-toggle="modal" data-bs-target="#drSarkarModal">
+    @else
+        <a href="{{ route('about.show', $about) }}" class="text-decoration-none text-dark">
+    @endif
                         <div class="project-card card h-100 border-0 shadow-sm overflow-hidden">
                             <div class="position-relative overflow-hidden">
                                 <img src="{{ asset($about->image) }}" class="card-img-top project-image" alt="{{ $about->title }}" style="width: 100%; height: 200px; object-fit: cover;">
@@ -914,8 +920,8 @@ legend {
                                 </div>
                                 <div class="flip-back">
                                   <h5>Dr. Debasish Sarkar</h5>
-<p>● Education: Qualified Dental Surgeon with BDS degree.</p>
-<p>● Experience: Extensive dental practice and management of Orodental Hospitals Pvt Ltd serving 6 lakh households.</p>
+<p>â— Education: Qualified Dental Surgeon with BDS degree.</p>
+<p>â— Experience: Extensive dental practice and management of Orodental Hospitals Pvt Ltd serving 6 lakh households.</p>
 
                                 </div>
                             </div>
@@ -936,8 +942,8 @@ legend {
                                 </div>
                                 <div class="flip-back">
                                     <h5>Dr. Subhasis Sarkar</h5>
-                                    <p>●	Education: BDS & PG from Buddha Institute of Dental Sciences & Hospital.</p>
-                                    <p>●	Experience: Actively engaged in dental practice and associated with Orodental Hospital (P) Ltd.</p>
+                                    <p>â—	Education: BDS & PG from Buddha Institute of Dental Sciences & Hospital.</p>
+                                    <p>â—	Experience: Actively engaged in dental practice and associated with Orodental Hospital (P) Ltd.</p>
                                    
                                 </div>
                             </div>
@@ -959,9 +965,9 @@ legend {
                                 </div>
                                <div class="flip-back">
                                     <h5>Dr. Banasri Sarkar</h5>
-                                    <p>●	Education: MBBS, MS, DO from Burdwan Medical College; completed further DO from B.N. Mandal University, Kishanganj.</p>
-                                    <p>●	Experience: Worked at Burdwan Medical College and R.G. Kar Medical College.</p>
-                                    <p>●	Current Role: Associate Professor, Burdwan Medical College; also attending several eye hospitals.</p>
+                                    <p>â—	Education: MBBS, MS, DO from Burdwan Medical College; completed further DO from B.N. Mandal University, Kishanganj.</p>
+                                    <p>â—	Experience: Worked at Burdwan Medical College and R.G. Kar Medical College.</p>
+                                    <p>â—	Current Role: Associate Professor, Burdwan Medical College; also attending several eye hospitals.</p>
                                   
                                 </div>
                             </div>
@@ -981,9 +987,9 @@ legend {
                                 </div>
                                              <div class="flip-back">
                                     <h5>Dr. Sarmishtha Sarkar</h5>
-                                    <p>●	Education: MBBS, DGO (CH), graduated from R.G. Kar Medical College</p>
-                                    <p>●	Experience: Worked with several reputed hospitals in Kolkata. After marriage, relocated to Asansol.</p>
-                                    <p>●	Current Role: Attached with ESI Hospital, Asansol</p>
+                                    <p>â—	Education: MBBS, DGO (CH), graduated from R.G. Kar Medical College</p>
+                                    <p>â—	Experience: Worked with several reputed hospitals in Kolkata. After marriage, relocated to Asansol.</p>
+                                    <p>â—	Current Role: Attached with ESI Hospital, Asansol</p>
                                    
                                 </div>
                             </div>
@@ -1142,15 +1148,15 @@ legend {
                         <div class="col-md-8">
                             <div class="bio-content">
                                 <h6 class="text-uppercase text-primary mb-3">Dr. Suvankar Sarkar</h6>
-                                <p>Dr. Debasish Sarkar is popularly known as Daktar Babu. He is currently serving as Borough Chairman-VI and Councillor of Ward No. 84 in Asansol Municipal Corporation. Recently, he became the Mayor’s Representative in ADDA (Asansol Durgapur Development Authority).
+                                <p>Dr. Debasish Sarkar is popularly known as Daktar Babu. He is currently serving as Borough Chairman-VI and Councillor of Ward No. 84 in Asansol Municipal Corporation. Recently, he became the Mayorâ€™s Representative in ADDA (Asansol Durgapur Development Authority).
 <br>
-He fought for the first time in the Municipality Election (AITC ticket) and, for the first time in history, secured victory for Ward No. 84— a ward untouched by AITC since its inception in 1998.
+He fought for the first time in the Municipality Election (AITC ticket) and, for the first time in history, secured victory for Ward No. 84â€” a ward untouched by AITC since its inception in 1998.
 <br>
 Dr. Sarkar is very active in public activities, including political, administrative, and social work. As a renowned dentist, his Orodental Hospital initiative has outreach to over 6 lakh households.
 <br>
 Historic contribution includes initiating the naming of a road after Justice Radha Binod Paul, the first in West Bengal or any major metro city.
 <br>
-During his tenure, a total of ₹24.5 crore+ has been allocated for the development of eight wards, with 85% work sanctioned and ongoing, and 15% in DPR stage.
+During his tenure, a total of â‚¹24.5 crore+ has been allocated for the development of eight wards, with 85% work sanctioned and ongoing, and 15% in DPR stage.
 </p>
                                 
                                 <!-- <h6 class="text-uppercase text-primary mt-4 mb-3">Education</h6>
@@ -1183,7 +1189,7 @@ During his tenure, a total of ₹24.5 crore+ has been allocated for the developm
     <!-- Info Drawer (shared) -->
     <div id="infoOverlay" class="info-overlay" aria-hidden="true"></div>
     <aside id="infoPanel" class="info-panel" role="dialog" aria-modal="true" aria-labelledby="infoTitle" aria-hidden="true">
-        <button type="button" class="info-close" id="infoClose" aria-label="Close">×</button>
+        <button type="button" class="info-close" id="infoClose" aria-label="Close">Ã—</button>
         <div class="info-content">
             <div class="d-flex align-items-center gap-3 mb-3">
                 <img id="infoImage" src="" alt="" style="width:64px; height:64px; border-radius:12px; object-fit:cover; background:#ffffff33;">

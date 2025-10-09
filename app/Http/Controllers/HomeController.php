@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\YoutubeHighlight;
 use App\Models\About;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -63,6 +64,88 @@ class HomeController extends Controller
 
         return view('home', compact('projects', 'testimonials', 'abouts', 'highlights'));
     }
+    
+    
+     /**
+     * Fetch Open Graph/Twitter Card metadata for a URL to build a preview card.
+     * Returns ['title' => ..., 'description' => ..., 'image' => ...]
+     */
+    private function fetchLinkPreview(string $url): array
+    {
+        try {
+            $resp = Http::timeout(5)
+                ->withHeaders([
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                ])
+                ->get($url);
+            if (!$resp->ok()) return [];
+            $html = $resp->body();
+
+            libxml_use_internal_errors(true);
+            $doc = new \DOMDocument();
+            // Suppress warnings for malformed HTML
+            $doc->loadHTML('<?xml encoding="utf-8" ?>' . $html);
+            libxml_clear_errors();
+
+            $xpath = new \DOMXPath($doc);
+            $getMeta = function(array $names) use ($xpath) {
+                foreach ($names as $name) {
+                    // Try og: first
+                    $nodes = $xpath->query("//meta[@property='".$name."']");
+                    if ($nodes && $nodes->length > 0) {
+                        return trim((string)$nodes->item(0)->getAttribute('content'));
+                    }
+                    // Fallback to name attribute
+                    $nodes = $xpath->query("//meta[@name='".$name."']");
+                    if ($nodes && $nodes->length > 0) {
+                        return trim((string)$nodes->item(0)->getAttribute('content'));
+                    }
+                }
+                return '';
+            };
+
+            $title = $getMeta(['og:title','twitter:title']);
+            if ($title === '') {
+                $titleNodes = $xpath->query('//title');
+                if ($titleNodes && $titleNodes->length > 0) {
+                    $title = trim($titleNodes->item(0)->textContent);
+                }
+            }
+            $description = $getMeta(['og:description','twitter:description','description']);
+            $image = $getMeta(['og:image','twitter:image']);
+
+            // Resolve relative image URLs to absolute
+            if ($image !== '') {
+                $u = parse_url($url);
+                $scheme = $u['scheme'] ?? 'https';
+                $host   = $u['host'] ?? '';
+                if (strpos($image, '//') === 0) {
+                    $image = $scheme . ':' . $image;
+                } elseif (strpos($image, 'http://') !== 0 && strpos($image, 'https://') !== 0 && strpos($image, 'data:') !== 0) {
+                    $base = $scheme . '://' . $host;
+                    if (isset($u['path']) && substr($image, 0, 1) !== '/') {
+                        // If relative to path, trim filename from path
+                        $dir = rtrim(substr($u['path'], 0, strrpos($u['path'] . '/', '/')), '/');
+                        $base .= $dir ? $dir : '';
+                    }
+                    $image = rtrim($base, '/') . '/' . ltrim($image, '/');
+                }
+            }
+
+            // Trim overly long fields
+            if ($title !== '' && strlen($title) > 160) $title = substr($title, 0, 157) . '...';
+            if ($description !== '' && strlen($description) > 300) $description = substr($description, 0, 297) . '...';
+
+            return array_filter([
+                'title' => $title,
+                'description' => $description,
+                'image' => $image,
+            ], function($v) { return $v !== '' && $v !== null; });
+        } catch (\Throwable $e) {
+            return [];
+        }
+    }
 
     public function showAbout(About $about)
     {
@@ -106,9 +189,21 @@ class HomeController extends Controller
                 ],
                 [
                     'type' => 'youtube',
-                    'url'  => 'https://www.youtube.com/watch?v=IaiwtFOmC04',
+                    'url'  => 'https://youtube.com/shorts/KM8zf4hOuyc?si=1gfiaFetQl4h_8oD',
                     'title'=> 'Interview/Highlight on YouTube',
                 ],
+                [
+                    'type' => 'youtube',
+                    'url'  => 'https://youtube.com/shorts/UQko1u20Xss?si=BXjUsD-BgSIYlzVU',
+                    'title'=> 'Interview/Highlight on YouTube',
+                ],
+                [
+                    'type' => 'youtube',
+                    'url'  => 'https://youtu.be/evVvgDe0PZ0?si=ZaLTgulNFkygFsOY',
+                    'title'=> 'Interview/Highlight on YouTube',
+                ],
+             
+               
                 [
                     'type' => 'facebook',
                     'url'  => 'https://www.facebook.com/drdebashissarkar',
@@ -116,6 +211,20 @@ class HomeController extends Controller
                 ],
             ];
 
+
+                // Enrich website items with Open Graph metadata for preview
+            $pressItems = array_map(function ($item) {
+                if (($item['type'] ?? 'website') === 'website' && !empty($item['url'])) {
+                    $meta = $this->fetchLinkPreview($item['url']);
+                    if (!empty($meta)) {
+                        $item['meta'] = $meta; // ['title','description','image']
+                    }
+                }
+                return $item;
+            }, $pressItems);
+            
+            
+            
             return view('about.detail', compact('about', 'socialMediaPosts', 'videos', 'pressItems'));
         }
 

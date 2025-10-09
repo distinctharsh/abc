@@ -520,7 +520,61 @@
                                         <iframe src="https://www.facebook.com/plugins/page.php?href={{ urlencode($fbUrl) }}&tabs=timeline&width=300&height=260&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" style="border:none;overflow:hidden; width: 100%; height: 260px;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                                     @endif
                                 @else
-                                    <iframe src="{{ $url }}" style="border:0; width: 100%; height: 260px; background:#fff;" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+                                    @php
+                                        $meta = $press['meta'] ?? [];
+                                        $previewTitle = $title ?? ($meta['title'] ?? $domain);
+                                        $previewDesc  = $meta['description'] ?? null;
+                                        $previewImg   = $meta['image'] ?? null;
+                                        $host = parse_url($url, PHP_URL_HOST) ?: $domain;
+                                        $favicon = 'https://www.google.com/s2/favicons?domain=' . $host . '&sz=64';
+                                    @endphp
+                                    @if($previewTitle || $previewImg)
+                                        <div class="w-100 h-100 d-flex align-items-stretch">
+                                            <div class="w-100 d-flex flex-column" style="overflow:hidden;">
+                                                @if($previewImg)
+                                                    <div class="position-relative w-100">
+                                                        <div class="ratio ratio-16x9 w-100">
+                                                            <img src="{{ $previewImg }}" alt="{{ $previewTitle }}" style="object-fit: cover; width:100%; height:100%;"
+                                                                 onerror="this.closest('.ratio').classList.add('d-none'); this.closest('.position-relative').querySelector('.press-fallback').classList.remove('d-none');">
+                                                        </div>
+                                                        <div class="press-fallback d-none d-flex align-items-center justify-content-center bg-light" style="height: 160px;">
+                                                            <img src="{{ $favicon }}" alt="favicon" class="me-2" width="32" height="32">
+                                                            <span class="text-muted small">{{ $host }}</span>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="d-flex align-items-center justify-content-center bg-light" style="height: 160px;">
+                                                        <img src="{{ $favicon }}" alt="favicon" class="me-2" width="32" height="32">
+                                                        <span class="text-muted small">{{ $host }}</span>
+                                                    </div>
+                                                @endif
+                                                <div class="p-3" style="min-height: 100px;">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <img src="{{ $favicon }}" alt="favicon" class="me-2" width="16" height="16">
+                                                        <span class="small text-muted">{{ $host }}</span>
+                                                    </div>
+                                                    <div class="fw-semibold text-truncate" title="{{ $previewTitle }}">{{ $previewTitle }}</div>
+                                                    @if($previewDesc)
+                                                        <div class="text-muted small mt-1" style="display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">
+                                                            {{ $previewDesc }}
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="p-3 w-100">
+                                            <a class="microlink" href="{{ $url }}" data-size="large"></a>
+                                        </div>
+                                        @push('scripts')
+                                            <script src="https://cdn.jsdelivr.net/npm/microlinkjs@latest/dist/microlink.min.js"></script>
+                                            <script>
+                                                document.addEventListener('DOMContentLoaded', function(){
+                                                    if (window.microlink) window.microlink('.microlink');
+                                                });
+                                            </script>
+                                        @endpush
+                                    @endif
                                 @endif
                             </div>
                         </div>
