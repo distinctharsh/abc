@@ -34,6 +34,7 @@ class AboutController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'content' => 'nullable|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'order' => 'required|integer|min:0',
             'is_active' => 'boolean',
@@ -75,6 +76,7 @@ class AboutController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'content' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'order' => 'required|integer|min:0',
             'is_active' => 'boolean',
@@ -113,3 +115,4 @@ class AboutController extends Controller
             ->with('success', 'About section deleted successfully');
     }
 }
+

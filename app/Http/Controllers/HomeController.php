@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\YoutubeHighlight;
 use App\Models\About;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -63,6 +64,88 @@ class HomeController extends Controller
 
         return view('home', compact('projects', 'testimonials', 'abouts', 'highlights'));
     }
+    
+    
+     /**
+     * Fetch Open Graph/Twitter Card metadata for a URL to build a preview card.
+     * Returns ['title' => ..., 'description' => ..., 'image' => ...]
+     */
+    private function fetchLinkPreview(string $url): array
+    {
+        try {
+            $resp = Http::timeout(5)
+                ->withHeaders([
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                ])
+                ->get($url);
+            if (!$resp->ok()) return [];
+            $html = $resp->body();
+
+            libxml_use_internal_errors(true);
+            $doc = new \DOMDocument();
+            // Suppress warnings for malformed HTML
+            $doc->loadHTML('<?xml encoding="utf-8" ?>' . $html);
+            libxml_clear_errors();
+
+            $xpath = new \DOMXPath($doc);
+            $getMeta = function(array $names) use ($xpath) {
+                foreach ($names as $name) {
+                    // Try og: first
+                    $nodes = $xpath->query("//meta[@property='".$name."']");
+                    if ($nodes && $nodes->length > 0) {
+                        return trim((string)$nodes->item(0)->getAttribute('content'));
+                    }
+                    // Fallback to name attribute
+                    $nodes = $xpath->query("//meta[@name='".$name."']");
+                    if ($nodes && $nodes->length > 0) {
+                        return trim((string)$nodes->item(0)->getAttribute('content'));
+                    }
+                }
+                return '';
+            };
+
+            $title = $getMeta(['og:title','twitter:title']);
+            if ($title === '') {
+                $titleNodes = $xpath->query('//title');
+                if ($titleNodes && $titleNodes->length > 0) {
+                    $title = trim($titleNodes->item(0)->textContent);
+                }
+            }
+            $description = $getMeta(['og:description','twitter:description','description']);
+            $image = $getMeta(['og:image','twitter:image']);
+
+            // Resolve relative image URLs to absolute
+            if ($image !== '') {
+                $u = parse_url($url);
+                $scheme = $u['scheme'] ?? 'https';
+                $host   = $u['host'] ?? '';
+                if (strpos($image, '//') === 0) {
+                    $image = $scheme . ':' . $image;
+                } elseif (strpos($image, 'http://') !== 0 && strpos($image, 'https://') !== 0 && strpos($image, 'data:') !== 0) {
+                    $base = $scheme . '://' . $host;
+                    if (isset($u['path']) && substr($image, 0, 1) !== '/') {
+                        // If relative to path, trim filename from path
+                        $dir = rtrim(substr($u['path'], 0, strrpos($u['path'] . '/', '/')), '/');
+                        $base .= $dir ? $dir : '';
+                    }
+                    $image = rtrim($base, '/') . '/' . ltrim($image, '/');
+                }
+            }
+
+            // Trim overly long fields
+            if ($title !== '' && strlen($title) > 160) $title = substr($title, 0, 157) . '...';
+            if ($description !== '' && strlen($description) > 300) $description = substr($description, 0, 297) . '...';
+
+            return array_filter([
+                'title' => $title,
+                'description' => $description,
+                'image' => $image,
+            ], function($v) { return $v !== '' && $v !== null; });
+        } catch (\Throwable $e) {
+            return [];
+        }
+    }
 
     public function showAbout(About $about)
     {
@@ -74,18 +157,73 @@ class HomeController extends Controller
             // Array of social media post URLs to show as previews
             $socialMediaPosts = [
                 [
-                    'url' => 'https://www.facebook.com/drdebashissarkar/videos/623506467472129',
+                    'url' => 'https://www.facebook.com/drdebashissarkar?mibextid=ZbWKwL',
                     'platform' => 'facebook'
                 ],
+                [
+                    'url' => 'https://www.youtube.com/@drdebashissarkartmc/',
+                    'platform' => 'youtube'
+                ],
+                
                 // [
                 //     'url' => 'https://x.com/MrSinha_/status/1956680640515981546/photo/1',
                 //     'platform' => 'twitter'
                 // ],
                 [
-                    'url' => 'https://www.instagram.com/sarkardr.debasish',
+                    'url' => 'https://www.instagram.com/p/DNr7AKM4kSR/',
                     'platform' => 'instagram'
                 ]
             ];
+            // Enrich YouTube entries to make them embeddable (video or uploads playlist)
+            $socialMediaPosts = array_map(function ($item) {
+                if (($item['platform'] ?? '') !== 'youtube') return $item;
+                $url = $item['url'] ?? '';
+                if (!$url) return $item;
+
+                $parts = parse_url($url);
+                $path  = $parts['path'] ?? '';
+                parse_str($parts['query'] ?? '', $q);
+
+                // Direct video links
+                if (!empty($q['v'])) {
+                    $item['yt'] = ['type' => 'video', 'id' => $q['v']];
+                    return $item;
+                }
+                if (preg_match('#^/(?:embed/|shorts/|watch/|live/)?([A-Za-z0-9_-]{6,})#', $path, $m)) {
+                    $item['yt'] = ['type' => 'video', 'id' => $m[1]];
+                    return $item;
+                }
+
+                // Resolve channel -> uploads playlist
+                $channelId = null;
+                if (preg_match('#/channel/(UC[\w-]+)#', $path, $m2)) {
+                    $channelId = $m2[1];
+                } else {
+                    try {
+                        $resp = Http::timeout(5)->withHeaders([
+                            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+                            'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                        ])->get($url);
+                        if ($resp->ok()) {
+                            $html = $resp->body();
+                            if (preg_match('#"channelId"\s*:\s*"(UC[\w-]+)"#', $html, $mm)) {
+                                $channelId = $mm[1];
+                            } elseif (preg_match('#"externalId"\s*:\s*"(UC[\w-]+)"#', $html, $mm2)) {
+                                $channelId = $mm2[1];
+                            }
+                        }
+                    } catch (\Throwable $e) {
+                        // ignore failures
+                    }
+                }
+
+                if ($channelId) {
+                    $uploadsPlaylist = 'UU' . substr($channelId, 2); // UC... -> UU...
+                    $item['yt'] = ['type' => 'playlist', 'playlistId' => $uploadsPlaylist];
+                }
+
+                return $item;
+            }, $socialMediaPosts);
             
             // Debug: Check if data is being passed correctly
             // dd($socialMediaPosts);
@@ -96,7 +234,52 @@ class HomeController extends Controller
                 ['id' => 'oUoxM7nLrUk', 'title' => 'Our neighborhood, our solution.', 'url' => 'https://www.youtube.com/watch?v=oUoxM7nLrUk'],
             ];
 
-            return view('about.detail', compact('about', 'socialMediaPosts', 'videos'));
+            // Press items: websites, YouTube, Facebook (will render if provided)
+            $pressItems = [
+                [
+                    'type' => 'website',
+                    'url'  => 'https://sanmarg.in/asansol/dr-debashish-sarkar-and-manas-das-will-serve-as-mayors-representatives-at-the-adda',
+                    'title'=> 'Sanmarg: Mayor’s representatives at ADDA',
+                ],
+                [
+                    'type' => 'youtube',
+                    'url'  => 'https://youtube.com/shorts/KM8zf4hOuyc?si=1gfiaFetQl4h_8oD',
+                    'title'=> 'Interview/Highlight on YouTube',
+                ],
+                [
+                    'type' => 'youtube',
+                    'url'  => 'https://youtube.com/shorts/UQko1u20Xss?si=BXjUsD-BgSIYlzVU',
+                    'title'=> 'Interview/Highlight on YouTube',
+                ],
+                [
+                    'type' => 'youtube',
+                    'url'  => 'https://youtu.be/evVvgDe0PZ0?si=ZaLTgulNFkygFsOY',
+                    'title'=> 'Interview/Highlight on YouTube',
+                ],
+             
+               
+                [
+                    'type' => 'facebook',
+                    'url'  => 'https://www.facebook.com/drdebashissarkar',
+                    'title'=> 'Facebook Page Updates',
+                ],
+            ];
+
+
+                // Enrich website items with Open Graph metadata for preview
+            $pressItems = array_map(function ($item) {
+                if (($item['type'] ?? 'website') === 'website' && !empty($item['url'])) {
+                    $meta = $this->fetchLinkPreview($item['url']);
+                    if (!empty($meta)) {
+                        $item['meta'] = $meta; // ['title','description','image']
+                    }
+                }
+                return $item;
+            }, $pressItems);
+            
+            
+            
+            return view('about.detail', compact('about', 'socialMediaPosts', 'videos', 'pressItems'));
         }
 
         // For other about items, just show a simple page with title and description
@@ -131,7 +314,7 @@ class HomeController extends Controller
 
                                     <h4 class="section-subtitle">Cultural & Festival Support</h4>
                                     <ul class="initiatives-list">
-                                        <li>Durga Puja 2022: Financial assistance to local clubs.</li>
+                                        <li>In 2022, Dr. Debasish Sarkar introduced a new milestone in Durga Puja celebrations by felicitating Puja committees across the city, starting with Ward 84. The initiative gained wide appreciation, leading the Asansol Municipal Corporation (AMC) to entrust him in 2023 with organizing a citywide competition, where over 500 committees participated. A grand event was held at Rabindra Bhavan, marking a major success. Continuing this legacy, 2024 witnessed yet another remarkable milestone under his leadership.</li>
                                         <li>Idol Immersion Arrangements: Hydra & AMC support, drinking water, seating, attractive lighting.</li>
                                         <li>Ward 84 became the first in the industrial area to feature live bands at immersions.</li>
                                     </ul>
@@ -144,32 +327,32 @@ class HomeController extends Controller
                                     </ul>
 
                                     <h4 class="section-subtitle">Sanitation & Waste Management</h4>
-                                    <ul class="initiatives-list">
-                                        <li>Daily household garbage collection through Nirmal Sathi & Nirmal Sahayika.</li>
-                                        <li>Master dustbin constructed at Netaji Maidan for improved waste management.</li>
-                                        <li>First-ever underground electrical cable network in Ward 84.</li>
-                                        <li>Pipeline upgrades (after 40 years):
+                                    
+                                     <ul class="initiatives-list">
+                                        <li>Tetul tala.</li>
+                                         <li>
                                             <ul>
-                                                <li>Central Park (Purnashree, Pragati Granthgar Road)</li>
-                                                <li>Tul Tala</li>
-                                                <li>Guru Nanak Palli</li>
-                                                <li>Muchi Para</li>
-                                                <li>Netaji Maidan to Karmakar Parash (500 ft)</li>
+                                                <li>Central park</li>
+                                                <li>Purnashree pally</li>
+                                                <li>Pragati Granthagar road</li>
                                             </ul>
                                         </li>
+                                        <li>Pipeline upgrades (after 45 years).</li>
+                                        <li>Netaji maidan to karmakar para (500 ft)</li>
                                     </ul>
+
 
                                     <h4 class="section-subtitle">Community Centres</h4>
                                     <ul class="initiatives-list">
                                         <li>Completed: Netaji Maidan Community Centre.</li>
                                         <li>Under Construction: Kora Para, Bajrang Bali Mandir.</li>
-                                        <li>Proposed: Guru Nanak Palli, Lane 4 (Kali Mandir).</li>
+                                        <li>Proposed: Guru Nanak Pally, Lane 4 (Kali Mandir).</li>
                                     </ul>
 
                                     <h4 class="section-subtitle">Road Infrastructure</h4>
                                     <p>Major road repairs and new constructions across Ward 84:</p>
                                     <ul class="initiatives-list">
-                                        <li>Vivekananda Palli opposite PHE (repair).</li>
+                                        <li>Vivekananda Pally opposite PHE (repair).</li>
                                         <li>Netaji Maidan to Barracks (Bihari Bari).</li>
                                         <li>Lakhikanta Store Road Drain.</li>
                                         <li>Dukhini Barrack (200 ft).</li>
@@ -179,17 +362,17 @@ class HomeController extends Controller
                                         <li>Madhu Paramanik Road (30 ft).</li>
                                         <li>Pratima Sanga to Lakhikanta Store (600 ft).</li>
                                         <li>Bhama Charan Ghatak Lane.</li>
-                                        <li>Gurunanak Palli Priyanka Beauty Parlor Road.</li>
-                                        <li>Purnashree Palli Road (Anirban Pan).</li>
-                                        <li>Gurunanak Palli Lane 7 & 8 Connector Road.</li>
-                                        <li>Gurunanak Palli Lane 10.</li>
-                                        <li>Gurunanak Palli Lane 11.</li>
+                                        <li>Gurunanak Pally Priyanka Beauty Parlor Road.</li>
+                                        <li>Purnashree Pally Road (Anirban Pan).</li>
+                                        <li>Gurunanak Pally Lane 7 & 8 Connector Road.</li>
+                                        <li>Gurunanak Pally Lane 10.</li>
+                                        <li>Gurunanak Pally Lane 11.</li>
                                         <li>Kalijhariya Road (repair & renovation).</li>
                                     </ul>
 
                                     <h4 class="section-subtitle">Drainage & Culverts</h4>
                                     <ul class="initiatives-list">
-                                        <li>RCC Drains: Guru Nanak Palli Lane 3 & 4, Central Park Lower, Lakhikanta Store Road.</li>
+                                        <li>RCC Drains: Guru Nanak Pally Lane 3 & 4, Central Park Lower, Lakhikanta Store Road.</li>
                                         <li>Culverts constructed: Dhibar Para and Roy Para.</li>
                                     </ul>
                                 </div>
@@ -290,7 +473,7 @@ class HomeController extends Controller
                                         <p>Repaired a small road on April 5, 2025, improving daily access for residents.</p>
                                     </li>
                                     <li>
-                                        <strong>Vivekananda Palli to Netaji Maidan</strong> (Major Project):
+                                        <strong>Vivekananda Pally to Netaji Maidan</strong> (Major Project):
                                         <p>A strong new road built on June 1, 2025, now supports around 10,000 daily commuters.</p>
                                     </li>
                                     <li>
@@ -537,11 +720,268 @@ class HomeController extends Controller
                 'description' => 'Latest highlights and updates from Capigen',
                 'type' => 'highlights',
                 'content' => [
-                    'pase-achi' => [
+                     'pase-achi' => [
                         'title' => 'Pase Achi Asansol',
                         'image' => 'asansol.png',
-                        'description' => 'Building a better tomorrow for Asansol',
-                        'full_content' => 'Information about the Pase Achi Asansol initiative.'
+                        'description' => '',
+                        'full_content' => '
+                            <div class="adda-section">
+                                <div class="adda-about mb-4">
+                                    <h3 class="section-title">Overview </h3>
+                                    <p> Pashe Achi Asansol is a citizen-first public service campaign launched under the leadership of Dr. Debasish Sarkar (Chairman, Borough–6) with the support of the Asansol Municipal Corporation.
+ The initiative focuses on creating a transparent and accessible platform where citizens can easily register their grievances, receive timely assistance, and stay informed about government services.
+</p>
+                                </div>
+
+                                <div class="role-section mb-4">
+                                    <h3 class="section-title">Objective</h3>
+                                    <p> To provide every citizen of Asansol with easy access to government services, ensure quick resolution of grievances, and promote accountability through a centralized and digital platform.
+</p>
+                                </div>
+
+                                <div class="initiatives-section">
+                                    <h3 class="section-title">Key Features</h3>
+                                    <ul class="initiatives-list">
+                                        <li>1.	Integrated Platform: A unified system where citizens can register and track grievances</li>
+                                        <li>2.	Centralized Access: One-stop solution for all municipal and government-related services.</li>
+                                        <li>3.	Trained Support Staff: Well-trained personnel to guide and assist citizens efficiently.</li>
+                                        <li>4.	Digital Interface: Online facilities for grievance updates and resolution tracking.</li>
+                                      
+                                    </ul>
+                                </div>
+
+                               
+
+                                <div class="role-section mb-4">
+                                    <h3 class="section-title">Vision</h3>
+                                    <p>The vision of Pashe Achi Asansol is to build a responsive and inclusive governance model that truly listens to its people.<p>
+<p> It aims to ensure that every citizen’s concern is addressed with empathy, efficiency, and accountability.</p>
+ <p>By combining digital innovation with on-ground accessibility, the campaign strives to make public service delivery smoother, faster, and more people-centered—reflecting the spirit of a united and progressive Asansol
+</p>
+                                </div>
+                              
+                            </div>
+
+                            <style>
+                                .adda-section {
+                                    font-family: \'Segoe UI\', Tahoma, Geneva, Verdana, sans-serif;
+                                    line-height: 1.7;
+                                    color: #333;
+                                }
+                                .section-title {
+                                    color: #2c3e50;
+                                    border-bottom: 2px solid #3498db;
+                                    padding-bottom: 8px;
+                                    margin: 25px 0 15px;
+                                }
+                                .initiatives-list {
+                                    list-style-type: none;
+                                    padding: 0;
+                                }
+                                .initiatives-list li {
+                                    background: #f8f9fa;
+                                    margin: 8px 0;
+                                    padding: 12px 15px;
+                                    border-radius: 6px;
+                                    border-left: 4px solid #3498db;
+                                    transition: transform 0.2s, box-shadow 0.2s;
+                                }
+                                .initiatives-list li:hover {
+                                    transform: translateX(5px);
+                                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                                }
+                                .role-section {
+                                    background: #f8f9fa;
+                                    padding: 20px;
+                                    border-radius: 8px;
+                                    border-left: 4px solid #2ecc71;
+                                }
+                                
+                                .highlights-grid {
+                                    display: grid;
+                                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                                    gap: 20px;
+                                    margin: 20px 0;
+                                }
+                                
+                                .highlight-card {
+                                    background: white;
+                                    padding: 20px;
+                                    border-radius: 10px;
+                                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                                    transition: transform 0.3s ease;
+                                }
+                                
+                                .highlight-card:hover {
+                                    transform: translateY(-5px);
+                                }
+                                
+                                .highlight-icon {
+                                    font-size: 2rem;
+                                    color: #3498db;
+                                    margin-bottom: 15px;
+                                }
+                                
+                                .gallery-grid {
+                                    display: grid;
+                                    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                                    gap: 15px;
+                                    margin-top: 15px;
+                                }
+                                
+                                .gallery-item {
+                                    position: relative;
+                                    overflow: hidden;
+                                    border-radius: 8px;
+                                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                                }
+                                
+                                .gallery-caption {
+                                    position: absolute;
+                                    bottom: 0;
+                                    left: 0;
+                                    right: 0;
+                                    background: rgba(0,0,0,0.7);
+                                    color: white;
+                                    padding: 8px;
+                                    text-align: center;
+                                    font-size: 0.9rem;
+                                }
+                                @media (max-width: 768px) {
+                                    .initiatives-list li {
+                                        padding: 10px;
+                                    }
+                                }
+                            </style>'
+                        
+                    ],
+                     'pujo-pokkho' => [
+                        'title' => 'Pujo Pokkho',
+                        'image' => 'puja.jpg',
+                        'description' => '',
+                        'full_content' => '
+                           
+                            <h3 class="section-title">Videos</h3>
+                            <div class="row">
+                    
+                                <div class="col-md-6 col-lg-3 mb-4">
+                                    <div class="ratio ratio-16x9">
+                                        <iframe src="https://www.youtube.com/embed/f1DyAfrcJRc" 
+                                                title="YouTube video"
+                                                allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                    
+                                <div class="col-md-6 col-lg-3 mb-4">
+                                    <div class="ratio ratio-16x9">
+                                        <iframe src="https://www.youtube.com/embed/WR3hblCnuEc" 
+                                                title="YouTube video"
+                                                allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                    
+                                <div class="col-md-6 col-lg-3 mb-4">
+                                    <div class="ratio ratio-16x9">
+                                       <iframe src="https://drive.google.com/file/d/1kR8v9gyS5AEbjUClNHaqetSyYGJA6rY4/preview" width="640" height="480" allow="autoplay"></iframe>
+                                    </div>
+                                </div>
+                    
+                              
+                                  
+                            </div>
+
+                            <style>
+                                .adda-section {
+                                    font-family: \'Segoe UI\', Tahoma, Geneva, Verdana, sans-serif;
+                                    line-height: 1.7;
+                                    color: #333;
+                                }
+                                .section-title {
+                                    color: #2c3e50;
+                                    border-bottom: 2px solid #3498db;
+                                    padding-bottom: 8px;
+                                    margin: 25px 0 15px;
+                                }
+                                .initiatives-list {
+                                    list-style-type: none;
+                                    padding: 0;
+                                }
+                                .initiatives-list li {
+                                    background: #f8f9fa;
+                                    margin: 8px 0;
+                                    padding: 12px 15px;
+                                    border-radius: 6px;
+                                    border-left: 4px solid #3498db;
+                                    transition: transform 0.2s, box-shadow 0.2s;
+                                }
+                                .initiatives-list li:hover {
+                                    transform: translateX(5px);
+                                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                                }
+                                .role-section {
+                                    background: #f8f9fa;
+                                    padding: 20px;
+                                    border-radius: 8px;
+                                    border-left: 4px solid #2ecc71;
+                                }
+                                
+                                .highlights-grid {
+                                    display: grid;
+                                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                                    gap: 20px;
+                                    margin: 20px 0;
+                                }
+                                
+                                .highlight-card {
+                                    background: white;
+                                    padding: 20px;
+                                    border-radius: 10px;
+                                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                                    transition: transform 0.3s ease;
+                                }
+                                
+                                .highlight-card:hover {
+                                    transform: translateY(-5px);
+                                }
+                                
+                                .highlight-icon {
+                                    font-size: 2rem;
+                                    color: #3498db;
+                                    margin-bottom: 15px;
+                                }
+                                
+                                .gallery-grid {
+                                    display: grid;
+                                    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                                    gap: 15px;
+                                    margin-top: 15px;
+                                }
+                                
+                                .gallery-item {
+                                    position: relative;
+                                    overflow: hidden;
+                                    border-radius: 8px;
+                                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                                }
+                                
+                                .gallery-caption {
+                                    position: absolute;
+                                    bottom: 0;
+                                    left: 0;
+                                    right: 0;
+                                    background: rgba(0,0,0,0.7);
+                                    color: white;
+                                    padding: 8px;
+                                    text-align: center;
+                                    font-size: 0.9rem;
+                                }
+                                @media (max-width: 768px) {
+                                    .initiatives-list li {
+                                        padding: 10px;
+                                    }
+                                }
+                            </style>'
+                        
                     ],
                     'make-asansol-greater' => [
                         'title' => 'Make Asansol Greater Again',

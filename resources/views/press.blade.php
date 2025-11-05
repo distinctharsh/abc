@@ -59,6 +59,7 @@
         position: relative;
         perspective: 1000px;
         transform-style: preserve-3d;
+        overflow: hidden; /* clip to show 3 cards */
     }
 
     .slider-track {
@@ -386,193 +387,131 @@
         'p37.jpg', 'p38.jpg', 'p41.jpg'
     ];
     $imageCount = count($existingImages);
+    // Slider config (3 visible, step by 1)
+    $slidesPerView = 3;
+    $stepCount = max($imageCount - $slidesPerView + 1, 1);
 @endphp
-
-<section class="press-section">
-    <div class="floating-elements">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-    </div>
-    
-    <div class="container">
-        <div class="section-header">
-            <h1 class="section-title">Press & Media</h1>
+<!-- Simple Press Slider Section -->
+<section class="simple-press" style="padding: 60px 0; background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <div class="section-header" style="text-align:center; margin-bottom: 30px;">
+            <h2 class="section-title" style="font-size: 2.2rem;">Press & Media</h2>
             <p class="section-subtitle">Discover our latest media coverage and press highlights</p>
         </div>
 
-        <div class="modern-slider">
-            <div class="slider-container">
-                <div class="slider-track" id="sliderTrack">
-                    @foreach($existingImages as $index => $imageName)
-                    <div class="slide-item">
-                        <div class="slide-card">
-                            <div class="slide-image">
-                                <img src="{{ asset('images/press/' . $imageName) }}" alt="Press Image {{ $index + 1 }}" />
-                                <div class="slide-overlay"></div>
-                            </div>
-                            <div class="slide-content">
-                                <h3 class="slide-title">Press Coverage {{ $index + 1 }}</h3>
-                                <p class="slide-description">Latest media coverage and press highlights showcasing our achievements and milestones.</p>
-                                <a href="#" class="slide-button">
-                                    View Details
-                                    <svg class="slide-button-icon" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </a>
-                            </div>
+        <div class="simple-viewport" style="overflow: hidden;">
+            <div class="simple-track" id="simpleTrack" style="display:flex; transition: transform 0.5s ease; will-change: transform; gap: 20px;">
+                <!-- Facebook video as the first slider card -->
+                <div class="simple-item" style="flex: 0 0 calc((100% - 40px) / 3);">
+                    <div class="simple-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; overflow:hidden;">
+                        <div class="simple-video" style="position: relative; padding-top: 62%; background:#000; overflow:hidden;">
+                            <iframe 
+                                title="Facebook Video"
+                                src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fwatch%2F%3Fv%3D1076661023943505&show_text=false&width=500&height=400"
+                                style="position:absolute; top:0; left:0; width:100%; height:100%; border:none; overflow:hidden; display:block;"
+                                scrolling="no" frameborder="0" allowfullscreen="true"
+                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                            </iframe>
+                        </div>
+                        <div style="padding: 12px 14px; color:#fff; display:flex; justify-content:flex-end; align-items:center;">
+                            <a href="https://www.facebook.com/watch/?v=1076661023943505" target="_blank" rel="noopener" style="text-decoration:none; color:#00d4ff; font-weight:600;">Open</a>
                         </div>
                     </div>
-                    @endforeach
                 </div>
-            </div>
-
-            <div class="slider-controls">
-                <button class="control-btn" id="prevBtn">
-                    <svg fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-                <button class="control-btn" id="nextBtn">
-                    <svg fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="slider-indicators" id="indicators">
-                @for($i = 1; $i <= ceil($imageCount/3); $i++)
-                <div class="indicator {{ $i == 1 ? 'active' : '' }}" data-index="{{ $i - 1 }}"></div>
-                @endfor
+                @foreach($existingImages as $index => $imageName)
+                <div class="simple-item" style="flex: 0 0 calc((100% - 40px) / 3);">
+                    <div class="simple-card" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; overflow:hidden;">
+                        <div class="simple-img" style="position: relative; padding-top: 62%; background:#0b0b18; overflow:hidden;">
+                            <img src="{{ asset('images/press/' . $imageName) }}" alt="Press Image {{ $index + 1 }}" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;">
+                        </div>
+                        <div style="padding: 14px 16px; color:#fff;">
+                            <div style="font-weight:700; margin-bottom:6px;">Press Coverage {{ $index + 1 }}</div>
+                            <div style="color:#b8b8b8; font-size: 0.95rem;">Latest media coverage and press highlights.</div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
             </div>
         </div>
+
+        <div class="simple-controls" style="display:flex; justify-content:center; gap:14px; margin-top:20px;">
+            <button id="simplePrev" style="width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color:#fff; cursor:pointer;">‹</button>
+            <button id="simpleNext" style="width:44px; height:44px; border-radius:50%; border:1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color:#fff; cursor:pointer;">›</button>
+        </div>
     </div>
+
+    <style>
+        @media (max-width: 992px) {
+            .simple-track { gap: 16px !important; }
+            .simple-item { flex: 0 0 calc((100% - 16px) / 2) !important; }
+        }
+        @media (max-width: 576px) {
+            .simple-track { gap: 12px !important; }
+            .simple-item { flex: 0 0 100% !important; }
+        }
+    </style>
 </section>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const sliderTrack = document.getElementById('sliderTrack');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const indicators = document.querySelectorAll('.indicator');
-    
-    let currentIndex = 0;
-    const totalSlides = {{ $imageCount }}; // Use the actual image count
+    const track = document.getElementById('simpleTrack');
+    const prev = document.getElementById('simplePrev');
+    const next = document.getElementById('simpleNext');
+    const items = track ? Array.from(track.children) : [];
     const slidesPerView = 3;
-    const maxIndex = Math.ceil(totalSlides / slidesPerView) - 1;
-    
-    // Auto-play functionality
-    let autoPlayInterval;
-    
-    function startAutoPlay() {
-        autoPlayInterval = setInterval(() => {
-            nextSlide();
-        }, 3000);
-    }
-    
-    function stopAutoPlay() {
-        clearInterval(autoPlayInterval);
-    }
-    
-    function updateSlider() {
-        const translateX = -currentIndex * (350 + 30) * slidesPerView;
-        sliderTrack.style.transform = `translateX(${translateX}px)`;
-        
-        // Update indicators
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === currentIndex);
-        });
-        
-        // Add animation class
-        sliderTrack.classList.add('sliding');
-        setTimeout(() => {
-            sliderTrack.classList.remove('sliding');
-        }, 800);
-    }
-    
-    function nextSlide() {
-        currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
-        updateSlider();
-    }
-    
-    function prevSlide() {
-        currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
-        updateSlider();
-    }
-    
-    function goToSlide(index) {
-        currentIndex = index;
-        updateSlider();
-    }
-    
-    // Event listeners
-    prevBtn.addEventListener('click', () => {
-        prevSlide();
-        stopAutoPlay();
-        startAutoPlay();
-    });
-    
-    nextBtn.addEventListener('click', () => {
-        nextSlide();
-        stopAutoPlay();
-        startAutoPlay();
-    });
-    
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-            goToSlide(index);
-            stopAutoPlay();
-            startAutoPlay();
-        });
-    });
-    
-    // Touch/swipe support
-    let startX = 0;
-    let endX = 0;
-    
-    sliderTrack.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-    });
-    
-    sliderTrack.addEventListener('touchend', (e) => {
-        endX = e.changedTouches[0].clientX;
-        handleSwipe();
-    });
-    
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = startX - endX;
-        
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
-                nextSlide();
-            } else {
-                prevSlide();
-            }
-            stopAutoPlay();
-            startAutoPlay();
+    let currentIndex = 0;
+
+    function getStepWidth() {
+        const first = items[0];
+        if (!first) return 0;
+        const rect = first.getBoundingClientRect();
+        // Include flex gap from track since we no longer use per-item margins
+        const trackStyles = window.getComputedStyle(track);
+        let gap = 0;
+        if (trackStyles.gap) {
+            // gap may be like "20px" or "20px 20px"; take the first value
+            const g = trackStyles.gap.split(' ')[0];
+            gap = parseFloat(g) || 0;
         }
+        return rect.width + gap;
     }
-    
-    // Hover effects
-    const slideItems = document.querySelectorAll('.slide-item');
-    slideItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            stopAutoPlay();
-        });
-        
-        item.addEventListener('mouseleave', () => {
-            startAutoPlay();
-        });
-    });
-    
-    // Initialize
-    updateSlider();
-    startAutoPlay();
-    
-    // Pause on window blur
-    window.addEventListener('blur', stopAutoPlay);
-    window.addEventListener('focus', startAutoPlay);
+
+    function maxIndex() {
+        return Math.max(items.length - slidesPerView, 0);
+    }
+
+    function update() {
+        const x = -currentIndex * getStepWidth();
+        track.style.transform = `translateX(${x}px)`;
+        // hide controls when not needed
+        const hide = maxIndex() === 0;
+        prev.style.display = hide ? 'none' : '';
+        next.style.display = hide ? 'none' : '';
+    }
+
+    function goNext() {
+        currentIndex = currentIndex >= maxIndex() ? 0 : currentIndex + 1;
+        update();
+    }
+    function goPrev() {
+        currentIndex = currentIndex <= 0 ? maxIndex() : currentIndex - 1;
+        update();
+    }
+
+    // Events
+    if (prev) prev.addEventListener('click', goPrev);
+    if (next) next.addEventListener('click', goNext);
+
+    // Swipe
+    let sx = 0, ex = 0;
+    track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; });
+    track.addEventListener('touchend', e => { ex = e.changedTouches[0].clientX; const d = sx - ex; if (Math.abs(d) > 50) { d > 0 ? goNext() : goPrev(); } });
+
+    // Resize recalculation
+    window.addEventListener('resize', update);
+
+    // Init
+    update();
 });
 </script>
 @endsection

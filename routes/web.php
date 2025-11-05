@@ -80,7 +80,7 @@ Route::post('/logout', function () {
 // Admin Routes
 Route::prefix('admin')
     ->name('admin.')
-    ->middleware(['auth', 'admin'])
+    ->middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])
     ->group(function () {
         Route::resource('abouts', AdminAboutController::class);
     });

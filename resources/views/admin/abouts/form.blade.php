@@ -50,6 +50,16 @@
                     @enderror
                 </div>
 
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content</label>
+                    <textarea class="form-control @error('content') is-invalid @enderror"
+                              id="content" name="content" rows="8" placeholder="You can paste formatted HTML here">{{ old('content', $about->content) }}</textarea>
+                    @error('content')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <div class="form-text">Optional: shown on detail page. HTML allowed.</div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">

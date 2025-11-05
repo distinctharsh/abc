@@ -2,14 +2,24 @@
 
 @section('content')
 <div class="container py-5">
+
+    {{-- Section Title and Description --}}
     <div class="text-center mb-5">
-        <h1 class="display-4 fw-bold mb-3" style="background: linear-gradient(135deg, #a96ee4 0%, #46ff46 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        <h1 class="display-4 fw-bold mb-3" style="background: linear-gradient(135deg, #a96ee4 0%, #46ff46 100%);
+             -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
             {{ $sectionData['title'] }}
         </h1>
         <p class="lead text-muted">{{ $sectionData['description'] }}</p>
     </div>
 
-    <div class="row g-4">
+    {{-- Render the full_content raw HTML --}}
+    <div class="adda-section">
+        {!! $sectionData['full_content'] !!}
+    </div>
+
+    {{-- Optional: If you want to show the card grid from content --}}
+    {{-- 
+    <div class="row g-4 mt-5">
         @foreach($sectionData['content'] as $key => $item)
         <div class="col-lg-4 col-md-6">
             <div class="card h-100 border-0 shadow-sm hover-lift">
@@ -34,11 +44,8 @@
         </div>
         @endforeach
     </div>
+    --}}
 
-    <!-- <div class="text-center mt-5">
-        <a href="{{ url('/') }}" class="btn btn-primary">
-            <i class="fas fa-arrow-left me-2"></i> Back to Home
-        </a>
-    </div> -->
 </div>
 @endsection
+

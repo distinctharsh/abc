@@ -28,7 +28,8 @@
             <div class="gallery-item" data-category="{{ $image['category'] }}" data-title="{{ strtolower($image['title']) }}">
                 <div class="gallery-card">
                     <div class="gallery-img-container">
-                        <img src="{{ asset($image['src']) }}" alt="{{ $image['title'] }}" class="gallery-img" loading="lazy">
+                        <img src="/{{ $image['src'] }}" alt="{{ $image['title'] }}" class="gallery-img" loading="lazy">
+
                         <div class="gallery-overlay">
                             <div class="gallery-caption">
                                 <h5>{{ $image['title'] }}</h5>
