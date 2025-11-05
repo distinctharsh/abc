@@ -72,11 +72,11 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="d-flex">
+                    <!-- <div class="d-flex">
                         <a href="#appointment" class="btn btn-primary">
                             <i class="fas fa-calendar-check me-1"></i> Book Appointment
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </nav>
