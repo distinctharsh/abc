@@ -54,6 +54,12 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
+// Registration Routes
+Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])
+    ->name('register');
+Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])
+    ->name('register.submit');
+
 Route::post('/login', function (\Illuminate\Http\Request $request) {
     $credentials = $request->validate([
         'email' => 'required|email',
@@ -83,4 +89,9 @@ Route::prefix('admin')
     ->middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])
     ->group(function () {
         Route::resource('abouts', AdminAboutController::class);
+        // Media management routes
+        Route::get('abouts/{about}/media', [AdminAboutController::class, 'editMedia'])
+            ->name('abouts.media.edit');
+        Route::put('abouts/{about}/media', [AdminAboutController::class, 'updateMedia'])
+            ->name('abouts.media.update');
     });

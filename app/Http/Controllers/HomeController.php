@@ -152,121 +152,66 @@ class HomeController extends Controller
         // Debug: Check the about title
         \Log::info('About title:', ['title' => $about->title]);
         
-        // For Dr. Sarkar Social, show a detailed page with social media posts and videos
-        if (str_contains(strtolower($about->title), 'dr. sarkar social') || str_contains(strtolower($about->title), 'social')) {
-            // Array of social media post URLs to show as previews
-            $socialMediaPosts = [
-                [
-                    'url' => 'https://www.facebook.com/drdebashissarkar?mibextid=ZbWKwL',
-                    'platform' => 'facebook'
-                ],
-                [
-                    'url' => 'https://www.youtube.com/@drdebashissarkartmc/',
-                    'platform' => 'youtube'
-                ],
-                
-                // [
-                //     'url' => 'https://x.com/MrSinha_/status/1956680640515981546/photo/1',
-                //     'platform' => 'twitter'
-                // ],
-                [
-                    'url' => 'https://www.instagram.com/p/DNr7AKM4kSR/',
-                    'platform' => 'instagram'
-                ]
-            ];
-            // Enrich YouTube entries to make them embeddable (video or uploads playlist)
-            $socialMediaPosts = array_map(function ($item) {
-                if (($item['platform'] ?? '') !== 'youtube') return $item;
-                $url = $item['url'] ?? '';
-                if (!$url) return $item;
-
-                $parts = parse_url($url);
-                $path  = $parts['path'] ?? '';
-                parse_str($parts['query'] ?? '', $q);
-
-                // Direct video links
-                if (!empty($q['v'])) {
-                    $item['yt'] = ['type' => 'video', 'id' => $q['v']];
-                    return $item;
-                }
-                if (preg_match('#^/(?:embed/|shorts/|watch/|live/)?([A-Za-z0-9_-]{6,})#', $path, $m)) {
-                    $item['yt'] = ['type' => 'video', 'id' => $m[1]];
-                    return $item;
-                }
-
-                // Resolve channel -> uploads playlist
-                $channelId = null;
-                if (preg_match('#/channel/(UC[\w-]+)#', $path, $m2)) {
-                    $channelId = $m2[1];
-                } else {
-                    try {
-                        $resp = Http::timeout(5)->withHeaders([
-                            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
-                            'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                        ])->get($url);
-                        if ($resp->ok()) {
-                            $html = $resp->body();
-                            if (preg_match('#"channelId"\s*:\s*"(UC[\w-]+)"#', $html, $mm)) {
-                                $channelId = $mm[1];
-                            } elseif (preg_match('#"externalId"\s*:\s*"(UC[\w-]+)"#', $html, $mm2)) {
-                                $channelId = $mm2[1];
-                            }
-                        }
-                    } catch (\Throwable $e) {
-                        // ignore failures
+        // Initialize arrays for media data
+        $socialMediaPosts = [];
+        $videos = [];
+        $pressItems = [];
+        
+        // Get social media updates from the database if available
+        if (!empty($about->social_media_updates)) {
+            $socialMediaPosts = array_map(function($item) {
+                $platform = strtolower($item['platform'] ?? '');
+                return [
+                    'url' => $item['url'] ?? '#',
+                    'platform' => $platform,
+                    'title' => $item['title'] ?? ucfirst($platform) . ' Post'
+                ];
+            }, $about->social_media_updates);
+        }
+        
+        // Get videos from the database if available
+        if (!empty($about->videos)) {
+            // Convert object to array if it's an object
+            $videosData = is_object($about->videos) ? json_decode(json_encode($about->videos), true) : $about->videos;
+            
+            // Ensure it's an array
+            $videosData = is_array($videosData) ? $videosData : [];
+            
+            $videos = [];
+            $urls = []; // To track unique URLs
+            
+            foreach ($videosData as $video) {
+                if (!empty($video['url'])) {
+                    $url = trim($video['url']);
+                    // Only add if URL is not already in the list
+                    if (!in_array($url, $urls)) {
+                        $urls[] = $url;
+                        $videos[] = [
+                            'title' => $video['title'] ?? 'Video',
+                            'url' => $url,
+                            'thumbnail' => $video['thumbnail'] ?? null,
+                            'description' => $video['description'] ?? null
+                        ];
                     }
                 }
-
-                if ($channelId) {
-                    $uploadsPlaylist = 'UU' . substr($channelId, 2); // UC... -> UU...
-                    $item['yt'] = ['type' => 'playlist', 'playlistId' => $uploadsPlaylist];
-                }
-
-                return $item;
-            }, $socialMediaPosts);
-            
-            // Debug: Check if data is being passed correctly
-            // dd($socialMediaPosts);
-
-            // Dummy data for YouTube videos
-            $videos = [
-                ['id' => 'IaiwtFOmC04', 'title' => 'Healthy and beautiful. MLA and friend Shri Narendra Nath Chakraborty, Pandaveswar Assembly', 'url' => 'https://www.youtube.com/watch?v=IaiwtFOmC04'],
-                ['id' => 'oUoxM7nLrUk', 'title' => 'Our neighborhood, our solution.', 'url' => 'https://www.youtube.com/watch?v=oUoxM7nLrUk'],
-            ];
-
-            // Press items: websites, YouTube, Facebook (will render if provided)
-            $pressItems = [
-                [
-                    'type' => 'website',
-                    'url'  => 'https://sanmarg.in/asansol/dr-debashish-sarkar-and-manas-das-will-serve-as-mayors-representatives-at-the-adda',
-                    'title'=> 'Sanmarg: Mayor’s representatives at ADDA',
-                ],
-                [
-                    'type' => 'youtube',
-                    'url'  => 'https://youtube.com/shorts/KM8zf4hOuyc?si=1gfiaFetQl4h_8oD',
-                    'title'=> 'Interview/Highlight on YouTube',
-                ],
-                [
-                    'type' => 'youtube',
-                    'url'  => 'https://youtube.com/shorts/UQko1u20Xss?si=BXjUsD-BgSIYlzVU',
-                    'title'=> 'Interview/Highlight on YouTube',
-                ],
-                [
-                    'type' => 'youtube',
-                    'url'  => 'https://youtu.be/evVvgDe0PZ0?si=ZaLTgulNFkygFsOY',
-                    'title'=> 'Interview/Highlight on YouTube',
-                ],
-             
-               
-                [
-                    'type' => 'facebook',
-                    'url'  => 'https://www.facebook.com/drdebashissarkar',
-                    'title'=> 'Facebook Page Updates',
-                ],
-            ];
-
-
-                // Enrich website items with Open Graph metadata for preview
+            }
+        }
+        
+        // Get press coverage from the database if available
+        if (!empty($about->press_coverage)) {
+            $pressItems = array_map(function($item) {
+                return [
+                    'title' => $item['title'] ?? 'Press Coverage',
+                    'url' => $item['url'] ?? '#',
+                    'type' => strtolower($item['type'] ?? 'website'),
+                    'date' => $item['date'] ?? now()->format('Y-m-d'),
+                    'source' => $item['source'] ?? 'Unknown Source'
+                ];
+            }, $about->press_coverage);
+        }
+        
+        // Enrich website items with Open Graph metadata for preview
+        if (!empty($pressItems)) {
             $pressItems = array_map(function ($item) {
                 if (($item['type'] ?? 'website') === 'website' && !empty($item['url'])) {
                     $meta = $this->fetchLinkPreview($item['url']);
@@ -276,14 +221,10 @@ class HomeController extends Controller
                 }
                 return $item;
             }, $pressItems);
-            
-            
-            
-            return view('about.detail', compact('about', 'socialMediaPosts', 'videos', 'pressItems'));
         }
 
-        // For other about items, just show a simple page with title and description
-        return view('about.simple', compact('about'));
+        // Show the detail view with all the data
+        return view('about.detail', compact('about', 'socialMediaPosts', 'videos', 'pressItems'));
     }
     
     public function getSectionData()

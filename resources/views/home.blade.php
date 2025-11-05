@@ -577,11 +577,11 @@ legend {
             <div class="row g-4">
                 @foreach($abouts as $index => $about)
                 <div class="col-lg-4 col-md-6 fade-in-up" data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}" style="animation-delay: {{ 0.2 + ($index * 0.1) }}s;">
-    @if(isset($about->id) && (int)$about->id === 2)
+    <!-- @if(isset($about->id) && (int)$about->id === 2)
         <a href="#" class="text-decoration-none text-dark" role="button" data-bs-toggle="modal" data-bs-target="#drSarkarModal">
-    @else
+    @else -->
         <a href="{{ route('about.show', $about) }}" class="text-decoration-none text-dark">
-    @endif
+    <!-- @endif -->
                         <div class="project-card card h-100 border-0 shadow-sm overflow-hidden">
                             <div class="position-relative overflow-hidden">
                                 <img src="{{ asset($about->image) }}" class="card-img-top project-image" alt="{{ $about->title }}" style="width: 100%; height: 200px; object-fit: cover;">

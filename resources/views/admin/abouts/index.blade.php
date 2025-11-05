@@ -49,13 +49,16 @@
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a href="{{ route('admin.abouts.edit', $about) }}" class="btn btn-sm btn-primary">
+                                        <a href="{{ route('admin.abouts.edit', $about) }}" class="btn btn-sm btn-primary" title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('admin.abouts.destroy', $about) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this section?')">
+                                        <a href="{{ route('admin.abouts.media.edit', $about) }}" class="btn btn-sm btn-info text-white" title="Manage Media">
+                                            <i class="fas fa-photo-video"></i>
+                                        </a>
+                                        <form action="{{ route('admin.abouts.destroy', $about) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this section?')" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">
+                                            <button type="submit" class="btn btn-sm btn-danger" title="Delete">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
