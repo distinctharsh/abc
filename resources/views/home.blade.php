@@ -505,11 +505,19 @@ legend {
 
 
                     <div class="tagline">
+<<<<<<< HEAD
                         Transforming Smiles <span class="star">*</span> Transforming Lives
                     </div>
                   
                     <p class="hero-description">
                         A trusted dental surgeon and dedicated social contributor, bringing advanced healthcare and meaningful community development to the people of Asansol.
+=======
+                        Transforming Smiles <span class="star">â˜…</span> Transforming Lives
+                    </div>
+                  
+                    <p class="hero-description">
+                        A trusted dental surgeon and dedicated social contributor, bringing advanced healthcare and meaningful community development to the peopleÂ ofÂ Asansol.
+>>>>>>> 7421f9acc48bc31ee70a68998fb7dda2b8d61cde
                     </p>
                 
                     <button class="hero-btn" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#appointmentModal">
@@ -544,6 +552,11 @@ legend {
             </div>
             <div class="ticker-content">
                 <div class="ticker-text">
+<<<<<<< HEAD
+=======
+                     <a href="https://www.youtube.com/@drdebashissarkartmc" class="ticker-item">🏥 https://www.youtube.com/@drdebashissarkartmc</a>
+                    <span class="ticker-separator">•</span>
+>>>>>>> 7421f9acc48bc31ee70a68998fb7dda2b8d61cde
                      <span class="ticker-item">🏥 Orodental Hospital - First Dental Hospital in Burdwan District</span>
                     <span class="ticker-separator">•</span>
                     <span class="ticker-item">🦷 Dr. Sarkar treating 100+ patients daily with advanced dental care</span>
@@ -918,8 +931,13 @@ legend {
                                 </div>
                                 <div class="flip-back">
                                   <h5>Dr. Debasish Sarkar</h5>
+<<<<<<< HEAD
 <p>. Education: Qualified Dental Surgeon with BDS degree.</p>
 <p>. Experience: Extensive dental practice and management of Orodental Hospitals Pvt Ltd serving 6 lakh households.</p>
+=======
+<p>â— Education: Qualified Dental Surgeon with BDS degree.</p>
+<p>â— Experience: Extensive dental practice and management of Orodental Hospitals Pvt Ltd serving 6 lakh households.</p>
+>>>>>>> 7421f9acc48bc31ee70a68998fb7dda2b8d61cde
 
                                 </div>
                             </div>
@@ -940,8 +958,13 @@ legend {
                                 </div>
                                 <div class="flip-back">
                                     <h5>Dr. Subhasis Sarkar</h5>
+<<<<<<< HEAD
                                     <p>.	Education: BDS & PG from Buddha Institute of Dental Sciences & Hospital.</p>
                                     <p>.	Experience: Actively engaged in dental practice and associated with Orodental Hospital (P) Ltd.</p>
+=======
+                                    <p>â—	Education: BDS & PG from Buddha Institute of Dental Sciences & Hospital.</p>
+                                    <p>â—	Experience: Actively engaged in dental practice and associated with Orodental Hospital (P) Ltd.</p>
+>>>>>>> 7421f9acc48bc31ee70a68998fb7dda2b8d61cde
                                    
                                 </div>
                             </div>
@@ -963,9 +986,15 @@ legend {
                                 </div>
                                <div class="flip-back">
                                     <h5>Dr. Banasri Sarkar</h5>
+<<<<<<< HEAD
                                     <p>. Education: MBBS, MS, DO from Burdwan Medical College; completed further DO from B.N. Mandal University, Kishanganj.</p>
                                     <p>. Experience: Worked at Burdwan Medical College and R.G. Kar Medical College.</p>
                                     <p>. Current Role: Associate Professor, Burdwan Medical College; also attending several eye hospitals.</p>
+=======
+                                    <p>â—	Education: MBBS, MS, DO from Burdwan Medical College; completed further DO from B.N. Mandal University, Kishanganj.</p>
+                                    <p>â—	Experience: Worked at Burdwan Medical College and R.G. Kar Medical College.</p>
+                                    <p>â—	Current Role: Associate Professor, Burdwan Medical College; also attending several eye hospitals.</p>
+>>>>>>> 7421f9acc48bc31ee70a68998fb7dda2b8d61cde
                                   
                                 </div>
                             </div>
@@ -985,9 +1014,15 @@ legend {
                                 </div>
                                              <div class="flip-back">
                                     <h5>Dr. Sarmishtha Sarkar</h5>
+<<<<<<< HEAD
                                     <p>. Education: MBBS, DGO (CH), graduated from R.G. Kar Medical College</p>
                                     <p>. Experience: Worked with several reputed hospitals in Kolkata. After marriage, relocated to Asansol.</p>
                                     <p>. Current Role: Attached with ESI Hospital, Asansol</p>
+=======
+                                    <p>â—	Education: MBBS, DGO (CH), graduated from R.G. Kar Medical College</p>
+                                    <p>â—	Experience: Worked with several reputed hospitals in Kolkata. After marriage, relocated to Asansol.</p>
+                                    <p>â—	Current Role: Attached with ESI Hospital, Asansol</p>
+>>>>>>> 7421f9acc48bc31ee70a68998fb7dda2b8d61cde
                                    
                                 </div>
                             </div>
@@ -1145,21 +1180,32 @@ legend {
                         </div>
                         <div class="col-md-8">
                             <div class="bio-content">
+<<<<<<< HEAD
                                 <h6 class="text-uppercase text-primary mb-3">Dr. Debasish Sarkar</h6>
                                 <p>Dr. Debasish Sarkar is popularly known as Daktar Babu. He is currently serving as Borough Chairman-VI and Councillor of Ward No. 84 in Asansol Municipal Corporation. Recently, he became the Mayor Representative in ADDA (Asansol Durgapur Development Authority).
 <br>
 He fought for the first time in the Municipality Election (AITC ticket) and, for the first time in history, secured victory for Ward No. 84” a ward untouched by AITC since its inception in 1998.
+=======
+                                <h6 class="text-uppercase text-primary mb-3">Dr. Suvankar Sarkar</h6>
+                                <p>Dr. Debasish Sarkar is popularly known as Daktar Babu. He is currently serving as Borough Chairman-VI and Councillor of Ward No. 84 in Asansol Municipal Corporation. Recently, he became the Mayorâ€™s Representative in ADDA (Asansol Durgapur Development Authority).
+<br>
+He fought for the first time in the Municipality Election (AITC ticket) and, for the first time in history, secured victory for Ward No. 84â€” a ward untouched by AITC since its inception in 1998.
+>>>>>>> 7421f9acc48bc31ee70a68998fb7dda2b8d61cde
 <br>
 Dr. Sarkar is very active in public activities, including political, administrative, and social work. As a renowned dentist, his Orodental Hospital initiative has outreach to over 6 lakh households.
 <br>
 Historic contribution includes initiating the naming of a road after Justice Radha Binod Paul, the first in West Bengal or any major metro city.
 <br>
+<<<<<<< HEAD
 During his tenure, a total of 24.5 crore+ has been allocated for the development of eight wards, with 85% work sanctioned and ongoing, and 15% in DPR stage.
 <br>
 Dr. Debasish Sarkar has recently been appointed as the Vice President of the Asansol South Town Block unit of the All India Trinamool Congress (AITC).<br>
 This new responsibility marks a significant step in his active engagement in regional politics.<br>
 In this role, he will focus on strengthening the party’s organizational structure at the block level, enhancing grassroots connections, and promoting community development initiatives.<br>
 His appointment reflects the growing trust and recognition of his leadership within the party and the community.
+=======
+During his tenure, a total of â‚¹24.5 crore+ has been allocated for the development of eight wards, with 85% work sanctioned and ongoing, and 15% in DPR stage.
+>>>>>>> 7421f9acc48bc31ee70a68998fb7dda2b8d61cde
 </p>
                                 
                                 <!-- <h6 class="text-uppercase text-primary mt-4 mb-3">Education</h6>
